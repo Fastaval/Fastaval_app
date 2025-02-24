@@ -38,7 +38,7 @@ dependencies:
   firebase_core: ^2.27.1
   firebase_messaging: ^14.7.20
   firebase_remote_config: ^4.3.18
-  flutter_local_notifications: ^17.0.0
+  flutter_local_notifications: ^18.0.1
   fluttertoast: ^8.2.4
   font_awesome_flutter: ^10.7.0
   get: ^4.6.6
