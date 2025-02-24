@@ -46,7 +46,7 @@ dependencies:
   photo_view: ^0.14.0
   shared_preferences: ^2.2.2
   timezone: ^0.9.2
-  upgrader: ^10.0.1
+  upgrader: ^11.3.1
   url_launcher: ^6.2.5
 
 dev_dependencies:
