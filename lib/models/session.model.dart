@@ -8,15 +8,16 @@ class Session {
   double? length;
   int? stop;
 
-  Session(
-      {this.activityId,
-      this.id,
-      this.length,
-      this.linked,
-      this.roomId,
-      this.roomName,
-      this.start,
-      this.stop});
+  Session({
+    this.activityId,
+    this.id,
+    this.length,
+    this.linked,
+    this.roomId,
+    this.roomName,
+    this.start,
+    this.stop,
+  });
 
   Session.fromJson(dynamic json) {
     id = json['afvikling_id'] as int;
@@ -37,6 +38,6 @@ class Session {
         'lokale_id': roomId,
         'lokale_navn': roomName,
         'start': start,
-        'stop': stop
+        'stop': stop,
       };
 }

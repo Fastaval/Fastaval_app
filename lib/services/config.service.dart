@@ -11,12 +11,14 @@ class ConfigService {
   initConfig() async {
     await _remoteConfig.setDefaults({
       'API': 'https://infosys.fastaval.dk/api',
-      'APItest': 'https://infosys-test.fastaval.dk/api'
+      'APItest': 'https://infosys-test.fastaval.dk/api',
     });
-    await _remoteConfig.setConfigSettings(RemoteConfigSettings(
-      fetchTimeout: Duration(minutes: 1),
-      minimumFetchInterval: Duration(minutes: 10),
-    ));
+    await _remoteConfig.setConfigSettings(
+      RemoteConfigSettings(
+        fetchTimeout: Duration(minutes: 1),
+        minimumFetchInterval: Duration(minutes: 10),
+      ),
+    );
     await _remoteConfig.fetchAndActivate();
   }
 

@@ -5,12 +5,13 @@ class Sleep {
   String areaName;
   String areaId;
 
-  Sleep(
-      {required this.id,
-      required this.access,
-      required this.mattress,
-      required this.areaName,
-      required this.areaId});
+  Sleep({
+    required this.id,
+    required this.access,
+    required this.mattress,
+    required this.areaName,
+    required this.areaId,
+  });
 
   Sleep.fromJson(dynamic json)
       : id = json['id'],
@@ -24,6 +25,6 @@ class Sleep {
         'access': access,
         'mattress': mattress,
         'area_name': areaName,
-        'area_id': areaId
+        'area_id': areaId,
       };
 }

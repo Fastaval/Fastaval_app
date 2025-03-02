@@ -20,25 +20,26 @@ class Activity {
   String? wordpressId;
   int? canSignUp;
 
-  Activity(
-      {this.id,
-      this.author,
-      this.canSignUp,
-      this.descriptionDa,
-      this.descriptionEn,
-      this.gms,
-      this.language,
-      this.maxPlayer,
-      this.minPlayer,
-      this.playHours,
-      this.price,
-      this.sessions,
-      this.textDa,
-      this.textEn,
-      this.titleDa,
-      this.titleEn,
-      this.type,
-      this.wordpressId});
+  Activity({
+    this.id,
+    this.author,
+    this.canSignUp,
+    this.descriptionDa,
+    this.descriptionEn,
+    this.gms,
+    this.language,
+    this.maxPlayer,
+    this.minPlayer,
+    this.playHours,
+    this.price,
+    this.sessions,
+    this.textDa,
+    this.textEn,
+    this.titleDa,
+    this.titleEn,
+    this.type,
+    this.wordpressId,
+  });
 
   Activity.fromJson(dynamic json) {
     id = json['aktivitet_id'];
@@ -84,6 +85,6 @@ class Activity {
         'title_da': titleDa,
         'title_en': titleEn,
         'type': type,
-        'wp_id': wordpressId
+        'wp_id': wordpressId,
       };
 }

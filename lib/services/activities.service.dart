@@ -7,7 +7,7 @@ import 'package:fastaval_app/services/local_storage.service.dart';
 import 'package:http/http.dart' as http;
 
 class ActivitiesService {
-  static String kFavoritesKey = 'FAVORITES_KEY24';
+  static String kFavoritesKey = 'FAVORITES_KEY25';
   final LocalStorageService storageService = LocalStorageService();
 
   Future<List> retrieveFavorites() async {
@@ -31,8 +31,9 @@ class ActivitiesService {
   }
 
   Future<List<ActivityItem>> getDay(String isoDate) async {
-    final response =
-        await http.get(Uri.parse('$baseUrl/app/v3/activities/$isoDate'));
+    final response = await http.get(
+      Uri.parse('$baseUrl/app/v3/activities/$isoDate'),
+    );
 
     if (response.statusCode == 200) {
       return (jsonDecode(response.body) as List)

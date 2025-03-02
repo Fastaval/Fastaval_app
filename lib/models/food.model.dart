@@ -9,16 +9,17 @@ class Food {
   String textEn;
   int received;
 
-  Food(
-      {required this.time,
-      required this.timeEnd,
-      required this.titleDa,
-      required this.titleEn,
-      required this.id,
-      required this.timeId,
-      required this.textDa,
-      required this.textEn,
-      this.received = 0});
+  Food({
+    required this.time,
+    required this.timeEnd,
+    required this.titleDa,
+    required this.titleEn,
+    required this.id,
+    required this.timeId,
+    required this.textDa,
+    required this.textEn,
+    this.received = 0,
+  });
 
   Food.fromJson(dynamic json)
       : time = json['time'],
@@ -40,6 +41,6 @@ class Food {
         'time_id': timeId,
         'text_da': textDa,
         'text_en': textEn,
-        'received': received
+        'received': received,
       };
 }

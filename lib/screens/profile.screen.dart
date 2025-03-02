@@ -28,11 +28,14 @@ class ProfileScreen extends StatelessWidget {
         toolbarHeight: 40,
         centerTitle: true,
         actions: [
-          Obx(() => appCtrl.fetchingUser.isFalse
-              ? IconButton(
-                  onPressed: () => appCtrl.updateUserProfile(),
-                  icon: Icon(CupertinoIcons.refresh))
-              : Text(''))
+          Obx(
+            () => appCtrl.fetchingUser.isFalse
+                ? IconButton(
+                    onPressed: () => appCtrl.updateUserProfile(),
+                    icon: Icon(CupertinoIcons.refresh),
+                  )
+                : Text(''),
+          ),
         ],
         titleTextStyle: kAppBarTextStyle,
         title: Text(tr('screenTitle.profile')),
@@ -72,7 +75,7 @@ class ProfileScreen extends StatelessWidget {
                     border: Border.all(color: colorWhite, width: 1),
                     borderRadius: BorderRadius.circular(20),
                   ),
-                )
+                ),
               ],
             ),
             Column(
@@ -101,55 +104,65 @@ class ProfileScreen extends StatelessWidget {
                     ),
                   ),
                 ),
-                Row(mainAxisAlignment: MainAxisAlignment.center, children: [
-                  Text(
-                    tr('profile.participantNumber'),
-                    style: TextStyle(
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    Text(
+                      tr('profile.participantNumber'),
+                      style: TextStyle(
                         color: colorOrange,
                         fontSize: 21,
-                        fontWeight: FontWeight.bold),
-                  )
-                ])
+                        fontWeight: FontWeight.bold,
+                      ),
+                    ),
+                  ],
+                ),
               ],
-            )
+            ),
           ],
         ),
       );
 
   Widget buildLogoutButton() => Padding(
-      padding: EdgeInsets.all(40),
-      child: SizedBox(
-        width: double.infinity,
-        child: ElevatedButton(
-          style: ButtonStyle(
-            backgroundColor: MaterialStateProperty.all<Color>(Colors.white),
-          ),
-          onPressed: () => appCtrl.logout(),
-          child: Text(
-            tr('login.signOut'),
-            style: TextStyle(
+        padding: EdgeInsets.all(40),
+        child: SizedBox(
+          width: double.infinity,
+          child: ElevatedButton(
+            style: ButtonStyle(
+              backgroundColor: WidgetStateProperty.all<Color>(Colors.white),
+            ),
+            onPressed: () => appCtrl.logout(),
+            child: Text(
+              tr('login.signOut'),
+              style: TextStyle(
                 color: Colors.deepOrange,
                 fontSize: 18,
-                fontWeight: FontWeight.bold),
+                fontWeight: FontWeight.bold,
+              ),
+            ),
           ),
         ),
-      ));
+      );
 
-  Widget buildUserProgramCard() => Obx(() => textAndItemCard(
-      tr('profile.yourProgram'),
-      appCtrl.fetchingUser.isTrue
-          ? SizedBox(
-              width: 20,
-              height: 20,
-              child: CircularProgressIndicator(
-                strokeWidth: 2,
-                color: colorOrangeDark,
-              ),
-            )
-          : Text(
-              "${tr('common.updated')} ${formatDay(appCtrl.userUpdateTime.value)} ${formatTime(appCtrl.userUpdateTime.value)}",
-              style: kNormalTextSubdued),
-      buildUsersProgram(appCtrl.user.scheduling)));
+  Widget buildUserProgramCard() => Obx(
+        () => textAndItemCard(
+          tr('profile.yourProgram'),
+          appCtrl.fetchingUser.isTrue
+              ? SizedBox(
+                  width: 20,
+                  height: 20,
+                  child: CircularProgressIndicator(
+                    strokeWidth: 2,
+                    color: colorOrangeDark,
+                  ),
+                )
+              : Text(
+                  "${tr('common.updated')} ${formatDay(appCtrl.userUpdateTime.value)} ${formatTime(appCtrl.userUpdateTime.value)}",
+                  style: kNormalTextSubdued,
+                ),
+          buildUsersProgram(appCtrl.user.scheduling),
+        ),
+      );
 
   Widget buildUsersProgram(List<Scheduling> schedule) => Column(
         children: [
@@ -162,7 +175,7 @@ class ProfileScreen extends StatelessWidget {
             itemBuilder: (buildContext, index) =>
                 userProgramItem(schedule[index]),
           ),
-          SizedBox(height: 8)
+          SizedBox(height: 8),
         ],
       );
 
@@ -171,19 +184,21 @@ class ProfileScreen extends StatelessWidget {
     var title = Get.locale!.languageCode == 'da' ? item.titleDa : item.titleEn;
     var activityType = tr('activityType.${item.activityType}');
 
-    var expired = DateTime.now()
-        .isAfter(DateTime.fromMillisecondsSinceEpoch(item.stop! * 1000));
+    var expired = DateTime.now().isAfter(
+      DateTime.fromMillisecondsSinceEpoch(item.stop! * 1000),
+    );
 
     return InkWell(
       onTap: () => showDialog(
-          context: Get.context!,
-          builder: activityDialog,
-          routeSettings: RouteSettings(arguments: item)),
+        context: Get.context!,
+        builder: activityDialog,
+        routeSettings: RouteSettings(arguments: item),
+      ),
       child: Container(
         decoration: BoxDecoration(
           boxShadow: [
             BoxShadow(
-              color: Colors.grey.withOpacity(0.75),
+              color: Colors.grey.withValues(alpha: 0.75),
               blurRadius: 4,
               offset: Offset(0, 4),
             ),
@@ -199,33 +214,46 @@ class ProfileScreen extends StatelessWidget {
           child: Row(
             children: [
               Expanded(
-                  child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Row(
                       children: [
-                    Row(children: [
-                      Text(
+                        Text(
                           "${formatDay(item.start)} ${formatTime(item.start)}-${formatTime(item.stop)}",
                           style: TextStyle(
-                              fontSize: 16,
-                              color: expired ? Colors.black26 : Colors.black,
-                              fontWeight: FontWeight.bold)),
-                      SizedBox(width: 8),
-                      Flexible(
-                          child: Text("$activityType @ $room",
-                              style: expired
-                                  ? kNormalTextSubduedExpired
-                                  : kNormalTextSubdued,
-                              overflow: TextOverflow.ellipsis)),
-                    ]),
-                    Text(title!,
-                        overflow: TextOverflow.ellipsis,
-                        style:
-                            expired ? kNormalTextDisabled : kNormalTextStyle),
-                  ])),
+                            fontSize: 16,
+                            color: expired ? Colors.black26 : Colors.black,
+                            fontWeight: FontWeight.bold,
+                          ),
+                        ),
+                        SizedBox(width: 8),
+                        Flexible(
+                          child: Text(
+                            "$activityType @ $room",
+                            style: expired
+                                ? kNormalTextSubduedExpired
+                                : kNormalTextSubdued,
+                            overflow: TextOverflow.ellipsis,
+                          ),
+                        ),
+                      ],
+                    ),
+                    Text(
+                      title!,
+                      overflow: TextOverflow.ellipsis,
+                      style: expired ? kNormalTextDisabled : kNormalTextStyle,
+                    ),
+                  ],
+                ),
+              ),
               Padding(
-                  padding: EdgeInsets.only(left: 8),
-                  child: Icon(CupertinoIcons.doc_text_viewfinder,
-                      color: expired ? Colors.black26 : Colors.black)),
+                padding: EdgeInsets.only(left: 8),
+                child: Icon(
+                  CupertinoIcons.doc_text_viewfinder,
+                  color: expired ? Colors.black26 : Colors.black,
+                ),
+              ),
             ],
           ),
         ),
@@ -234,39 +262,50 @@ class ProfileScreen extends StatelessWidget {
   }
 
   Widget buildUserFoodTimesCard() {
-    return textAndIconCard(tr('profile.foodTimes'), Icons.fastfood_outlined,
-        buildUsersFoodTickets(appCtrl.user.food));
+    return textAndIconCard(
+      tr('profile.foodTimes'),
+      Icons.fastfood_outlined,
+      buildUsersFoodTickets(appCtrl.user.food),
+    );
   }
 
   Widget buildUsersFoodTickets(List<Food> foodList) {
-    return Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
-      Padding(
-        padding: EdgeInsets.fromLTRB(16, 8, 16, 8),
-        child: foodList.isNotEmpty
-            ? Text(tr('program.food.ordered'))
-            : Text(tr('program.food.notOrdered'), style: kNormalTextStyle),
-      ),
-      ListView.separated(
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        Padding(
+          padding: EdgeInsets.fromLTRB(16, 8, 16, 8),
+          child: foodList.isNotEmpty
+              ? Text(tr('program.food.ordered'))
+              : Text(
+                  tr('program.food.notOrdered'),
+                  style: kNormalTextStyle,
+                ),
+        ),
+        ListView.separated(
           physics: NeverScrollableScrollPhysics(),
           shrinkWrap: true,
           itemCount: foodList.length,
           separatorBuilder: (context, int index) => SizedBox(height: 0),
-          itemBuilder: (buildContext, index) => foodTickets(foodList[index])),
-      SizedBox(height: 8)
-    ]);
+          itemBuilder: (buildContext, index) => foodTickets(foodList[index]),
+        ),
+        SizedBox(height: 8),
+      ],
+    );
   }
 
   Widget foodTickets(Food foodItem) {
     return InkWell(
       onTap: () => showDialog(
-          context: Get.context!,
-          builder: foodDialog,
-          routeSettings: RouteSettings(arguments: foodItem)),
+        context: Get.context!,
+        builder: foodDialog,
+        routeSettings: RouteSettings(arguments: foodItem),
+      ),
       child: Container(
         decoration: BoxDecoration(
           boxShadow: [
             BoxShadow(
-              color: Colors.grey.withOpacity(0.75),
+              color: Colors.grey.withValues(alpha: 0.75),
               blurRadius: 4,
               offset: Offset(0, 4),
             ),
@@ -280,38 +319,51 @@ class ProfileScreen extends StatelessWidget {
           child: Row(
             children: [
               Expanded(
-                  child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Row(
                       children: [
-                    Row(children: [
-                      Text(
+                        Text(
                           "${formatDay(foodItem.time)} ${formatTime(foodItem.time)} - ${formatTime(foodItem.timeEnd)}",
                           style: TextStyle(
-                              fontSize: 16,
-                              color: foodItem.received == 0
-                                  ? Colors.black
-                                  : Colors.black26,
-                              fontWeight: FontWeight.bold)),
-                    ]),
+                            fontSize: 16,
+                            color: foodItem.received == 0
+                                ? Colors.black
+                                : Colors.black26,
+                            fontWeight: FontWeight.bold,
+                          ),
+                        ),
+                      ],
+                    ),
                     Text(
-                        Get.locale!.languageCode == 'da'
-                            ? foodItem.titleDa
-                            : foodItem.titleEn,
-                        overflow: TextOverflow.ellipsis,
-                        style: foodItem.received == 0
-                            ? kNormalTextStyle
-                            : kNormalTextDisabled),
-                  ])),
-              Row(children: [
-                Text(tr('profile.foodTicket'),
+                      Get.locale!.languageCode == 'da'
+                          ? foodItem.titleDa
+                          : foodItem.titleEn,
+                      overflow: TextOverflow.ellipsis,
+                      style: foodItem.received == 0
+                          ? kNormalTextStyle
+                          : kNormalTextDisabled,
+                    ),
+                  ],
+                ),
+              ),
+              Row(
+                children: [
+                  Text(
+                    tr('profile.foodTicket'),
                     style: foodItem.received == 0
                         ? kNormalTextStyle
-                        : kNormalTextDisabled),
-                SizedBox(width: 8),
-                Icon(CupertinoIcons.barcode_viewfinder,
+                        : kNormalTextDisabled,
+                  ),
+                  SizedBox(width: 8),
+                  Icon(
+                    CupertinoIcons.barcode_viewfinder,
                     color:
-                        foodItem.received == 0 ? Colors.black : Colors.black26)
-              ]),
+                        foodItem.received == 0 ? Colors.black : Colors.black26,
+                  ),
+                ],
+              ),
             ],
           ),
         ),
@@ -320,9 +372,9 @@ class ProfileScreen extends StatelessWidget {
   }
 
   Widget buildUserWearCard() => textAndIconCard(
-      tr('profile.wear.title'),
-      Icons.shopping_bag_outlined,
-      Padding(
+        tr('profile.wear.title'),
+        Icons.shopping_bag_outlined,
+        Padding(
           padding: EdgeInsets.fromLTRB(16, 8, 24, 16),
           child: appCtrl.user.wear.isEmpty
               ? Row(children: [oneTextRow(tr('profile.wear.noWear'))])
@@ -334,7 +386,9 @@ class ProfileScreen extends StatelessWidget {
                       SizedBox(height: 10),
                   itemBuilder: (buildContext, index) =>
                       wearItem(appCtrl.user.wear[index]),
-                )));
+                ),
+        ),
+      );
 
   Widget wearItem(Wear item) {
     String title = Get.locale!.languageCode == 'da'
@@ -345,30 +399,43 @@ class ProfileScreen extends StatelessWidget {
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
       children: [
         Flexible(
-          child: Text(title,
-              style: kNormalTextStyle, overflow: TextOverflow.ellipsis),
+          child: Text(
+            title,
+            style: kNormalTextStyle,
+            overflow: TextOverflow.ellipsis,
+          ),
         ),
         SizedBox(width: 8),
-        Text(tr('profile.wear.received.${item.received}'),
-            style: kNormalTextBoldStyle)
+        Text(
+          tr('profile.wear.received.${item.received}'),
+          style: kNormalTextBoldStyle,
+        ),
       ],
     );
   }
 
   Widget buildUserSleepCard() => textAndIconCard(
-      tr('profile.sleep.title'),
-      CupertinoIcons.bed_double,
-      Padding(
+        tr('profile.sleep.title'),
+        CupertinoIcons.bed_double,
+        Padding(
           padding: EdgeInsets.fromLTRB(16, 8, 24, 16),
           child: appCtrl.user.sleep.access == 0
               ? Row(children: [oneTextRow(tr('profile.sleep.notSleeping'))])
-              : Column(children: [
-                  twoTextRow(tr('profile.sleep.location'),
-                      appCtrl.user.sleep.areaName),
-                  SizedBox(height: 10),
-                  twoTextRow(tr('profile.sleep.mattressRented'),
-                      tr('profile.sleep.mattress.${appCtrl.user.sleep.mattress}'))
-                ])));
+              : Column(
+                  children: [
+                    twoTextRow(
+                      tr('profile.sleep.location'),
+                      appCtrl.user.sleep.areaName,
+                    ),
+                    SizedBox(height: 10),
+                    twoTextRow(
+                      tr('profile.sleep.mattressRented'),
+                      tr('profile.sleep.mattress.${appCtrl.user.sleep.mattress}'),
+                    ),
+                  ],
+                ),
+        ),
+      );
 
   getFoodImage(Food item) {
     if (item.titleEn.contains('Dinner')) {
@@ -393,32 +460,44 @@ class ProfileScreen extends StatelessWidget {
     bool foodAvailable = food.received == 1 ? false : true;
 
     return AlertDialog(
-        actions: [
-          TextButton(
-              onPressed: () => Navigator.pop(context),
-              child: Text(tr('common.close')))
-        ],
-        backgroundColor: colorWhite,
-        surfaceTintColor: colorWhite,
-        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
-        titlePadding: EdgeInsets.all(0),
-        title: Column(children: [
+      actions: [
+        TextButton(
+          onPressed: () => Navigator.pop(context),
+          child: Text(tr('common.close')),
+        ),
+      ],
+      backgroundColor: colorWhite,
+      surfaceTintColor: colorWhite,
+      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
+      titlePadding: EdgeInsets.all(0),
+      title: Column(
+        children: [
           Container(
-              decoration: BoxDecoration(
-                borderRadius: BorderRadius.only(
-                    topLeft: Radius.circular(10),
-                    topRight: Radius.circular(10)),
-                image: DecorationImage(
-                    image: AssetImage(getFoodImage(food)), fit: BoxFit.cover),
+            decoration: BoxDecoration(
+              borderRadius: BorderRadius.only(
+                topLeft: Radius.circular(10),
+                topRight: Radius.circular(10),
               ),
-              height: 100),
+              image: DecorationImage(
+                image: AssetImage(getFoodImage(food)),
+                fit: BoxFit.cover,
+              ),
+            ),
+            height: 100,
+          ),
           SizedBox(height: 5),
           Text(
-              context.locale.languageCode == 'da' ? food.titleDa : food.titleEn)
-        ]),
-        content: Column(mainAxisSize: MainAxisSize.min, children: [
-          Text(context.locale.languageCode == 'da' ? food.textDa : food.textEn,
-              style: kNormalTextStyle),
+            context.locale.languageCode == 'da' ? food.titleDa : food.titleEn,
+          ),
+        ],
+      ),
+      content: Column(
+        mainAxisSize: MainAxisSize.min,
+        children: [
+          Text(
+            context.locale.languageCode == 'da' ? food.textDa : food.textEn,
+            style: kNormalTextStyle,
+          ),
           if (food.titleEn.contains('Breakfast'))
             Text(tr('profile.breakfastText'), style: kNormalTextSubdued),
           SizedBox(height: 10),
@@ -426,16 +505,21 @@ class ProfileScreen extends StatelessWidget {
             Text(tr('profile.foodHandedOut'), style: kNormalTextSubdued),
           if (foodAvailable)
             Text(
-                "${tr('profile.handout')}: ${formatDay(food.time)} ${formatTime(food.time)} - ${formatTime(food.timeEnd)}",
-                style: kNormalTextSubdued),
+              "${tr('profile.handout')}: ${formatDay(food.time)} ${formatTime(food.time)} - ${formatTime(food.timeEnd)}",
+              style: kNormalTextSubdued,
+            ),
           if (foodAvailable) SizedBox(height: 10),
           if (foodAvailable)
             BarcodeWidget(
-                barcode: Barcode.ean8(), data: appCtrl.user.barcode.toString()),
+              barcode: Barcode.ean8(),
+              data: appCtrl.user.barcode.toString(),
+            ),
           if (foodAvailable) SizedBox(height: 30),
           if (foodAvailable)
-            Text(tr('profile.scanBarcode'), style: kNormalTextSubdued)
-        ]));
+            Text(tr('profile.scanBarcode'), style: kNormalTextSubdued),
+        ],
+      ),
+    );
   }
 
   Widget activityDialog(BuildContext context) {
@@ -444,87 +528,115 @@ class ProfileScreen extends StatelessWidget {
     var activity = programCtrl.activities[item.id];
 
     return AlertDialog(
-        actions: [
-          TextButton(
-              onPressed: () => Navigator.pop(context),
-              child: Text(tr('common.close'))),
-        ],
-        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
-        backgroundColor: colorWhite,
-        surfaceTintColor: colorWhite,
-        insetPadding: EdgeInsets.all(10),
-        actionsPadding: EdgeInsets.all(5),
-        contentPadding: EdgeInsets.fromLTRB(20, 0, 20, 0),
-        titlePadding: EdgeInsets.fromLTRB(0, 0, 0, 5),
-        title: Column(children: [
+      actions: [
+        TextButton(
+          onPressed: () => Navigator.pop(context),
+          child: Text(tr('common.close')),
+        ),
+      ],
+      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
+      backgroundColor: colorWhite,
+      surfaceTintColor: colorWhite,
+      insetPadding: EdgeInsets.all(10),
+      actionsPadding: EdgeInsets.all(5),
+      contentPadding: EdgeInsets.fromLTRB(20, 0, 20, 0),
+      titlePadding: EdgeInsets.fromLTRB(0, 0, 0, 5),
+      title: Column(
+        children: [
           Container(
-              decoration: BoxDecoration(
-                borderRadius: BorderRadius.only(
-                    topLeft: Radius.circular(4), topRight: Radius.circular(4)),
-                image: DecorationImage(
-                    image:
-                        AssetImage(getActivityImageLocation(item.activityType)),
-                    fit: BoxFit.fitWidth,
-                    alignment: Alignment.topCenter),
+            decoration: BoxDecoration(
+              borderRadius: BorderRadius.only(
+                topLeft: Radius.circular(4),
+                topRight: Radius.circular(4),
               ),
-              height: 150),
+              image: DecorationImage(
+                image: AssetImage(getActivityImageLocation(item.activityType)),
+                fit: BoxFit.fitWidth,
+                alignment: Alignment.topCenter,
+              ),
+            ),
+            height: 150,
+          ),
           SizedBox(height: 8),
           Padding(
-              padding: EdgeInsets.fromLTRB(10, 0, 10, 0),
-              child: Text(
-                  context.locale.languageCode == 'da'
-                      ? item.titleDa!
-                      : item.titleEn!,
-                  textAlign: TextAlign.center))
-        ]),
-        content: Column(
-          mainAxisSize: MainAxisSize.min,
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            Row(children: [
-              Text('${tr('common.type')}: ',
-                  style: TextStyle(fontWeight: FontWeight.bold)),
-              Text(tr('activityType.${item.activityType}')),
-            ]),
-            SizedBox(height: 8),
-            Row(children: [
-              Text('${tr('common.time')}: ',
-                  style: TextStyle(fontWeight: FontWeight.bold)),
+            padding: EdgeInsets.fromLTRB(10, 0, 10, 0),
+            child: Text(
+              context.locale.languageCode == 'da'
+                  ? item.titleDa!
+                  : item.titleEn!,
+              textAlign: TextAlign.center,
+            ),
+          ),
+        ],
+      ),
+      content: Column(
+        mainAxisSize: MainAxisSize.min,
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Row(
+            children: [
               Text(
-                  "${formatDay(item.start)} ${formatTime(item.start)} - ${formatTime(item.stop)}"),
-            ]),
-            SizedBox(height: 8),
-            Row(crossAxisAlignment: CrossAxisAlignment.start, children: [
-              Text('${tr('common.place')}: ',
-                  style: TextStyle(fontWeight: FontWeight.bold)),
+                '${tr('common.type')}: ',
+                style: TextStyle(fontWeight: FontWeight.bold),
+              ),
+              Text(tr('activityType.${item.activityType}')),
+            ],
+          ),
+          SizedBox(height: 8),
+          Row(
+            children: [
+              Text(
+                '${tr('common.time')}: ',
+                style: TextStyle(fontWeight: FontWeight.bold),
+              ),
+              Text(
+                "${formatDay(item.start)} ${formatTime(item.start)} - ${formatTime(item.stop)}",
+              ),
+            ],
+          ),
+          SizedBox(height: 8),
+          Row(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Text(
+                '${tr('common.place')}: ',
+                style: TextStyle(fontWeight: FontWeight.bold),
+              ),
               Flexible(
-                  child: Text(context.locale.languageCode == 'da'
+                child: Text(
+                  context.locale.languageCode == 'da'
                       ? item.roomDa!
-                      : item.roomEn!)),
-            ]),
-            if (activity != null) ...[
-              SizedBox(height: 8),
-              Text('${tr('common.description')}:',
-                  style: TextStyle(fontWeight: FontWeight.bold)),
-              SizedBox(height: 8),
-              SizedBox(
-                height: 250,
-                child: Scrollbar(
+                      : item.roomEn!,
+                ),
+              ),
+            ],
+          ),
+          if (activity != null) ...[
+            SizedBox(height: 8),
+            Text(
+              '${tr('common.description')}:',
+              style: TextStyle(fontWeight: FontWeight.bold),
+            ),
+            SizedBox(height: 8),
+            SizedBox(
+              height: 250,
+              child: Scrollbar(
+                controller: scrollController,
+                thumbVisibility: true,
+                child: SingleChildScrollView(
+                  padding: EdgeInsets.fromLTRB(0, 0, 8, 0),
                   controller: scrollController,
-                  thumbVisibility: true,
-                  child: SingleChildScrollView(
-                    padding: EdgeInsets.fromLTRB(0, 0, 8, 0),
-                    controller: scrollController,
-                    child: Text(
-                      Get.locale?.languageCode == 'da'
-                          ? activity.daText
-                          : activity.enText,
-                    ),
+                  child: Text(
+                    Get.locale?.languageCode == 'da'
+                        ? activity.daText
+                        : activity.enText,
                   ),
                 ),
-              )
-            ]
+              ),
+            ),
           ],
-        ));
+        ],
+      ),
+    );
   }
 }

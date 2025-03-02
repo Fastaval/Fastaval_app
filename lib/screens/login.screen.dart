@@ -40,7 +40,7 @@ class LoginScreen extends StatelessWidget {
                 _buildLoginButton(),
                 SizedBox(height: 16),
                 Text(tr('login.helpTitle'), style: kLabelStyle),
-                Text(textAlign: TextAlign.center, tr('login.helpText'))
+                Text(textAlign: TextAlign.center, tr('login.helpText')),
               ],
             ),
           ),
@@ -53,7 +53,8 @@ class LoginScreen extends StatelessWidget {
         width: double.infinity,
         child: ElevatedButton(
           style: ButtonStyle(
-              backgroundColor: MaterialStateProperty.all<Color>(Colors.white)),
+            backgroundColor: WidgetStateProperty.all<Color>(Colors.white),
+          ),
           onPressed: () async => {
             await appCtrl.login(userIdInput.text, passwordInput.text),
             if (appCtrl.loggedIn.value == true)

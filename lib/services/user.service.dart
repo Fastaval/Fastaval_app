@@ -18,7 +18,7 @@ final settingsController = Get.find<SettingsController>();
 final appController = Get.find<AppController>();
 
 class UserService {
-  static String kUserKey = 'USER_KEY24';
+  static String kUserKey = 'USER_KEY25';
   final LocalStorageService storageService = LocalStorageService();
 
   Future<User?> getUserFromStorage() async {
@@ -55,17 +55,19 @@ class UserService {
             content: Text(tr('login.alert.description')),
             actions: <Widget>[
               TextButton(
-                  child: Text(tr('login.alert.dialogNo')),
-                  onPressed: () {
-                    Navigator.of(context).pop();
-                  }),
+                child: Text(tr('login.alert.dialogNo')),
+                onPressed: () {
+                  Navigator.of(context).pop();
+                },
+              ),
               ElevatedButton(
-                  child: Text(tr('login.alert.dialogYes')),
-                  onPressed: () {
-                    sendFCMTokenToInfosys(user.id);
-                    askForTrackingPermission(context);
-                    Navigator.of(context).pop();
-                  }),
+                child: Text(tr('login.alert.dialogYes')),
+                onPressed: () {
+                  sendFCMTokenToInfosys(user.id);
+                  askForTrackingPermission(context);
+                  Navigator.of(context).pop();
+                },
+              ),
             ],
           );
         },
@@ -73,8 +75,9 @@ class UserService {
 }
 
 Future<User> fetchUser(String userId, String password) async {
-  var response =
-      await http.get(Uri.parse('$baseUrl/v3/user/$userId?pass=$password'));
+  var response = await http.get(
+    Uri.parse('$baseUrl/v3/user/$userId?pass=$password'),
+  );
   if (response.statusCode == 200) {
     return User.fromJson(jsonDecode(response.body));
   }
@@ -84,9 +87,11 @@ Future<User> fetchUser(String userId, String password) async {
 
 Future<void> sendFCMTokenToInfosys(int userId) async {
   String token = await getDeviceToken();
-  var response = await http.post(Uri.parse('$baseUrl/user/$userId/register'),
-      headers: {'Content-Type': 'application/json; charset=UTF-8'},
-      body: jsonEncode({'gcm_id': token}));
+  var response = await http.post(
+    Uri.parse('$baseUrl/user/$userId/register'),
+    headers: {'Content-Type': 'application/json; charset=UTF-8'},
+    body: jsonEncode({'gcm_id': token}),
+  );
   if (response.statusCode != 200) {
     throw Exception('Failed to register app with infosys');
   }

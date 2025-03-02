@@ -5,12 +5,13 @@ class Wear {
   int wearId;
   int received;
 
-  Wear(
-      {required this.amount,
-      required this.titleDa,
-      required this.titleEn,
-      required this.wearId,
-      required this.received});
+  Wear({
+    required this.amount,
+    required this.titleDa,
+    required this.titleEn,
+    required this.wearId,
+    required this.received,
+  });
 
   Wear.fromJson(dynamic json)
       : amount = json['amount'],
@@ -24,6 +25,6 @@ class Wear {
         'title_da': titleDa,
         'title_en': titleEn,
         'wear_id': wearId,
-        'received': received
+        'received': received,
       };
 }

@@ -21,30 +21,31 @@ class ActivityItem {
   final int wpId;
   final int canSignUp;
 
-  ActivityItem(
-      {required this.id,
-      required this.runs,
-      required this.daTitle,
-      required this.daText,
-      required this.daDescription,
-      required this.enTitle,
-      required this.enText,
-      required this.enDescription,
-      required this.author,
-      required this.price,
-      required this.minPlayers,
-      required this.maxPlayers,
-      required this.type,
-      required this.playHours,
-      required this.language,
-      required this.wpId,
-      required this.canSignUp});
+  ActivityItem({
+    required this.id,
+    required this.runs,
+    required this.daTitle,
+    required this.daText,
+    required this.daDescription,
+    required this.enTitle,
+    required this.enText,
+    required this.enDescription,
+    required this.author,
+    required this.price,
+    required this.minPlayers,
+    required this.maxPlayers,
+    required this.type,
+    required this.playHours,
+    required this.language,
+    required this.wpId,
+    required this.canSignUp,
+  });
 
   ActivityItem.fromJson(Map<String, dynamic> json)
       : id = json['aktivitet_id'],
-        runs = List.from(json['afviklinger'])
-            .map((run) => ActivityRun.fromJson(run))
-            .toList(),
+        runs = List.from(
+          json['afviklinger'],
+        ).map((run) => ActivityRun.fromJson(run)).toList(),
         daTitle = json['title_da'],
         daText = json['text_da'],
         daDescription = json['description_da'],

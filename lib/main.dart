@@ -38,12 +38,13 @@ void main() async {
 
   runApp(
     EasyLocalization(
-        startLocale: Locale(Get.find<SettingsController>().language.value),
-        supportedLocales: [Locale('da'), Locale('en')],
-        path: 'assets/translations',
-        useOnlyLangCode: true,
-        fallbackLocale: Locale('en'),
-        child: MyApp()),
+      startLocale: Locale(Get.find<SettingsController>().language.value),
+      supportedLocales: [Locale('da'), Locale('en')],
+      path: 'assets/translations',
+      useOnlyLangCode: true,
+      fallbackLocale: Locale('en'),
+      child: MyApp(),
+    ),
   );
 }
 
@@ -53,11 +54,13 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     // Setting the top bar in system to same color as app
-    SystemChrome.setSystemUIOverlayStyle(SystemUiOverlayStyle(
-      systemNavigationBarColor: colorOrangeDark,
-      statusBarColor: colorOrangeDark,
-      statusBarIconBrightness: Brightness.light,
-    ));
+    SystemChrome.setSystemUIOverlayStyle(
+      SystemUiOverlayStyle(
+        systemNavigationBarColor: colorOrangeDark,
+        statusBarColor: colorOrangeDark,
+        statusBarIconBrightness: Brightness.light,
+      ),
+    );
     // Setting app only portrait mode
     SystemChrome.setPreferredOrientations([
       DeviceOrientation.portraitUp,

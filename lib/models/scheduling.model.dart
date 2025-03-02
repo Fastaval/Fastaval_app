@@ -14,21 +14,22 @@ class Scheduling {
   String? meetRoomId;
   String? meetRoomName;
 
-  Scheduling(
-      {this.type,
-      this.activityType,
-      this.id,
-      this.scheduleId,
-      this.titleDa,
-      this.titleEn,
-      this.roomDa,
-      this.roomEn,
-      this.start,
-      this.stop,
-      this.playRoomId,
-      this.playRoomName,
-      this.meetRoomId,
-      this.meetRoomName});
+  Scheduling({
+    this.type,
+    this.activityType,
+    this.id,
+    this.scheduleId,
+    this.titleDa,
+    this.titleEn,
+    this.roomDa,
+    this.roomEn,
+    this.start,
+    this.stop,
+    this.playRoomId,
+    this.playRoomName,
+    this.meetRoomId,
+    this.meetRoomName,
+  });
 
   Scheduling.fromJson(dynamic json) {
     type = json['type'];
@@ -61,6 +62,6 @@ class Scheduling {
         'play_room_id': playRoomId,
         'play_room_name': playRoomName,
         'meet_room_id': meetRoomId,
-        'meet_room_name': meetRoomName
+        'meet_room_name': meetRoomName,
       };
 }

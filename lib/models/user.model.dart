@@ -18,18 +18,19 @@ class User {
   late int barcode;
   late List<OttoParty> ottoParty;
 
-  User(
-      {this.id = 0,
-      this.password = '',
-      this.name = '',
-      this.hasCheckedIn = false,
-      this.messages = '',
-      this.category = '',
-      this.food = const [],
-      this.wear = const [],
-      this.scheduling = const [],
-      this.barcode = 0,
-      this.ottoParty = const []}) {
+  User({
+    this.id = 0,
+    this.password = '',
+    this.name = '',
+    this.hasCheckedIn = false,
+    this.messages = '',
+    this.category = '',
+    this.food = const [],
+    this.wear = const [],
+    this.scheduling = const [],
+    this.barcode = 0,
+    this.ottoParty = const [],
+  }) {
     sleep = Sleep(id: 0, access: 0, mattress: 0, areaName: '', areaId: '');
   }
 
@@ -45,9 +46,11 @@ class User {
         food = List<Food>.from(json['food'].map((item) => Food.fromJson(item))),
         wear = List<Wear>.from(json['wear'].map((item) => Wear.fromJson(item))),
         scheduling = List<Scheduling>.from(
-            json['scheduling'].map((item) => Scheduling.fromJson(item))),
+          json['scheduling'].map((item) => Scheduling.fromJson(item)),
+        ),
         ottoParty = List<OttoParty>.from(
-            json['otto_party'].map((item) => OttoParty.fromJson(item)));
+          json['otto_party'].map((item) => OttoParty.fromJson(item)),
+        );
 
   Map<String, dynamic> toJson() => {
         'id': id,
@@ -61,6 +64,6 @@ class User {
         'wear': wear,
         'scheduling': scheduling,
         'barcode': barcode,
-        'otto_party': ottoParty
+        'otto_party': ottoParty,
       };
 }

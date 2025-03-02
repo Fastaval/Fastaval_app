@@ -1,15 +1,23 @@
 class ActivityRun {
   final int id;
   final int activity;
-  final int localeId;
+  final int? localeId;
   final String localeName;
   final int start;
   final int linked;
   final double length;
   final int stop;
 
-  ActivityRun(this.id, this.activity, this.localeId, this.localeName,
-      this.start, this.linked, this.length, this.stop);
+  ActivityRun(
+    this.id,
+    this.activity,
+    this.localeId,
+    this.localeName,
+    this.start,
+    this.linked,
+    this.length,
+    this.stop,
+  );
 
   ActivityRun.fromJson(Map<String, dynamic> json)
       : id = json['afvikling_id'] is String

@@ -7,12 +7,13 @@ class Boardgame {
   bool fastavalGame;
   int bbgId;
 
-  Boardgame(
-      {required this.id,
-      required this.name,
-      required this.available,
-      required this.fastavalGame,
-      required this.bbgId});
+  Boardgame({
+    required this.id,
+    required this.name,
+    required this.available,
+    required this.fastavalGame,
+    required this.bbgId,
+  });
 
   Boardgame.fromJson(dynamic json)
       : id = json['id'],
@@ -26,7 +27,7 @@ class Boardgame {
         'title_da': name,
         'available': available,
         'fastavalGame': fastavalGame,
-        'bggId': bbgId
+        'bggId': bbgId,
       };
 }
 

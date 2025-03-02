@@ -27,12 +27,16 @@ class BoardGameController extends GetxController {
   applyFilterToList([String? filter]) {
     showSearchClear(filter != null && filter.isNotEmpty);
 
-    filteredList(filter != null && filter.isNotEmpty
-        ? boardgameList
-            .where((game) =>
-                game.name.toLowerCase().contains(filter.toLowerCase()))
-            .toList()
-        : boardgameList);
+    filteredList(
+      filter != null && filter.isNotEmpty
+          ? boardgameList
+              .where(
+                (game) =>
+                    game.name.toLowerCase().contains(filter.toLowerCase()),
+              )
+              .toList()
+          : boardgameList,
+    );
   }
 }
 

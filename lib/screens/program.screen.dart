@@ -13,32 +13,31 @@ class ProgramScreen extends StatelessWidget {
   @override
   Widget build(context) {
     return DefaultTabController(
-        length: 5,
-        child: Scaffold(
-          appBar: AppBar(
-            backgroundColor: colorOrangeDark,
-            foregroundColor: colorWhite,
-            toolbarHeight: 40,
-            centerTitle: true,
-            titleTextStyle: kAppBarTextStyle,
-            title: Text(tr('screenTitle.program')),
-            bottom: PreferredSize(
-                preferredSize: _tabBar.preferredSize,
-                child: ColoredBox(
-                  color: colorWhite,
-                  child: _tabBar,
-                )),
+      length: 5,
+      child: Scaffold(
+        appBar: AppBar(
+          backgroundColor: colorOrangeDark,
+          foregroundColor: colorWhite,
+          toolbarHeight: 40,
+          centerTitle: true,
+          titleTextStyle: kAppBarTextStyle,
+          title: Text(tr('screenTitle.program')),
+          bottom: PreferredSize(
+            preferredSize: _tabBar.preferredSize,
+            child: ColoredBox(color: colorWhite, child: _tabBar),
           ),
-          body: TabBarView(
-            children: [
-              buildday("2024-03-27"),
-              buildday("2024-03-28"),
-              buildday("2024-03-29"),
-              buildday("2024-03-30"),
-              buildday("2024-03-31"),
-            ],
-          ),
-        ));
+        ),
+        body: TabBarView(
+          children: [
+            buildday("2025-04-16"),
+            buildday("2025-04-17"),
+            buildday("2025-04-18"),
+            buildday("2025-04-19"),
+            buildday("2025-04-20"),
+          ],
+        ),
+      ),
+    );
   }
 
   TabBar get _tabBar => TabBar(
@@ -62,10 +61,11 @@ class ProgramScreen extends StatelessWidget {
       itemBuilder: (context, index) {
         ActivityRun item = programCtrl.activityRunForDay[day]![index];
         return programListItem(
-            programCtrl.activities[item.activity]!,
-            item,
-            getActivityColor(programCtrl.activities[item.activity]!.type),
-            context);
+          programCtrl.activities[item.activity]!,
+          item,
+          getActivityColor(programCtrl.activities[item.activity]!.type),
+          context,
+        );
       },
     );
   }

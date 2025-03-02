@@ -25,8 +25,9 @@ class NotificationsScreen extends StatelessWidget {
         titleTextStyle: kAppBarTextStyle,
         actions: [
           IconButton(
-              onPressed: () => notificationCtrl.getNotifications(),
-              icon: Icon(CupertinoIcons.refresh))
+            onPressed: () => notificationCtrl.getNotifications(),
+            icon: Icon(CupertinoIcons.refresh),
+          ),
         ],
         title: Text(tr('screenTitle.notifications')),
       ),
@@ -70,9 +71,12 @@ class NotificationsScreen extends StatelessWidget {
                 notificationItem(notifications[index]),
           )
         : Padding(
-            child: Text(tr('notifications.noNotificationsFound'),
-                style: kNormalTextStyle),
-            padding: EdgeInsets.fromLTRB(16, 48, 16, 48));
+            child: Text(
+              tr('notifications.noNotificationsFound'),
+              style: kNormalTextStyle,
+            ),
+            padding: EdgeInsets.fromLTRB(16, 48, 16, 48),
+          );
   }
 
   Widget notificationItem(InfosysNotification notification) {
@@ -80,21 +84,32 @@ class NotificationsScreen extends StatelessWidget {
         (tz.getLocation('Europe/Copenhagen').currentTimeZone.offset / 1000)
             .round();
 
-    return Row(crossAxisAlignment: CrossAxisAlignment.start, children: [
-      Padding(
+    return Row(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        Padding(
           padding: EdgeInsets.only(right: 10),
           child: Column(
             children: [
-              Text(formatTime(notification.sendTime + tzOffset),
-                  style: kNormalTextBoldStyle),
-              Text(formatDay(notification.sendTime + tzOffset),
-                  style: kNormalTextBoldStyle)
+              Text(
+                formatTime(notification.sendTime + tzOffset),
+                style: kNormalTextBoldStyle,
+              ),
+              Text(
+                formatDay(notification.sendTime + tzOffset),
+                style: kNormalTextBoldStyle,
+              ),
             ],
-          )),
-      Expanded(
-          child: Text(Get.locale?.languageCode == 'da'
-              ? notification.da
-              : notification.en))
-    ]);
+          ),
+        ),
+        Expanded(
+          child: Text(
+            Get.locale?.languageCode == 'da'
+                ? notification.da
+                : notification.en,
+          ),
+        ),
+      ],
+    );
   }
 }
