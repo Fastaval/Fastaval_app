@@ -14,9 +14,9 @@ class OttoParty {
   }
 
   Map<String, dynamic> toJson() => {
-    'id': id,
-    'title_da': titleDa,
-    'title_en': titleEn,
-    'amount': amount,
-  };
+        'id': id,
+        'title_da': titleDa,
+        'title_en': titleEn,
+        'amount': amount,
+      };
 }

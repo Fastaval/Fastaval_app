@@ -20,16 +20,16 @@ class ActivityRun {
   );
 
   ActivityRun.fromJson(Map<String, dynamic> json)
-    : id =
-          json['afvikling_id'] is String
-              ? int.parse(json['afvikling_id'])
-              : json['afvikling_id'],
-      activity = json['aktivitet_id'],
-      localeId = json['lokale_id'],
-      localeName = json['lokale_navn'],
-      start = json['start'],
-      linked =
-          json['linked'] is String ? int.parse(json['linked']) : json['linked'],
-      length = json['length'] + .0,
-      stop = json['stop'];
+      : id = json['afvikling_id'] is String
+            ? int.parse(json['afvikling_id'])
+            : json['afvikling_id'],
+        activity = json['aktivitet_id'],
+        localeId = json['lokale_id'],
+        localeName = json['lokale_navn'],
+        start = json['start'],
+        linked = json['linked'] is String
+            ? int.parse(json['linked'])
+            : json['linked'],
+        length = json['length'] + .0,
+        stop = json['stop'];
 }

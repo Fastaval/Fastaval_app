@@ -56,10 +56,9 @@ class SettingsScreen extends StatelessWidget {
                 DropdownMenuItem(value: 'en', child: Text('English')),
               ],
               value: settingsCtrl.language.value,
-              onChanged:
-                  (Object? value) => {
-                    settingsCtrl.updateLanguage(value as String),
-                  },
+              onChanged: (Object? value) => {
+                settingsCtrl.updateLanguage(value as String),
+              },
             ),
             title: Row(
               children: [

@@ -29,13 +29,12 @@ class ProfileScreen extends StatelessWidget {
         centerTitle: true,
         actions: [
           Obx(
-            () =>
-                appCtrl.fetchingUser.isFalse
-                    ? IconButton(
-                      onPressed: () => appCtrl.updateUserProfile(),
-                      icon: Icon(CupertinoIcons.refresh),
-                    )
-                    : Text(''),
+            () => appCtrl.fetchingUser.isFalse
+                ? IconButton(
+                    onPressed: () => appCtrl.updateUserProfile(),
+                    icon: Icon(CupertinoIcons.refresh),
+                  )
+                : Text(''),
           ),
         ],
         titleTextStyle: kAppBarTextStyle,
@@ -63,121 +62,122 @@ class ProfileScreen extends StatelessWidget {
   }
 
   Widget buildIdIcon() => Container(
-    margin: EdgeInsets.fromLTRB(16, 20, 16, 0),
-    child: Stack(
-      children: [
-        Column(
+        margin: EdgeInsets.fromLTRB(16, 20, 16, 0),
+        child: Stack(
           children: [
-            SizedBox(height: 70),
-            Container(
-              height: 80,
-              decoration: BoxDecoration(
-                color: Color.fromRGBO(255, 255, 255, 0.41),
-                border: Border.all(color: colorWhite, width: 1),
-                borderRadius: BorderRadius.circular(20),
-              ),
+            Column(
+              children: [
+                SizedBox(height: 70),
+                Container(
+                  height: 80,
+                  decoration: BoxDecoration(
+                    color: Color.fromRGBO(255, 255, 255, 0.41),
+                    border: Border.all(color: colorWhite, width: 1),
+                    borderRadius: BorderRadius.circular(20),
+                  ),
+                ),
+              ],
             ),
-          ],
-        ),
-        Column(
-          crossAxisAlignment: CrossAxisAlignment.center,
-          children: [
-            Container(
-              width: 120,
-              height: 120,
-              decoration: BoxDecoration(
-                color: Colors.white,
-                shape: BoxShape.circle,
-              ),
-              child: Padding(
-                padding: EdgeInsets.symmetric(horizontal: 10),
-                child: FittedBox(
-                  fit: BoxFit.scaleDown,
-                  child: Text(
-                    appCtrl.user.id.toString(),
-                    textAlign: TextAlign.center,
-                    style: TextStyle(
-                      color: colorBlack,
-                      fontSize: 58,
-                      fontWeight: FontWeight.bold,
+            Column(
+              crossAxisAlignment: CrossAxisAlignment.center,
+              children: [
+                Container(
+                  width: 120,
+                  height: 120,
+                  decoration: BoxDecoration(
+                    color: Colors.white,
+                    shape: BoxShape.circle,
+                  ),
+                  child: Padding(
+                    padding: EdgeInsets.symmetric(horizontal: 10),
+                    child: FittedBox(
+                      fit: BoxFit.scaleDown,
+                      child: Text(
+                        appCtrl.user.id.toString(),
+                        textAlign: TextAlign.center,
+                        style: TextStyle(
+                          color: colorBlack,
+                          fontSize: 58,
+                          fontWeight: FontWeight.bold,
+                        ),
+                      ),
                     ),
                   ),
                 ),
-              ),
-            ),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                Text(
-                  tr('profile.participantNumber'),
-                  style: TextStyle(
-                    color: colorOrange,
-                    fontSize: 21,
-                    fontWeight: FontWeight.bold,
-                  ),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    Text(
+                      tr('profile.participantNumber'),
+                      style: TextStyle(
+                        color: colorOrange,
+                        fontSize: 21,
+                        fontWeight: FontWeight.bold,
+                      ),
+                    ),
+                  ],
                 ),
               ],
             ),
           ],
         ),
-      ],
-    ),
-  );
+      );
 
   Widget buildLogoutButton() => Padding(
-    padding: EdgeInsets.all(40),
-    child: SizedBox(
-      width: double.infinity,
-      child: ElevatedButton(
-        style: ButtonStyle(
-          backgroundColor: WidgetStateProperty.all<Color>(Colors.white),
-        ),
-        onPressed: () => appCtrl.logout(),
-        child: Text(
-          tr('login.signOut'),
-          style: TextStyle(
-            color: Colors.deepOrange,
-            fontSize: 18,
-            fontWeight: FontWeight.bold,
+        padding: EdgeInsets.all(40),
+        child: SizedBox(
+          width: double.infinity,
+          child: ElevatedButton(
+            style: ButtonStyle(
+              backgroundColor: WidgetStateProperty.all<Color>(Colors.white),
+            ),
+            onPressed: () => appCtrl.logout(),
+            child: Text(
+              tr('login.signOut'),
+              style: TextStyle(
+                color: Colors.deepOrange,
+                fontSize: 18,
+                fontWeight: FontWeight.bold,
+              ),
+            ),
           ),
         ),
-      ),
-    ),
-  );
+      );
 
   Widget buildUserProgramCard() => Obx(
-    () => textAndItemCard(
-      tr('profile.yourProgram'),
-      appCtrl.fetchingUser.isTrue
-          ? SizedBox(
-            width: 20,
-            height: 20,
-            child: CircularProgressIndicator(
-              strokeWidth: 2,
-              color: colorOrangeDark,
-            ),
-          )
-          : Text(
-            "${tr('common.updated')} ${formatDay(appCtrl.userUpdateTime.value)} ${formatTime(appCtrl.userUpdateTime.value)}",
-            style: kNormalTextSubdued,
-          ),
-      buildUsersProgram(appCtrl.user.scheduling),
-    ),
-  );
+        () => textAndItemCard(
+          tr('profile.yourProgram'),
+          appCtrl.fetchingUser.isTrue
+              ? SizedBox(
+                  width: 20,
+                  height: 20,
+                  child: CircularProgressIndicator(
+                    strokeWidth: 2,
+                    color: colorOrangeDark,
+                  ),
+                )
+              : Text(
+                  "${tr('common.updated')} ${formatDay(appCtrl.userUpdateTime.value)} ${formatTime(appCtrl.userUpdateTime.value)}",
+                  style: kNormalTextSubdued,
+                ),
+          buildUsersProgram(appCtrl.user.scheduling),
+        ),
+      );
 
   Widget buildUsersProgram(List<Scheduling> schedule) => Column(
-    children: [
-      SizedBox(height: 8),
-      ListView.separated(
-        physics: NeverScrollableScrollPhysics(),
-        shrinkWrap: true,
-        itemCount: schedule.length,
-        separatorBuilder: (context, int index) => SizedBox(height: 0),
-        itemBuilder: (buildContext, index) => userProgramItem(schedule[index]),
-      ),
-      SizedBox(height: 8),
-    ],
-  );
+        children: [
+          SizedBox(height: 8),
+          ListView.separated(
+            physics: NeverScrollableScrollPhysics(),
+            shrinkWrap: true,
+            itemCount: schedule.length,
+            separatorBuilder: (context, int index) => SizedBox(height: 0),
+            itemBuilder: (buildContext, index) =>
+                userProgramItem(schedule[index]),
+          ),
+          SizedBox(height: 8),
+        ],
+      );
 
   Widget userProgramItem(Scheduling item) {
     var room = Get.locale!.languageCode == 'da' ? item.roomDa : item.roomEn;
@@ -189,25 +189,23 @@ class ProfileScreen extends StatelessWidget {
     );
 
     return InkWell(
-      onTap:
-          () => showDialog(
-            context: Get.context!,
-            builder: activityDialog,
-            routeSettings: RouteSettings(arguments: item),
-          ),
+      onTap: () => showDialog(
+        context: Get.context!,
+        builder: activityDialog,
+        routeSettings: RouteSettings(arguments: item),
+      ),
       child: Container(
         decoration: BoxDecoration(
           boxShadow: [
             BoxShadow(
-              color: Colors.grey.withOpacity(0.75),
+              color: Colors.grey.withValues(alpha: 0.75),
               blurRadius: 4,
               offset: Offset(0, 4),
             ),
           ],
-          color:
-              expired == true
-                  ? Color(0xFFD4E9EC)
-                  : getActivityColor(item.activityType!),
+          color: expired == true
+              ? Color(0xFFD4E9EC)
+              : getActivityColor(item.activityType!),
           borderRadius: BorderRadius.circular(15),
         ),
         margin: EdgeInsets.fromLTRB(8, 0, 8, 8),
@@ -233,10 +231,9 @@ class ProfileScreen extends StatelessWidget {
                         Flexible(
                           child: Text(
                             "$activityType @ $room",
-                            style:
-                                expired
-                                    ? kNormalTextSubduedExpired
-                                    : kNormalTextSubdued,
+                            style: expired
+                                ? kNormalTextSubduedExpired
+                                : kNormalTextSubdued,
                             overflow: TextOverflow.ellipsis,
                           ),
                         ),
@@ -278,13 +275,12 @@ class ProfileScreen extends StatelessWidget {
       children: [
         Padding(
           padding: EdgeInsets.fromLTRB(16, 8, 16, 8),
-          child:
-              foodList.isNotEmpty
-                  ? Text(tr('program.food.ordered'))
-                  : Text(
-                    tr('program.food.notOrdered'),
-                    style: kNormalTextStyle,
-                  ),
+          child: foodList.isNotEmpty
+              ? Text(tr('program.food.ordered'))
+              : Text(
+                  tr('program.food.notOrdered'),
+                  style: kNormalTextStyle,
+                ),
         ),
         ListView.separated(
           physics: NeverScrollableScrollPhysics(),
@@ -300,17 +296,16 @@ class ProfileScreen extends StatelessWidget {
 
   Widget foodTickets(Food foodItem) {
     return InkWell(
-      onTap:
-          () => showDialog(
-            context: Get.context!,
-            builder: foodDialog,
-            routeSettings: RouteSettings(arguments: foodItem),
-          ),
+      onTap: () => showDialog(
+        context: Get.context!,
+        builder: foodDialog,
+        routeSettings: RouteSettings(arguments: foodItem),
+      ),
       child: Container(
         decoration: BoxDecoration(
           boxShadow: [
             BoxShadow(
-              color: Colors.grey.withOpacity(0.75),
+              color: Colors.grey.withValues(alpha: 0.75),
               blurRadius: 4,
               offset: Offset(0, 4),
             ),
@@ -333,10 +328,9 @@ class ProfileScreen extends StatelessWidget {
                           "${formatDay(foodItem.time)} ${formatTime(foodItem.time)} - ${formatTime(foodItem.timeEnd)}",
                           style: TextStyle(
                             fontSize: 16,
-                            color:
-                                foodItem.received == 0
-                                    ? Colors.black
-                                    : Colors.black26,
+                            color: foodItem.received == 0
+                                ? Colors.black
+                                : Colors.black26,
                             fontWeight: FontWeight.bold,
                           ),
                         ),
@@ -347,10 +341,9 @@ class ProfileScreen extends StatelessWidget {
                           ? foodItem.titleDa
                           : foodItem.titleEn,
                       overflow: TextOverflow.ellipsis,
-                      style:
-                          foodItem.received == 0
-                              ? kNormalTextStyle
-                              : kNormalTextDisabled,
+                      style: foodItem.received == 0
+                          ? kNormalTextStyle
+                          : kNormalTextDisabled,
                     ),
                   ],
                 ),
@@ -359,10 +352,9 @@ class ProfileScreen extends StatelessWidget {
                 children: [
                   Text(
                     tr('profile.foodTicket'),
-                    style:
-                        foodItem.received == 0
-                            ? kNormalTextStyle
-                            : kNormalTextDisabled,
+                    style: foodItem.received == 0
+                        ? kNormalTextStyle
+                        : kNormalTextDisabled,
                   ),
                   SizedBox(width: 8),
                   Icon(
@@ -380,29 +372,28 @@ class ProfileScreen extends StatelessWidget {
   }
 
   Widget buildUserWearCard() => textAndIconCard(
-    tr('profile.wear.title'),
-    Icons.shopping_bag_outlined,
-    Padding(
-      padding: EdgeInsets.fromLTRB(16, 8, 24, 16),
-      child:
-          appCtrl.user.wear.isEmpty
+        tr('profile.wear.title'),
+        Icons.shopping_bag_outlined,
+        Padding(
+          padding: EdgeInsets.fromLTRB(16, 8, 24, 16),
+          child: appCtrl.user.wear.isEmpty
               ? Row(children: [oneTextRow(tr('profile.wear.noWear'))])
               : ListView.separated(
-                physics: NeverScrollableScrollPhysics(),
-                shrinkWrap: true,
-                itemCount: appCtrl.user.wear.length,
-                separatorBuilder: (context, int index) => SizedBox(height: 10),
-                itemBuilder:
-                    (buildContext, index) => wearItem(appCtrl.user.wear[index]),
-              ),
-    ),
-  );
+                  physics: NeverScrollableScrollPhysics(),
+                  shrinkWrap: true,
+                  itemCount: appCtrl.user.wear.length,
+                  separatorBuilder: (context, int index) =>
+                      SizedBox(height: 10),
+                  itemBuilder: (buildContext, index) =>
+                      wearItem(appCtrl.user.wear[index]),
+                ),
+        ),
+      );
 
   Widget wearItem(Wear item) {
-    String title =
-        Get.locale!.languageCode == 'da'
-            ? "${item.amount} stk. ${item.titleDa}"
-            : "${item.amount} pcs. ${item.titleEn}";
+    String title = Get.locale!.languageCode == 'da'
+        ? "${item.amount} stk. ${item.titleDa}"
+        : "${item.amount} pcs. ${item.titleEn}";
 
     return Row(
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -424,28 +415,27 @@ class ProfileScreen extends StatelessWidget {
   }
 
   Widget buildUserSleepCard() => textAndIconCard(
-    tr('profile.sleep.title'),
-    CupertinoIcons.bed_double,
-    Padding(
-      padding: EdgeInsets.fromLTRB(16, 8, 24, 16),
-      child:
-          appCtrl.user.sleep.access == 0
+        tr('profile.sleep.title'),
+        CupertinoIcons.bed_double,
+        Padding(
+          padding: EdgeInsets.fromLTRB(16, 8, 24, 16),
+          child: appCtrl.user.sleep.access == 0
               ? Row(children: [oneTextRow(tr('profile.sleep.notSleeping'))])
               : Column(
-                children: [
-                  twoTextRow(
-                    tr('profile.sleep.location'),
-                    appCtrl.user.sleep.areaName,
-                  ),
-                  SizedBox(height: 10),
-                  twoTextRow(
-                    tr('profile.sleep.mattressRented'),
-                    tr('profile.sleep.mattress.${appCtrl.user.sleep.mattress}'),
-                  ),
-                ],
-              ),
-    ),
-  );
+                  children: [
+                    twoTextRow(
+                      tr('profile.sleep.location'),
+                      appCtrl.user.sleep.areaName,
+                    ),
+                    SizedBox(height: 10),
+                    twoTextRow(
+                      tr('profile.sleep.mattressRented'),
+                      tr('profile.sleep.mattress.${appCtrl.user.sleep.mattress}'),
+                    ),
+                  ],
+                ),
+        ),
+      );
 
   getFoodImage(Food item) {
     if (item.titleEn.contains('Dinner')) {

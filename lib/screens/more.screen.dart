@@ -55,14 +55,13 @@ class MoreScreen extends StatelessWidget {
                       true,
                       notificationCtrl.notificationsWaiting.value,
                     ),
-                    onTap:
-                        () => {
-                          Get.to(
-                            () => NotificationsScreen(),
-                            transition: Transition.rightToLeft,
-                          ),
-                          notificationCtrl.clearNotificationsWaiting(),
-                        },
+                    onTap: () => {
+                      Get.to(
+                        () => NotificationsScreen(),
+                        transition: Transition.rightToLeft,
+                      ),
+                      notificationCtrl.clearNotificationsWaiting(),
+                    },
                   ),
                 InkWell(
                   child: menuCard(
@@ -70,11 +69,10 @@ class MoreScreen extends StatelessWidget {
                     Icons.sports_esports_outlined,
                     true,
                   ),
-                  onTap:
-                      () => Get.to(
-                        () => BoardgameScreen(),
-                        transition: Transition.rightToLeft,
-                      ),
+                  onTap: () => Get.to(
+                    () => BoardgameScreen(),
+                    transition: Transition.rightToLeft,
+                  ),
                 ),
                 InkWell(
                   child: menuCard(
@@ -93,11 +91,10 @@ class MoreScreen extends StatelessWidget {
                 SizedBox(height: 50),
                 InkWell(
                   child: menuCard(tr('more.settings'), Icons.settings, true),
-                  onTap:
-                      () => Get.to(
-                        () => SettingsScreen(),
-                        transition: Transition.rightToLeft,
-                      ),
+                  onTap: () => Get.to(
+                    () => SettingsScreen(),
+                    transition: Transition.rightToLeft,
+                  ),
                 ),
                 Expanded(
                   child: Column(
@@ -107,16 +104,15 @@ class MoreScreen extends StatelessWidget {
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: [
                           IconButton(
-                            onPressed:
-                                () => canLaunchUrl(facebook).then(
-                                  (allowed) => {
-                                    if (allowed)
-                                      launchUrl(
-                                        facebook,
-                                        mode: LaunchMode.externalApplication,
-                                      ),
-                                  },
-                                ),
+                            onPressed: () => canLaunchUrl(facebook).then(
+                              (allowed) => {
+                                if (allowed)
+                                  launchUrl(
+                                    facebook,
+                                    mode: LaunchMode.externalApplication,
+                                  ),
+                              },
+                            ),
                             icon: FaIcon(
                               FontAwesomeIcons.facebook,
                               size: 40,
@@ -125,16 +121,15 @@ class MoreScreen extends StatelessWidget {
                           ),
                           SizedBox(width: 24),
                           IconButton(
-                            onPressed:
-                                () => canLaunchUrl(instagram).then(
-                                  (allowed) => {
-                                    if (allowed)
-                                      launchUrl(
-                                        instagram,
-                                        mode: LaunchMode.externalApplication,
-                                      ),
-                                  },
-                                ),
+                            onPressed: () => canLaunchUrl(instagram).then(
+                              (allowed) => {
+                                if (allowed)
+                                  launchUrl(
+                                    instagram,
+                                    mode: LaunchMode.externalApplication,
+                                  ),
+                              },
+                            ),
                             icon: FaIcon(
                               FontAwesomeIcons.instagram,
                               size: 40,
@@ -143,16 +138,15 @@ class MoreScreen extends StatelessWidget {
                           ),
                           SizedBox(width: 24),
                           IconButton(
-                            onPressed:
-                                () => canLaunchUrl(x).then(
-                                  (allowed) => {
-                                    if (allowed)
-                                      launchUrl(
-                                        x,
-                                        mode: LaunchMode.externalApplication,
-                                      ),
-                                  },
-                                ),
+                            onPressed: () => canLaunchUrl(x).then(
+                              (allowed) => {
+                                if (allowed)
+                                  launchUrl(
+                                    x,
+                                    mode: LaunchMode.externalApplication,
+                                  ),
+                              },
+                            ),
                             icon: FaIcon(
                               FontAwesomeIcons.xTwitter,
                               size: 40,
@@ -161,16 +155,15 @@ class MoreScreen extends StatelessWidget {
                           ),
                           SizedBox(width: 24),
                           IconButton(
-                            onPressed:
-                                () => canLaunchUrl(newsletter).then(
-                                  (allowed) => {
-                                    if (allowed)
-                                      launchUrl(
-                                        newsletter,
-                                        mode: LaunchMode.externalApplication,
-                                      ),
-                                  },
-                                ),
+                            onPressed: () => canLaunchUrl(newsletter).then(
+                              (allowed) => {
+                                if (allowed)
+                                  launchUrl(
+                                    newsletter,
+                                    mode: LaunchMode.externalApplication,
+                                  ),
+                              },
+                            ),
                             icon: FaIcon(
                               FontAwesomeIcons.envelopeOpenText,
                               size: 40,
@@ -209,28 +202,28 @@ class MoreScreen extends StatelessWidget {
 }
 
 Future fastaMap(BuildContext context, AssetImage image) => showDialog(
-  context: context,
-  builder: (BuildContext context) {
-    return Stack(
-      children: [
-        PhotoView(imageProvider: image),
-        Positioned(
-          right: 10,
-          top: 10,
-          child: Material(
-            color: Colors.transparent,
-            child: CircleAvatar(
-              backgroundColor: Colors.orange,
-              radius: 20,
-              child: IconButton(
-                icon: Icon(Icons.close),
-                color: Colors.black,
-                onPressed: () => Navigator.pop(context),
+      context: context,
+      builder: (BuildContext context) {
+        return Stack(
+          children: [
+            PhotoView(imageProvider: image),
+            Positioned(
+              right: 10,
+              top: 10,
+              child: Material(
+                color: Colors.transparent,
+                child: CircleAvatar(
+                  backgroundColor: Colors.orange,
+                  radius: 20,
+                  child: IconButton(
+                    icon: Icon(Icons.close),
+                    color: Colors.black,
+                    onPressed: () => Navigator.pop(context),
+                  ),
+                ),
               ),
             ),
-          ),
-        ),
-      ],
+          ],
+        );
+      },
     );
-  },
-);

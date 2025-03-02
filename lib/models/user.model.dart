@@ -35,35 +35,35 @@ class User {
   }
 
   User.fromJson(dynamic json)
-    : id = json['id'],
-      password = json['password'] ?? '',
-      name = json['name'],
-      hasCheckedIn = json['checked_in'] != 0,
-      messages = json['messages'] ?? '',
-      sleep = Sleep.fromJson(json['sleep']),
-      category = json['category'],
-      barcode = json['barcode'],
-      food = List<Food>.from(json['food'].map((item) => Food.fromJson(item))),
-      wear = List<Wear>.from(json['wear'].map((item) => Wear.fromJson(item))),
-      scheduling = List<Scheduling>.from(
-        json['scheduling'].map((item) => Scheduling.fromJson(item)),
-      ),
-      ottoParty = List<OttoParty>.from(
-        json['otto_party'].map((item) => OttoParty.fromJson(item)),
-      );
+      : id = json['id'],
+        password = json['password'] ?? '',
+        name = json['name'],
+        hasCheckedIn = json['checked_in'] != 0,
+        messages = json['messages'] ?? '',
+        sleep = Sleep.fromJson(json['sleep']),
+        category = json['category'],
+        barcode = json['barcode'],
+        food = List<Food>.from(json['food'].map((item) => Food.fromJson(item))),
+        wear = List<Wear>.from(json['wear'].map((item) => Wear.fromJson(item))),
+        scheduling = List<Scheduling>.from(
+          json['scheduling'].map((item) => Scheduling.fromJson(item)),
+        ),
+        ottoParty = List<OttoParty>.from(
+          json['otto_party'].map((item) => OttoParty.fromJson(item)),
+        );
 
   Map<String, dynamic> toJson() => {
-    'id': id,
-    'password': password,
-    'name': name,
-    'checked_in': hasCheckedIn,
-    'messages': messages,
-    'sleep': sleep,
-    'category': category,
-    'food': food,
-    'wear': wear,
-    'scheduling': scheduling,
-    'barcode': barcode,
-    'otto_party': ottoParty,
-  };
+        'id': id,
+        'password': password,
+        'name': name,
+        'checked_in': hasCheckedIn,
+        'messages': messages,
+        'sleep': sleep,
+        'category': category,
+        'food': food,
+        'wear': wear,
+        'scheduling': scheduling,
+        'barcode': barcode,
+        'otto_party': ottoParty,
+      };
 }

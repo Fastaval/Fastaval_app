@@ -41,19 +41,19 @@ class ProgramScreen extends StatelessWidget {
   }
 
   TabBar get _tabBar => TabBar(
-    labelColor: colorBlack,
-    unselectedLabelStyle: TextStyle(fontWeight: FontWeight.normal),
-    labelStyle: TextStyle(fontWeight: FontWeight.bold),
-    indicatorSize: TabBarIndicatorSize.tab,
-    indicatorColor: colorOrange,
-    tabs: [
-      Tab(text: tr('program.wednesday.short')),
-      Tab(text: tr('program.thursday.short')),
-      Tab(text: tr('program.friday.short')),
-      Tab(text: tr('program.saturday.short')),
-      Tab(text: tr('program.sunday.short')),
-    ],
-  );
+        labelColor: colorBlack,
+        unselectedLabelStyle: TextStyle(fontWeight: FontWeight.normal),
+        labelStyle: TextStyle(fontWeight: FontWeight.bold),
+        indicatorSize: TabBarIndicatorSize.tab,
+        indicatorColor: colorOrange,
+        tabs: [
+          Tab(text: tr('program.wednesday.short')),
+          Tab(text: tr('program.thursday.short')),
+          Tab(text: tr('program.friday.short')),
+          Tab(text: tr('program.saturday.short')),
+          Tab(text: tr('program.sunday.short')),
+        ],
+      );
 
   Widget buildday(String day) {
     return ListView.builder(

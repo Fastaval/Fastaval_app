@@ -22,9 +22,9 @@ class InfosysNotification {
   });
 
   InfosysNotification.fromJson(dynamic json)
-    : sendTime = json['send_time'],
-      en = json['en'],
-      da = json['da'];
+      : sendTime = json['send_time'],
+        en = json['en'],
+        da = json['da'];
 
   Map<String, dynamic> toJson() => {'send_time': sendTime, 'en': en, 'da': da};
 }

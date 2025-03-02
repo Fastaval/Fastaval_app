@@ -47,31 +47,31 @@ class UserService {
   }
 
   Future<void> registerAppToInfosys(User user) async => await showDialog(
-    context: Get.context!,
-    barrierDismissible: false,
-    builder: (BuildContext context) {
-      return AlertDialog(
-        title: Text(tr('login.alert.title')),
-        content: Text(tr('login.alert.description')),
-        actions: <Widget>[
-          TextButton(
-            child: Text(tr('login.alert.dialogNo')),
-            onPressed: () {
-              Navigator.of(context).pop();
-            },
-          ),
-          ElevatedButton(
-            child: Text(tr('login.alert.dialogYes')),
-            onPressed: () {
-              sendFCMTokenToInfosys(user.id);
-              askForTrackingPermission(context);
-              Navigator.of(context).pop();
-            },
-          ),
-        ],
+        context: Get.context!,
+        barrierDismissible: false,
+        builder: (BuildContext context) {
+          return AlertDialog(
+            title: Text(tr('login.alert.title')),
+            content: Text(tr('login.alert.description')),
+            actions: <Widget>[
+              TextButton(
+                child: Text(tr('login.alert.dialogNo')),
+                onPressed: () {
+                  Navigator.of(context).pop();
+                },
+              ),
+              ElevatedButton(
+                child: Text(tr('login.alert.dialogYes')),
+                onPressed: () {
+                  sendFCMTokenToInfosys(user.id);
+                  askForTrackingPermission(context);
+                  Navigator.of(context).pop();
+                },
+              ),
+            ],
+          );
+        },
       );
-    },
-  );
 }
 
 Future<User> fetchUser(String userId, String password) async {
@@ -123,9 +123,8 @@ Future<void> askForTrackingPermission(BuildContext context) async {
 }
 
 showCustomTrackingDialog(BuildContext context) async => await showDialog(
-  context: context,
-  builder:
-      (context) => AlertDialog(
+      context: context,
+      builder: (context) => AlertDialog(
         title: Text(tr('login.permissionsWarning.title')),
         content: Text(tr('login.permissionsWarning.description')),
         actions: [
@@ -135,4 +134,4 @@ showCustomTrackingDialog(BuildContext context) async => await showDialog(
           ),
         ],
       ),
-);
+    );

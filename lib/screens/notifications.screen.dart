@@ -62,21 +62,21 @@ class NotificationsScreen extends StatelessWidget {
 
     return notifications.isNotEmpty
         ? ListView.separated(
-          physics: NeverScrollableScrollPhysics(),
-          shrinkWrap: true,
-          itemCount: notifications.length,
-          separatorBuilder:
-              (context, int index) => Divider(height: 20, color: Colors.grey),
-          itemBuilder:
-              (buildContext, index) => notificationItem(notifications[index]),
-        )
+            physics: NeverScrollableScrollPhysics(),
+            shrinkWrap: true,
+            itemCount: notifications.length,
+            separatorBuilder: (context, int index) =>
+                Divider(height: 20, color: Colors.grey),
+            itemBuilder: (buildContext, index) =>
+                notificationItem(notifications[index]),
+          )
         : Padding(
-          child: Text(
-            tr('notifications.noNotificationsFound'),
-            style: kNormalTextStyle,
-          ),
-          padding: EdgeInsets.fromLTRB(16, 48, 16, 48),
-        );
+            child: Text(
+              tr('notifications.noNotificationsFound'),
+              style: kNormalTextStyle,
+            ),
+            padding: EdgeInsets.fromLTRB(16, 48, 16, 48),
+          );
   }
 
   Widget notificationItem(InfosysNotification notification) {

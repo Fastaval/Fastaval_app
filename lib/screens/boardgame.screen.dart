@@ -46,25 +46,23 @@ class BoardgameScreen extends StatelessWidget {
                   child: Obx(
                     () => TextField(
                       controller: _searchInput,
-                      onChanged:
-                          (value) => boardgameCtrl.applyFilterToList(value),
+                      onChanged: (value) =>
+                          boardgameCtrl.applyFilterToList(value),
                       decoration: InputDecoration(
                         contentPadding: EdgeInsets.fromLTRB(16, 0, 0, 0),
                         filled: true,
                         fillColor: Colors.white,
                         prefixIcon: Icon(CupertinoIcons.search),
                         hintText: tr("boardgames.search"),
-                        suffixIcon:
-                            boardgameCtrl.showSearchClear.value
-                                ? IconButton(
-                                  icon: Icon(Icons.clear),
-                                  onPressed:
-                                      () => {
-                                        _searchInput.clear(),
-                                        boardgameCtrl.applyFilterToList(),
-                                      },
-                                )
-                                : null,
+                        suffixIcon: boardgameCtrl.showSearchClear.value
+                            ? IconButton(
+                                icon: Icon(Icons.clear),
+                                onPressed: () => {
+                                  _searchInput.clear(),
+                                  boardgameCtrl.applyFilterToList(),
+                                },
+                              )
+                            : null,
                         border: OutlineInputBorder(
                           borderRadius: BorderRadius.circular(20),
                         ),
@@ -94,24 +92,23 @@ class BoardgameScreen extends StatelessWidget {
   Widget buildGameList(BuildContext context) {
     return boardgameCtrl.filteredList.isNotEmpty
         ? ListView.separated(
-          physics: NeverScrollableScrollPhysics(),
-          shrinkWrap: true,
-          itemCount: boardgameCtrl.filteredList.length,
-          addRepaintBoundaries: true,
-          separatorBuilder:
-              (context, int index) => Divider(height: 0, color: Colors.grey),
-          itemBuilder:
-              (buildContext, index) =>
-                  boardGameItem(boardgameCtrl.filteredList[index]),
-        )
+            physics: NeverScrollableScrollPhysics(),
+            shrinkWrap: true,
+            itemCount: boardgameCtrl.filteredList.length,
+            addRepaintBoundaries: true,
+            separatorBuilder: (context, int index) =>
+                Divider(height: 0, color: Colors.grey),
+            itemBuilder: (buildContext, index) =>
+                boardGameItem(boardgameCtrl.filteredList[index]),
+          )
         : Padding(
-          child: Text(
-            textAlign: TextAlign.center,
-            tr('boardgames.noGamesFound'),
-            style: kNormalTextStyle,
-          ),
-          padding: EdgeInsets.fromLTRB(0, 48, 0, 48),
-        );
+            child: Text(
+              textAlign: TextAlign.center,
+              tr('boardgames.noGamesFound'),
+              style: kNormalTextStyle,
+            ),
+            padding: EdgeInsets.fromLTRB(0, 48, 0, 48),
+          );
   }
 
   Widget boardGameItem(Boardgame game) {

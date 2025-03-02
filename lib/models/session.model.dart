@@ -31,13 +31,13 @@ class Session {
   }
 
   Map<String, dynamic> toJson() => {
-    'afvikling_id': id,
-    'aktivitet_id': activityId,
-    'length': length,
-    'linked': linked,
-    'lokale_id': roomId,
-    'lokale_navn': roomName,
-    'start': start,
-    'stop': stop,
-  };
+        'afvikling_id': id,
+        'aktivitet_id': activityId,
+        'length': length,
+        'linked': linked,
+        'lokale_id': roomId,
+        'lokale_navn': roomName,
+        'start': start,
+        'stop': stop,
+      };
 }

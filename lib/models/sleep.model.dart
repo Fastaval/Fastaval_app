@@ -14,17 +14,17 @@ class Sleep {
   });
 
   Sleep.fromJson(dynamic json)
-    : id = json['id'],
-      access = json['access'],
-      mattress = json['mattress'],
-      areaName = json['area_name'],
-      areaId = json['area_id'];
+      : id = json['id'],
+        access = json['access'],
+        mattress = json['mattress'],
+        areaName = json['area_name'],
+        areaId = json['area_id'];
 
   Map<String, dynamic> toJson() => {
-    'id': id,
-    'access': access,
-    'mattress': mattress,
-    'area_name': areaName,
-    'area_id': areaId,
-  };
+        'id': id,
+        'access': access,
+        'mattress': mattress,
+        'area_name': areaName,
+        'area_id': areaId,
+      };
 }

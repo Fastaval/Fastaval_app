@@ -50,29 +50,30 @@ class FavoritesScreen extends StatelessWidget {
   }
 
   Widget buildFavorites() {
-    var sortedFavorites =
-        programCtrl.favorites.map((id) => programCtrl.runs[id]).toList()
-          ..sort((a, b) => a.start - b.start);
+    var sortedFavorites = programCtrl.favorites
+        .map((id) => programCtrl.runs[id])
+        .toList()
+      ..sort((a, b) => a.start - b.start);
 
     return sortedFavorites.isNotEmpty
         ? Column(
-          children: [
-            SizedBox(height: 8),
-            ListView.separated(
-              physics: NeverScrollableScrollPhysics(),
-              shrinkWrap: true,
-              itemCount: sortedFavorites.length,
-              separatorBuilder: (context, int index) => SizedBox(height: 0),
-              itemBuilder:
-                  (buildContext, index) => favoriteItem(sortedFavorites[index]),
-            ),
-            SizedBox(height: 8),
-          ],
-        )
+            children: [
+              SizedBox(height: 8),
+              ListView.separated(
+                physics: NeverScrollableScrollPhysics(),
+                shrinkWrap: true,
+                itemCount: sortedFavorites.length,
+                separatorBuilder: (context, int index) => SizedBox(height: 0),
+                itemBuilder: (buildContext, index) =>
+                    favoriteItem(sortedFavorites[index]),
+              ),
+              SizedBox(height: 8),
+            ],
+          )
         : Padding(
-          child: Text(tr('favorites.noFavorites'), style: kNormalTextStyle),
-          padding: EdgeInsets.fromLTRB(16, 48, 16, 48),
-        );
+            child: Text(tr('favorites.noFavorites'), style: kNormalTextStyle),
+            padding: EdgeInsets.fromLTRB(16, 48, 16, 48),
+          );
   }
 
   Widget favoriteItem(ActivityRun run) {
@@ -85,25 +86,23 @@ class FavoritesScreen extends StatelessWidget {
     );
 
     return InkWell(
-      onTap:
-          () => showDialog(
-            context: Get.context!,
-            builder: activityDialog,
-            routeSettings: RouteSettings(arguments: run),
-          ),
+      onTap: () => showDialog(
+        context: Get.context!,
+        builder: activityDialog,
+        routeSettings: RouteSettings(arguments: run),
+      ),
       child: Container(
         decoration: BoxDecoration(
           boxShadow: [
             BoxShadow(
-              color: Colors.grey.withOpacity(0.75),
+              color: Colors.grey.withValues(alpha: 0.75),
               blurRadius: 4,
               offset: Offset(0, 4),
             ),
           ],
-          color:
-              expired == true
-                  ? Color(0xFFD4E9EC)
-                  : getActivityColor(activity.type),
+          color: expired == true
+              ? Color(0xFFD4E9EC)
+              : getActivityColor(activity.type),
           borderRadius: BorderRadius.circular(15),
         ),
         margin: EdgeInsets.fromLTRB(8, 0, 8, 8),
@@ -129,10 +128,9 @@ class FavoritesScreen extends StatelessWidget {
                         Flexible(
                           child: Text(
                             "$activityType @ ${run.localeName}",
-                            style:
-                                expired
-                                    ? kNormalTextSubduedExpired
-                                    : kNormalTextSubdued,
+                            style: expired
+                                ? kNormalTextSubduedExpired
+                                : kNormalTextSubdued,
                             overflow: TextOverflow.ellipsis,
                           ),
                         ),

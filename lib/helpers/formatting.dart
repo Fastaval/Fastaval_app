@@ -1,8 +1,7 @@
 import 'package:easy_localization/easy_localization.dart';
 import 'package:get/get.dart';
 
-formatDay(int? time) =>
-    DateFormat.E(
+formatDay(int? time) => DateFormat.E(
       Get.locale!.languageCode == 'da' ? 'da_DK' : 'en_UK',
     ).format(formatTimestampToDateTime(time!)).capitalizeString();
 
