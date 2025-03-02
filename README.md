@@ -11,6 +11,7 @@ A Flutter project for Alea's Fastaval
 | `dart pub get`                                            | Download packages from pubspec.yaml                    |
 | `flutter build appbundle --no-tree-shake-icons --release` | Builds a release bundle of android                     |
 | `flutter build ipa`                                       | Builds a release file for iOS                          |
+| `pod update`                                              | Run inside ios folder to update cocoa pods             |
 
 ## Deploy to iOS
 
