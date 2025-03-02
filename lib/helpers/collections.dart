@@ -12,7 +12,7 @@ Map<String, Color> colorMap = {
   'live': Color(0xFFAED581),
   'magic': Colors.purpleAccent.shade100,
   'workshop': Colors.amberAccent.shade200,
-  'figur': Colors.red.shade300
+  'figur': Colors.red.shade300,
 };
 
 Map<String, String> activityImageMap = {

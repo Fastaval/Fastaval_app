@@ -26,114 +26,138 @@ class BoardgameScreen extends StatelessWidget {
         titleTextStyle: kAppBarTextStyle,
         actions: [
           IconButton(
-              onPressed: () => boardgameCtrl.getBoardGames(),
-              icon: Icon(CupertinoIcons.refresh))
+            onPressed: () => boardgameCtrl.getBoardGames(),
+            icon: Icon(CupertinoIcons.refresh),
+          ),
         ],
         title: Text(tr('boardgames.title')),
       ),
       body: Container(
-          height: double.infinity,
-          decoration: backgroundBoxDecorationStyle,
-          child: SingleChildScrollView(
-            physics: AlwaysScrollableScrollPhysics(),
-            child: Column(
-              children: [
-                Padding(
-                    padding: EdgeInsets.fromLTRB(16, 16, 16, 0),
-                    child: Container(
-                      height: 40,
-                      child: Obx(() => TextField(
-                            controller: _searchInput,
-                            onChanged: (value) =>
-                                boardgameCtrl.applyFilterToList(value),
-                            decoration: InputDecoration(
-                                contentPadding:
-                                    EdgeInsets.fromLTRB(16, 0, 0, 0),
-                                filled: true,
-                                fillColor: Colors.white,
-                                prefixIcon: Icon(CupertinoIcons.search),
-                                hintText: tr("boardgames.search"),
-                                suffixIcon: boardgameCtrl.showSearchClear.value
-                                    ? IconButton(
-                                        icon: Icon(Icons.clear),
-                                        onPressed: () => {
-                                          _searchInput.clear(),
-                                          boardgameCtrl.applyFilterToList()
-                                        },
-                                      )
-                                    : null,
-                                border: OutlineInputBorder(
-                                    borderRadius: BorderRadius.circular(20))),
-                          )),
-                    )),
-                Obx(
-                  () => textAndTextCard(
-                    tr('boardgames.title'),
-                    "${tr('common.updated')} ${formatDay(boardgameCtrl.listUpdatedAt.value)} ${formatTime(boardgameCtrl.listUpdatedAt.value)}",
-                    Padding(
-                      padding: EdgeInsets.fromLTRB(16, 0, 16, 0),
-                      child: buildGameList(context),
+        height: double.infinity,
+        decoration: backgroundBoxDecorationStyle,
+        child: SingleChildScrollView(
+          physics: AlwaysScrollableScrollPhysics(),
+          child: Column(
+            children: [
+              Padding(
+                padding: EdgeInsets.fromLTRB(16, 16, 16, 0),
+                child: Container(
+                  height: 40,
+                  child: Obx(
+                    () => TextField(
+                      controller: _searchInput,
+                      onChanged:
+                          (value) => boardgameCtrl.applyFilterToList(value),
+                      decoration: InputDecoration(
+                        contentPadding: EdgeInsets.fromLTRB(16, 0, 0, 0),
+                        filled: true,
+                        fillColor: Colors.white,
+                        prefixIcon: Icon(CupertinoIcons.search),
+                        hintText: tr("boardgames.search"),
+                        suffixIcon:
+                            boardgameCtrl.showSearchClear.value
+                                ? IconButton(
+                                  icon: Icon(Icons.clear),
+                                  onPressed:
+                                      () => {
+                                        _searchInput.clear(),
+                                        boardgameCtrl.applyFilterToList(),
+                                      },
+                                )
+                                : null,
+                        border: OutlineInputBorder(
+                          borderRadius: BorderRadius.circular(20),
+                        ),
+                      ),
                     ),
                   ),
                 ),
-                SizedBox(height: 80),
-              ],
-            ),
-          )),
+              ),
+              Obx(
+                () => textAndTextCard(
+                  tr('boardgames.title'),
+                  "${tr('common.updated')} ${formatDay(boardgameCtrl.listUpdatedAt.value)} ${formatTime(boardgameCtrl.listUpdatedAt.value)}",
+                  Padding(
+                    padding: EdgeInsets.fromLTRB(16, 0, 16, 0),
+                    child: buildGameList(context),
+                  ),
+                ),
+              ),
+              SizedBox(height: 80),
+            ],
+          ),
+        ),
+      ),
     );
   }
 
   Widget buildGameList(BuildContext context) {
     return boardgameCtrl.filteredList.isNotEmpty
         ? ListView.separated(
-            physics: NeverScrollableScrollPhysics(),
-            shrinkWrap: true,
-            itemCount: boardgameCtrl.filteredList.length,
-            addRepaintBoundaries: true,
-            separatorBuilder: (context, int index) =>
-                Divider(height: 0, color: Colors.grey),
-            itemBuilder: (buildContext, index) =>
-                boardGameItem(boardgameCtrl.filteredList[index]))
+          physics: NeverScrollableScrollPhysics(),
+          shrinkWrap: true,
+          itemCount: boardgameCtrl.filteredList.length,
+          addRepaintBoundaries: true,
+          separatorBuilder:
+              (context, int index) => Divider(height: 0, color: Colors.grey),
+          itemBuilder:
+              (buildContext, index) =>
+                  boardGameItem(boardgameCtrl.filteredList[index]),
+        )
         : Padding(
-            child: Text(
-              textAlign: TextAlign.center,
-              tr('boardgames.noGamesFound'),
-              style: kNormalTextStyle,
-            ),
-            padding: EdgeInsets.fromLTRB(0, 48, 0, 48));
+          child: Text(
+            textAlign: TextAlign.center,
+            tr('boardgames.noGamesFound'),
+            style: kNormalTextStyle,
+          ),
+          padding: EdgeInsets.fromLTRB(0, 48, 0, 48),
+        );
   }
 
   Widget boardGameItem(Boardgame game) {
     return Container(
-        color: !game.available ? Colors.red[100] : null,
-        child: Column(children: [
+      color: !game.available ? Colors.red[100] : null,
+      child: Column(
+        children: [
           SizedBox(height: 10),
           InkWell(
-              onTap: () => _launchDDB(game.bbgId),
-              child: Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    Flexible(
-                        child: Column(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: [
-                          Text(game.name,
-                              style: kNormalTextBoldStyle,
-                              overflow: TextOverflow.ellipsis),
-                          Row(children: [
-                            Text(tr(
-                                "boardgames.gameAvailable.${game.available}")),
-                            if (game.fastavalGame == true)
-                              Text(" - ${tr('boardgames.fastavalGame')}"),
-                          ]),
-                        ])),
-                    if (game.bbgId > 0)
-                      Padding(
-                          padding: EdgeInsets.fromLTRB(8, 0, 0, 0),
-                          child: Icon(Icons.public)),
-                  ])),
-          SizedBox(height: 10)
-        ]));
+            onTap: () => _launchDDB(game.bbgId),
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                Flexible(
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Text(
+                        game.name,
+                        style: kNormalTextBoldStyle,
+                        overflow: TextOverflow.ellipsis,
+                      ),
+                      Row(
+                        children: [
+                          Text(
+                            tr("boardgames.gameAvailable.${game.available}"),
+                          ),
+                          if (game.fastavalGame == true)
+                            Text(" - ${tr('boardgames.fastavalGame')}"),
+                        ],
+                      ),
+                    ],
+                  ),
+                ),
+                if (game.bbgId > 0)
+                  Padding(
+                    padding: EdgeInsets.fromLTRB(8, 0, 0, 0),
+                    child: Icon(Icons.public),
+                  ),
+              ],
+            ),
+          ),
+          SizedBox(height: 10),
+        ],
+      ),
+    );
   }
 
   _launchDDB(int gameID) async {

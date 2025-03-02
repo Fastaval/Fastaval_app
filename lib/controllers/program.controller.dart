@@ -18,11 +18,11 @@ class ProgramController extends GetxController {
   RxMap activityRunForDay = {}.obs;
 
   init() async {
-    await addDayToList("2024-03-27");
-    await addDayToList("2024-03-28");
-    await addDayToList("2024-03-29");
-    await addDayToList("2024-03-30");
-    await addDayToList("2024-03-31");
+    await addDayToList("2025-04-16");
+    await addDayToList("2025-04-17");
+    await addDayToList("2025-04-18");
+    await addDayToList("2025-04-19");
+    await addDayToList("2025-04-20");
 
     await getFavoritesFromStorage();
   }
@@ -36,9 +36,9 @@ class ProgramController extends GetxController {
         if (activity.type != 'system') {
           activities[activity.id] = activity;
           for (ActivityRun run in activity.runs) {
-            if (formatTimestampToDateTime(run.start)
-                    .toString()
-                    .substring(0, 10) ==
+            if (formatTimestampToDateTime(
+                  run.start,
+                ).toString().substring(0, 10) ==
                 day) {
               runs[run.id] = run;
               runlist.add(run);

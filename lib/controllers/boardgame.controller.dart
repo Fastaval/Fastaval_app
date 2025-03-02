@@ -27,12 +27,16 @@ class BoardGameController extends GetxController {
   applyFilterToList([String? filter]) {
     showSearchClear(filter != null && filter.isNotEmpty);
 
-    filteredList(filter != null && filter.isNotEmpty
-        ? boardgameList
-            .where((game) =>
-                game.name.toLowerCase().contains(filter.toLowerCase()))
-            .toList()
-        : boardgameList);
+    filteredList(
+      filter != null && filter.isNotEmpty
+          ? boardgameList
+              .where(
+                (game) =>
+                    game.name.toLowerCase().contains(filter.toLowerCase()),
+              )
+              .toList()
+          : boardgameList,
+    );
   }
 }
 
@@ -40,9 +44,10 @@ Future<List<Boardgame>> fetchBoardgames() async {
   var response = await http.get(Uri.parse('$baseUrl/v1/boardgames'));
 
   if (response.statusCode == 200) {
-    var boardgames = (jsonDecode(response.body) as List)
-        .map((game) => Boardgame.fromJson(game))
-        .toList();
+    var boardgames =
+        (jsonDecode(response.body) as List)
+            .map((game) => Boardgame.fromJson(game))
+            .toList();
 
     boardgames.sort((a, b) => a.name.compareTo(b.name));
 

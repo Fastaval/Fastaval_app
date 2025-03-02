@@ -1,9 +1,0 @@
-get https://infosys-test.fastaval.dk/api/v3/user/1?pass=155942 HTTP/1.1
-
-###
-
-GET https://infosys.fastaval.dk/api/v1/boardgames
-
-###
-
-GET https://infosys-test.fastaval.dk/api/app/v2/activities/*

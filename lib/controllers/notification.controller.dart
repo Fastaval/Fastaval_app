@@ -18,15 +18,18 @@ class NotificationController extends GetxController {
   }
 
   getNotificationsAndSetWaiting() {
-    _fetchNotifications().then((notificationList) => {
-          _updateNotificationList(notificationList),
-          if (notificationList.isNotEmpty) setNotificationWaiting()
-        });
+    _fetchNotifications().then(
+      (notificationList) => {
+        _updateNotificationList(notificationList),
+        if (notificationList.isNotEmpty) setNotificationWaiting(),
+      },
+    );
   }
 
   getNotifications() {
-    _fetchNotifications()
-        .then((notificationList) => _updateNotificationList(notificationList));
+    _fetchNotifications().then(
+      (notificationList) => _updateNotificationList(notificationList),
+    );
   }
 
   setNotificationWaiting() {
@@ -41,14 +44,18 @@ class NotificationController extends GetxController {
   _updateNotificationList(List<InfosysNotification> notifications) {
     notificationList(notifications);
     notificationListUpdatedAt(
-        (DateTime.now().millisecondsSinceEpoch / 1000).round());
+      (DateTime.now().millisecondsSinceEpoch / 1000).round(),
+    );
   }
 
   Future<List<InfosysNotification>> _fetchNotifications() async {
     if (appController.user.id == 0) throw Exception('User not logged in');
 
-    var response = await http.get(Uri.parse(
-        '$baseUrl/messages/${appController.user.id}?pass=${appController.user.password}'));
+    var response = await http.get(
+      Uri.parse(
+        '$baseUrl/messages/${appController.user.id}?pass=${appController.user.password}',
+      ),
+    );
 
     if (response.statusCode == 200) {
       return (jsonDecode(response.body) as List)

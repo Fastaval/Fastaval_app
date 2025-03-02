@@ -27,9 +27,11 @@ class AppController extends GetxController {
   }
 
   init() async {
-    await UserService().getUserFromStorage().then((newUser) => {
-          if (newUser != null) {updateUser(newUser), updateLoggedIn(true)}
-        });
+    await UserService().getUserFromStorage().then(
+      (newUser) => {
+        if (newUser != null) {updateUser(newUser), updateLoggedIn(true)},
+      },
+    );
   }
 
   updateUserProfile() async {

@@ -21,7 +21,8 @@ class MoreScreen extends StatelessWidget {
   @override
   Widget build(context) {
     var newsletter = Uri.parse(
-        'https://fastaval.us21.list-manage.com/subscribe?u=0929f085b293ddfa9eb2bc60a&id=13f4440b66');
+      'https://fastaval.us21.list-manage.com/subscribe?u=0929f085b293ddfa9eb2bc60a&id=13f4440b66',
+    );
     var x = Uri.parse('https://twitter.com/fastaval');
     var facebook = Uri.parse('https://www.facebook.com/Fastaval');
     var instagram = Uri.parse('https://www.instagram.com/fastaval/');
@@ -43,109 +44,164 @@ class MoreScreen extends StatelessWidget {
           height: double.infinity,
           width: double.infinity,
           decoration: backgroundBoxDecorationStyle,
-          child: Obx(() => Column(
-                children: [
-                  if (appCtrl.loggedIn.value == true)
-                    InkWell(
-                      child: menuCard(
-                        tr('notifications.title'),
-                        Icons.notifications_outlined,
-                        true,
-                        notificationCtrl.notificationsWaiting.value,
+          child: Obx(
+            () => Column(
+              children: [
+                if (appCtrl.loggedIn.value == true)
+                  InkWell(
+                    child: menuCard(
+                      tr('notifications.title'),
+                      Icons.notifications_outlined,
+                      true,
+                      notificationCtrl.notificationsWaiting.value,
+                    ),
+                    onTap:
+                        () => {
+                          Get.to(
+                            () => NotificationsScreen(),
+                            transition: Transition.rightToLeft,
+                          ),
+                          notificationCtrl.clearNotificationsWaiting(),
+                        },
+                  ),
+                InkWell(
+                  child: menuCard(
+                    tr('boardgames.title'),
+                    Icons.sports_esports_outlined,
+                    true,
+                  ),
+                  onTap:
+                      () => Get.to(
+                        () => BoardgameScreen(),
+                        transition: Transition.rightToLeft,
                       ),
-                      onTap: () => {
-                        Get.to(() => NotificationsScreen(),
-                            transition: Transition.rightToLeft),
-                        notificationCtrl.clearNotificationsWaiting(),
-                      },
-                    ),
-                  InkWell(
-                      child: menuCard(tr('boardgames.title'),
-                          Icons.sports_esports_outlined, true),
-                      onTap: () => Get.to(() => BoardgameScreen(),
-                          transition: Transition.rightToLeft)),
-                  InkWell(
-                      child: menuCard(tr('more.map.school'),
-                          CupertinoIcons.map_pin_ellipse),
-                      onTap: () => fastaMap(context, AssetImage(school))),
-                  InkWell(
-                      child: menuCard(
-                          tr('more.map.gym'), CupertinoIcons.map_pin_ellipse),
-                      onTap: () => fastaMap(context, AssetImage(gym))),
-                  SizedBox(height: 50),
-                  InkWell(
-                    child: menuCard(tr('more.settings'), Icons.settings, true),
-                    onTap: () => Get.to(() => SettingsScreen(),
-                        transition: Transition.rightToLeft),
+                ),
+                InkWell(
+                  child: menuCard(
+                    tr('more.map.school'),
+                    CupertinoIcons.map_pin_ellipse,
                   ),
-                  Expanded(
-                    child: Column(
-                      mainAxisAlignment: MainAxisAlignment.end,
-                      children: [
-                        Row(
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          children: [
-                            IconButton(
-                                onPressed: () =>
-                                    canLaunchUrl(facebook).then((allowed) => {
-                                          if (allowed)
-                                            launchUrl(facebook,
-                                                mode: LaunchMode
-                                                    .externalApplication),
-                                        }),
-                                icon: FaIcon(FontAwesomeIcons.facebook,
-                                    size: 40, color: colorBlack)),
-                            SizedBox(width: 24),
-                            IconButton(
-                                onPressed: () =>
-                                    canLaunchUrl(instagram).then((allowed) => {
-                                          if (allowed)
-                                            launchUrl(instagram,
-                                                mode: LaunchMode
-                                                    .externalApplication),
-                                        }),
-                                icon: FaIcon(FontAwesomeIcons.instagram,
-                                    size: 40, color: colorBlack)),
-                            SizedBox(width: 24),
-                            IconButton(
-                                onPressed: () =>
-                                    canLaunchUrl(x).then((allowed) => {
-                                          if (allowed)
-                                            launchUrl(x,
-                                                mode: LaunchMode
-                                                    .externalApplication),
-                                        }),
-                                icon: FaIcon(FontAwesomeIcons.xTwitter,
-                                    size: 40, color: colorBlack)),
-                            SizedBox(width: 24),
-                            IconButton(
-                                onPressed: () =>
-                                    canLaunchUrl(newsletter).then((allowed) => {
-                                          if (allowed)
-                                            launchUrl(newsletter,
-                                                mode: LaunchMode
-                                                    .externalApplication),
-                                        }),
-                                icon: FaIcon(FontAwesomeIcons.envelopeOpenText,
-                                    size: 40, color: colorBlack))
-                          ],
+                  onTap: () => fastaMap(context, AssetImage(school)),
+                ),
+                InkWell(
+                  child: menuCard(
+                    tr('more.map.gym'),
+                    CupertinoIcons.map_pin_ellipse,
+                  ),
+                  onTap: () => fastaMap(context, AssetImage(gym)),
+                ),
+                SizedBox(height: 50),
+                InkWell(
+                  child: menuCard(tr('more.settings'), Icons.settings, true),
+                  onTap:
+                      () => Get.to(
+                        () => SettingsScreen(),
+                        transition: Transition.rightToLeft,
+                      ),
+                ),
+                Expanded(
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.end,
+                    children: [
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          IconButton(
+                            onPressed:
+                                () => canLaunchUrl(facebook).then(
+                                  (allowed) => {
+                                    if (allowed)
+                                      launchUrl(
+                                        facebook,
+                                        mode: LaunchMode.externalApplication,
+                                      ),
+                                  },
+                                ),
+                            icon: FaIcon(
+                              FontAwesomeIcons.facebook,
+                              size: 40,
+                              color: colorBlack,
+                            ),
+                          ),
+                          SizedBox(width: 24),
+                          IconButton(
+                            onPressed:
+                                () => canLaunchUrl(instagram).then(
+                                  (allowed) => {
+                                    if (allowed)
+                                      launchUrl(
+                                        instagram,
+                                        mode: LaunchMode.externalApplication,
+                                      ),
+                                  },
+                                ),
+                            icon: FaIcon(
+                              FontAwesomeIcons.instagram,
+                              size: 40,
+                              color: colorBlack,
+                            ),
+                          ),
+                          SizedBox(width: 24),
+                          IconButton(
+                            onPressed:
+                                () => canLaunchUrl(x).then(
+                                  (allowed) => {
+                                    if (allowed)
+                                      launchUrl(
+                                        x,
+                                        mode: LaunchMode.externalApplication,
+                                      ),
+                                  },
+                                ),
+                            icon: FaIcon(
+                              FontAwesomeIcons.xTwitter,
+                              size: 40,
+                              color: colorBlack,
+                            ),
+                          ),
+                          SizedBox(width: 24),
+                          IconButton(
+                            onPressed:
+                                () => canLaunchUrl(newsletter).then(
+                                  (allowed) => {
+                                    if (allowed)
+                                      launchUrl(
+                                        newsletter,
+                                        mode: LaunchMode.externalApplication,
+                                      ),
+                                  },
+                                ),
+                            icon: FaIcon(
+                              FontAwesomeIcons.envelopeOpenText,
+                              size: 40,
+                              color: colorBlack,
+                            ),
+                          ),
+                        ],
+                      ),
+                      SizedBox(height: 8),
+                      Text(
+                        tr('more.socialMedia'),
+                        style: kNormalTextStyle,
+                        textAlign: TextAlign.center,
+                      ),
+                      SizedBox(height: 24),
+                      Align(
+                        alignment: Alignment.bottomRight,
+                        child: Padding(
+                          padding: EdgeInsets.only(bottom: 8, right: 16),
+                          child: Text(
+                            '1.2.6 © Fastaval IT',
+                            style: kNormalTextSubdued,
+                          ),
                         ),
-                        SizedBox(height: 8),
-                        Text(tr('more.socialMedia'),
-                            style: kNormalTextStyle,
-                            textAlign: TextAlign.center),
-                        SizedBox(height: 24),
-                        Align(
-                            alignment: Alignment.bottomRight,
-                            child: Padding(
-                                padding: EdgeInsets.only(bottom: 8, right: 16),
-                                child: Text('1.2.6 © Fastaval IT',
-                                    style: kNormalTextSubdued)))
-                      ],
-                    ),
+                      ),
+                    ],
                   ),
-                ],
-              )),
+                ),
+              ],
+            ),
+          ),
         ),
       ),
     );
@@ -153,23 +209,28 @@ class MoreScreen extends StatelessWidget {
 }
 
 Future fastaMap(BuildContext context, AssetImage image) => showDialog(
-    context: context,
-    builder: (BuildContext context) {
-      return Stack(children: [
+  context: context,
+  builder: (BuildContext context) {
+    return Stack(
+      children: [
         PhotoView(imageProvider: image),
         Positioned(
-            right: 10,
-            top: 10,
-            child: Material(
-              color: Colors.transparent,
-              child: CircleAvatar(
-                backgroundColor: Colors.orange,
-                radius: 20,
-                child: IconButton(
-                    icon: Icon(Icons.close),
-                    color: Colors.black,
-                    onPressed: () => Navigator.pop(context)),
+          right: 10,
+          top: 10,
+          child: Material(
+            color: Colors.transparent,
+            child: CircleAvatar(
+              backgroundColor: Colors.orange,
+              radius: 20,
+              child: IconButton(
+                icon: Icon(Icons.close),
+                color: Colors.black,
+                onPressed: () => Navigator.pop(context),
               ),
-            ))
-      ]);
-    });
+            ),
+          ),
+        ),
+      ],
+    );
+  },
+);

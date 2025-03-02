@@ -20,25 +20,26 @@ class Activity {
   String? wordpressId;
   int? canSignUp;
 
-  Activity(
-      {this.id,
-      this.author,
-      this.canSignUp,
-      this.descriptionDa,
-      this.descriptionEn,
-      this.gms,
-      this.language,
-      this.maxPlayer,
-      this.minPlayer,
-      this.playHours,
-      this.price,
-      this.sessions,
-      this.textDa,
-      this.textEn,
-      this.titleDa,
-      this.titleEn,
-      this.type,
-      this.wordpressId});
+  Activity({
+    this.id,
+    this.author,
+    this.canSignUp,
+    this.descriptionDa,
+    this.descriptionEn,
+    this.gms,
+    this.language,
+    this.maxPlayer,
+    this.minPlayer,
+    this.playHours,
+    this.price,
+    this.sessions,
+    this.textDa,
+    this.textEn,
+    this.titleDa,
+    this.titleEn,
+    this.type,
+    this.wordpressId,
+  });
 
   Activity.fromJson(dynamic json) {
     id = json['aktivitet_id'];
@@ -67,23 +68,23 @@ class Activity {
   }
 
   Map<String, dynamic> toJson() => {
-        'aktivitet_id': id,
-        'author': author,
-        'can_sign_up': canSignUp,
-        'description_da': descriptionDa,
-        'description_en': descriptionEn,
-        'gms': gms,
-        'language': language,
-        'max_player': maxPlayer,
-        'min_player': minPlayer,
-        'play_hours': playHours,
-        'price': price,
-        'afviklinger': sessions,
-        'text_da': textDa,
-        'text_en': textEn,
-        'title_da': titleDa,
-        'title_en': titleEn,
-        'type': type,
-        'wp_id': wordpressId
-      };
+    'aktivitet_id': id,
+    'author': author,
+    'can_sign_up': canSignUp,
+    'description_da': descriptionDa,
+    'description_en': descriptionEn,
+    'gms': gms,
+    'language': language,
+    'max_player': maxPlayer,
+    'min_player': minPlayer,
+    'play_hours': playHours,
+    'price': price,
+    'afviklinger': sessions,
+    'text_da': textDa,
+    'text_en': textEn,
+    'title_da': titleDa,
+    'title_en': titleEn,
+    'type': type,
+    'wp_id': wordpressId,
+  };
 }

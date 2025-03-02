@@ -8,15 +8,16 @@ class Session {
   double? length;
   int? stop;
 
-  Session(
-      {this.activityId,
-      this.id,
-      this.length,
-      this.linked,
-      this.roomId,
-      this.roomName,
-      this.start,
-      this.stop});
+  Session({
+    this.activityId,
+    this.id,
+    this.length,
+    this.linked,
+    this.roomId,
+    this.roomName,
+    this.start,
+    this.stop,
+  });
 
   Session.fromJson(dynamic json) {
     id = json['afvikling_id'] as int;
@@ -30,13 +31,13 @@ class Session {
   }
 
   Map<String, dynamic> toJson() => {
-        'afvikling_id': id,
-        'aktivitet_id': activityId,
-        'length': length,
-        'linked': linked,
-        'lokale_id': roomId,
-        'lokale_navn': roomName,
-        'start': start,
-        'stop': stop
-      };
+    'afvikling_id': id,
+    'aktivitet_id': activityId,
+    'length': length,
+    'linked': linked,
+    'lokale_id': roomId,
+    'lokale_navn': roomName,
+    'start': start,
+    'stop': stop,
+  };
 }
