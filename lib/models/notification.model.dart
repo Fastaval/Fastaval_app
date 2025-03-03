@@ -1,12 +1,14 @@
 class InfosysNotifications {
-  List<InfosysNotification> notifications = List.empty(growable: true);
+  List<InfosysNotification> notifications;
 
   InfosysNotifications({required this.notifications});
 
-  InfosysNotifications.fromJson(dynamic json) {
+  factory InfosysNotifications.fromJson(dynamic json) {
+    List<InfosysNotification> notificationList = List.empty(growable: true);
     for (var activity in json) {
-      notifications.add(InfosysNotification.fromJson(activity));
+      notificationList.add(InfosysNotification.fromJson(activity));
     }
+    return InfosysNotifications(notifications: notificationList);
   }
 }
 
@@ -21,10 +23,13 @@ class InfosysNotification {
     required this.da,
   });
 
-  InfosysNotification.fromJson(dynamic json)
-      : sendTime = json['send_time'],
-        en = json['en'],
-        da = json['da'];
+  factory InfosysNotification.fromJson(Map<String, dynamic> json) {
+    return InfosysNotification(
+      sendTime: json['send_time'],
+      en: json['en'],
+      da: json['da'],
+    );
+  }
 
   Map<String, dynamic> toJson() => {'send_time': sendTime, 'en': en, 'da': da};
 }

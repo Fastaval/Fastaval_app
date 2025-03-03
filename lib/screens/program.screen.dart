@@ -12,32 +12,27 @@ class ProgramScreen extends StatelessWidget {
 
   @override
   Widget build(context) {
-    return DefaultTabController(
-      length: 5,
-      child: Scaffold(
-        appBar: AppBar(
-          backgroundColor: colorOrangeDark,
-          foregroundColor: colorWhite,
-          toolbarHeight: 40,
-          centerTitle: true,
-          titleTextStyle: kAppBarTextStyle,
-          title: Text(tr('screenTitle.program')),
-          bottom: PreferredSize(
-            preferredSize: _tabBar.preferredSize,
-            child: ColoredBox(color: colorWhite, child: _tabBar),
+    return Obx(() => DefaultTabController(
+          length: programCtrl.eventDates.length,
+          child: Scaffold(
+            appBar: AppBar(
+              backgroundColor: colorOrangeDark,
+              foregroundColor: colorWhite,
+              toolbarHeight: 40,
+              centerTitle: true,
+              titleTextStyle: kAppBarTextStyle,
+              title: Text(tr('screenTitle.program')),
+              bottom: PreferredSize(
+                preferredSize: _tabBar.preferredSize,
+                child: ColoredBox(color: colorWhite, child: _tabBar),
+              ),
+            ),
+            body: TabBarView(
+              children:
+                  programCtrl.eventDates.map((day) => buildday(day)).toList(),
+            ),
           ),
-        ),
-        body: TabBarView(
-          children: [
-            buildday("2025-04-16"),
-            buildday("2025-04-17"),
-            buildday("2025-04-18"),
-            buildday("2025-04-19"),
-            buildday("2025-04-20"),
-          ],
-        ),
-      ),
-    );
+        ));
   }
 
   TabBar get _tabBar => TabBar(
@@ -46,14 +41,24 @@ class ProgramScreen extends StatelessWidget {
         labelStyle: TextStyle(fontWeight: FontWeight.bold),
         indicatorSize: TabBarIndicatorSize.tab,
         indicatorColor: colorOrange,
-        tabs: [
-          Tab(text: tr('program.wednesday.short')),
-          Tab(text: tr('program.thursday.short')),
-          Tab(text: tr('program.friday.short')),
-          Tab(text: tr('program.saturday.short')),
-          Tab(text: tr('program.sunday.short')),
-        ],
+        tabs: programCtrl.eventDates.map((day) {
+          DateTime date = DateTime.parse(day);
+          String weekday = getDayNameShort(date);
+          return Tab(text: weekday);
+        }).toList(),
       );
+
+  String getDayNameShort(DateTime date) {
+    Map<int, String> dayTranslations = {
+      3: 'program.wednesday.short',
+      4: 'program.thursday.short',
+      5: 'program.friday.short',
+      6: 'program.saturday.short',
+      7: 'program.sunday.short',
+    };
+
+    return tr(dayTranslations[date.weekday] ?? 'unknown');
+  }
 
   Widget buildday(String day) {
     return ListView.builder(

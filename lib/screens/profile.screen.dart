@@ -185,7 +185,7 @@ class ProfileScreen extends StatelessWidget {
     var activityType = tr('activityType.${item.activityType}');
 
     var expired = DateTime.now().isAfter(
-      DateTime.fromMillisecondsSinceEpoch(item.stop! * 1000),
+      DateTime.fromMillisecondsSinceEpoch(item.stop * 1000),
     );
 
     return InkWell(
@@ -205,7 +205,7 @@ class ProfileScreen extends StatelessWidget {
           ],
           color: expired == true
               ? Color(0xFFD4E9EC)
-              : getActivityColor(item.activityType!),
+              : getActivityColor(item.activityType),
           borderRadius: BorderRadius.circular(15),
         ),
         margin: EdgeInsets.fromLTRB(8, 0, 8, 8),
@@ -240,7 +240,7 @@ class ProfileScreen extends StatelessWidget {
                       ],
                     ),
                     Text(
-                      title!,
+                      title,
                       overflow: TextOverflow.ellipsis,
                       style: expired ? kNormalTextDisabled : kNormalTextStyle,
                     ),
@@ -561,9 +561,7 @@ class ProfileScreen extends StatelessWidget {
           Padding(
             padding: EdgeInsets.fromLTRB(10, 0, 10, 0),
             child: Text(
-              context.locale.languageCode == 'da'
-                  ? item.titleDa!
-                  : item.titleEn!,
+              context.locale.languageCode == 'da' ? item.titleDa : item.titleEn,
               textAlign: TextAlign.center,
             ),
           ),
@@ -605,8 +603,8 @@ class ProfileScreen extends StatelessWidget {
               Flexible(
                 child: Text(
                   context.locale.languageCode == 'da'
-                      ? item.roomDa!
-                      : item.roomEn!,
+                      ? item.roomDa
+                      : item.roomEn,
                 ),
               ),
             ],

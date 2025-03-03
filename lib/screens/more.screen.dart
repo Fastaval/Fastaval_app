@@ -183,10 +183,10 @@ class MoreScreen extends StatelessWidget {
                         alignment: Alignment.bottomRight,
                         child: Padding(
                           padding: EdgeInsets.only(bottom: 8, right: 16),
-                          child: Text(
-                            '1.2.6 © Fastaval IT',
-                            style: kNormalTextSubdued,
-                          ),
+                          child: Obx(() => Text(
+                                '${appCtrl.packageInfo.value?.version} © Fastaval IT',
+                                style: kNormalTextSubdued,
+                              )),
                         ),
                       ),
                     ],

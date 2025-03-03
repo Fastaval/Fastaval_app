@@ -14,7 +14,15 @@ class NotificationController extends GetxController {
   final appController = Get.find<AppController>();
 
   init() {
-    getNotifications();
+    if (appController.loggedIn.value) {
+      getNotifications();
+    }
+
+    appController.loggedIn.listen((loggedIn) {
+      if (loggedIn) {
+        getNotifications();
+      }
+    });
   }
 
   getNotificationsAndSetWaiting() {
@@ -49,20 +57,26 @@ class NotificationController extends GetxController {
   }
 
   Future<List<InfosysNotification>> _fetchNotifications() async {
-    if (appController.user.id == 0) throw Exception('User not logged in');
+    if (appController.user.id <= 0) {
+      return [];
+    }
 
-    var response = await http.get(
-      Uri.parse(
-        '$baseUrl/messages/${appController.user.id}?pass=${appController.user.password}',
-      ),
-    );
+    try {
+      var response = await http.get(
+        Uri.parse(
+          '$baseUrl/messages/${appController.user.id}?pass=${appController.user.password}',
+        ),
+      );
 
-    if (response.statusCode == 200) {
-      return (jsonDecode(response.body) as List)
-          .map((item) => InfosysNotification.fromJson(item))
-          .toList();
-    } else {
-      throw Exception('Failed to get messages');
+      if (response.statusCode == 200) {
+        return (jsonDecode(response.body) as List)
+            .map((item) => InfosysNotification.fromJson(item))
+            .toList();
+      } else {
+        return [];
+      }
+    } catch (e) {
+      return [];
     }
   }
 }

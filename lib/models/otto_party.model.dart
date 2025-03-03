@@ -1,16 +1,22 @@
 class OttoParty {
-  int? id;
-  String? titleEn;
-  String? titleDa;
-  int? amount;
+  int id;
+  String titleEn;
+  String titleDa;
+  int amount;
 
-  OttoParty({this.id, this.titleEn, this.titleDa, this.amount});
+  OttoParty(
+      {required this.id,
+      required this.titleEn,
+      required this.titleDa,
+      required this.amount});
 
-  OttoParty.fromJson(dynamic json) {
-    id = json['id'];
-    titleEn = json['title_en'];
-    titleDa = json['title_da'];
-    amount = json['amount'];
+  factory OttoParty.fromJson(Map<String, dynamic> json) {
+    return OttoParty(
+      id: json['id'],
+      titleEn: json['title_en'],
+      titleDa: json['title_da'],
+      amount: json['amount'],
+    );
   }
 
   Map<String, dynamic> toJson() => {

@@ -13,7 +13,7 @@ class Wear {
     required this.received,
   });
 
-  Wear.fromJson(dynamic json)
+  Wear.fromJson(Map<String, dynamic> json)
       : amount = json['amount'],
         titleDa = json['title_da'],
         titleEn = json['title_en'],

@@ -13,7 +13,7 @@ class Sleep {
     required this.areaId,
   });
 
-  Sleep.fromJson(dynamic json)
+  Sleep.fromJson(Map<String, dynamic> json)
       : id = json['id'],
         access = json['access'],
         mattress = json['mattress'],

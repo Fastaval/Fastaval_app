@@ -5,41 +5,40 @@ import 'package:fastaval_app/models/sleep.model.dart';
 import 'package:fastaval_app/models/wear.model.dart';
 
 class User {
-  late int id;
-  late String password;
-  late String name;
-  late bool hasCheckedIn;
-  late String messages;
-  late Sleep sleep;
-  late String category;
-  late List<Food> food;
-  late List<Wear> wear;
-  late List<Scheduling> scheduling;
-  late int barcode;
-  late List<OttoParty> ottoParty;
+  int id;
+  String password;
+  String name;
+  bool hasCheckedIn;
+  String? messages;
+  Sleep sleep;
+  String category;
+  List<Food> food;
+  List<Wear> wear;
+  List<Scheduling> scheduling;
+  int barcode;
+  List<OttoParty> ottoParty;
 
   User({
-    this.id = 0,
-    this.password = '',
-    this.name = '',
-    this.hasCheckedIn = false,
-    this.messages = '',
-    this.category = '',
-    this.food = const [],
-    this.wear = const [],
-    this.scheduling = const [],
-    this.barcode = 0,
-    this.ottoParty = const [],
-  }) {
-    sleep = Sleep(id: 0, access: 0, mattress: 0, areaName: '', areaId: '');
-  }
+    required this.id,
+    required this.password,
+    required this.name,
+    required this.hasCheckedIn,
+    required this.messages,
+    required this.sleep,
+    required this.category,
+    required this.food,
+    required this.wear,
+    required this.scheduling,
+    required this.barcode,
+    required this.ottoParty,
+  });
 
-  User.fromJson(dynamic json)
+  User.fromJson(Map<String, dynamic> json)
       : id = json['id'],
         password = json['password'] ?? '',
         name = json['name'],
         hasCheckedIn = json['checked_in'] != 0,
-        messages = json['messages'] ?? '',
+        messages = json['messages'],
         sleep = Sleep.fromJson(json['sleep']),
         category = json['category'],
         barcode = json['barcode'],
@@ -60,10 +59,10 @@ class User {
         'messages': messages,
         'sleep': sleep,
         'category': category,
+        'barcode': barcode,
         'food': food,
         'wear': wear,
         'scheduling': scheduling,
-        'barcode': barcode,
         'otto_party': ottoParty,
       };
 }

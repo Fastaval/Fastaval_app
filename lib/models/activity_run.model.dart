@@ -8,28 +8,30 @@ class ActivityRun {
   final double length;
   final int stop;
 
-  ActivityRun(
-    this.id,
-    this.activity,
+  ActivityRun({
+    required this.id,
+    required this.activity,
     this.localeId,
-    this.localeName,
-    this.start,
-    this.linked,
-    this.length,
-    this.stop,
-  );
+    required this.localeName,
+    required this.start,
+    required this.linked,
+    required this.length,
+    required this.stop,
+  });
 
-  ActivityRun.fromJson(Map<String, dynamic> json)
-      : id = json['afvikling_id'] is String
-            ? int.parse(json['afvikling_id'])
-            : json['afvikling_id'],
-        activity = json['aktivitet_id'],
-        localeId = json['lokale_id'],
-        localeName = json['lokale_navn'],
-        start = json['start'],
-        linked = json['linked'] is String
-            ? int.parse(json['linked'])
-            : json['linked'],
-        length = json['length'] + .0,
-        stop = json['stop'];
+  factory ActivityRun.fromJson(Map<String, dynamic> json) {
+    return ActivityRun(
+      id: json['afvikling_id'] is String
+          ? int.parse(json['afvikling_id'])
+          : json['afvikling_id'],
+      activity: json['aktivitet_id'],
+      localeId: json['lokale_id'],
+      localeName: json['lokale_navn'],
+      start: json['start'],
+      linked:
+          json['linked'] is String ? int.parse(json['linked']) : json['linked'],
+      length: json['length'] + .0,
+      stop: json['stop'],
+    );
+  }
 }

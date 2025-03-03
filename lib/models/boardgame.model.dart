@@ -15,12 +15,15 @@ class Boardgame {
     required this.bbgId,
   });
 
-  Boardgame.fromJson(dynamic json)
-      : id = json['id'],
-        name = json['name'].toString().capitalizeString(),
-        available = json['available'],
-        fastavalGame = json['fastavalGame'],
-        bbgId = json['bggId'] ?? 0;
+  factory Boardgame.fromJson(Map<String, dynamic> json) {
+    return Boardgame(
+      id: json['id'],
+      name: json['name'].toString().capitalizeString(),
+      available: json['available'],
+      fastavalGame: json['fastavalGame'],
+      bbgId: json['bggId'] ?? 0,
+    );
+  }
 
   Map<String, dynamic> toJson() => {
         'id': id,
@@ -32,13 +35,15 @@ class Boardgame {
 }
 
 class Boardgames {
-  List<Boardgame> games = List.empty(growable: true);
+  List<Boardgame> games;
 
   Boardgames({required this.games});
 
-  Boardgames.fromJson(dynamic json) {
+  factory Boardgames.fromJson(dynamic json) {
+    List<Boardgame> gamesList = List.empty(growable: true);
     for (var game in json) {
-      games.add(Boardgame.fromJson(game));
+      gamesList.add(Boardgame.fromJson(game));
     }
+    return Boardgames(games: gamesList);
   }
 }
