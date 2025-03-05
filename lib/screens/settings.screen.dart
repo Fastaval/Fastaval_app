@@ -1,6 +1,7 @@
 import 'package:easy_localization/easy_localization.dart';
 import 'package:fastaval_app/constants/styles.constant.dart';
 import 'package:fastaval_app/controllers/settings.controller.dart';
+import 'package:fastaval_app/widgets/widgets.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
@@ -10,13 +11,8 @@ class SettingsScreen extends StatelessWidget {
   @override
   Widget build(context) {
     return Scaffold(
-      appBar: AppBar(
-        backgroundColor: colorOrangeDark,
-        foregroundColor: colorWhite,
-        toolbarHeight: 40,
-        centerTitle: true,
-        titleTextStyle: kAppBarTextStyle,
-        title: Text(tr('settings.title')),
+      appBar: commonAppBar(
+        title: tr('settings.title'),
       ),
       body: SafeArea(
         child: Container(

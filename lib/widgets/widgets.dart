@@ -8,6 +8,7 @@ import 'package:fastaval_app/models/activity_item.model.dart';
 import 'package:fastaval_app/models/activity_run.model.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:get/get.dart';
 import 'package:url_launcher/url_launcher.dart';
 
@@ -27,14 +28,13 @@ Widget programListItem(
     children: [
       Positioned.fill(
         child: InkWell(
-          onTap:
-              () => showDialog(
-                context: context,
-                builder: programItemDialog,
-                routeSettings: RouteSettings(
-                  arguments: [run, programCtrl.activities[activity.id]],
-                ),
-              ),
+          onTap: () => showDialog(
+            context: context,
+            builder: programItemDialog,
+            routeSettings: RouteSettings(
+              arguments: [run, programCtrl.activities[activity.id]],
+            ),
+          ),
           child: Padding(
             padding: EdgeInsets.fromLTRB(10, 5, 48, 5),
             child: Row(
@@ -236,17 +236,17 @@ Widget textAndItemCard(String title, Widget secondaryTitle, content) {
 }
 
 Widget textRowHeader(String text) => Row(
-  mainAxisSize: MainAxisSize.max,
-  children: [
-    Expanded(
-      child: Text(
-        text,
-        style: kNormalTextBoldStyle,
-        overflow: TextOverflow.ellipsis,
-      ),
-    ),
-  ],
-);
+      mainAxisSize: MainAxisSize.max,
+      children: [
+        Expanded(
+          child: Text(
+            text,
+            style: kNormalTextBoldStyle,
+            overflow: TextOverflow.ellipsis,
+          ),
+        ),
+      ],
+    );
 
 Widget twoTextRow(
   String textLeft,
@@ -261,18 +261,17 @@ Widget twoTextRow(
         Expanded(flex: 4, child: Text(textLeft, style: kNormalTextStyle)),
         Expanded(
           flex: 6,
-          child:
-              selectable
-                  ? SelectableText(
-                    textRight,
-                    textAlign: TextAlign.right,
-                    style: kNormalTextStyle,
-                  )
-                  : Text(
-                    textRight,
-                    textAlign: TextAlign.right,
-                    style: kNormalTextStyle,
-                  ),
+          child: selectable
+              ? SelectableText(
+                  textRight,
+                  textAlign: TextAlign.right,
+                  style: kNormalTextStyle,
+                )
+              : Text(
+                  textRight,
+                  textAlign: TextAlign.right,
+                  style: kNormalTextStyle,
+                ),
         ),
       ],
     ),
@@ -445,5 +444,25 @@ Widget programItemDialog(BuildContext context) {
         ],
       ],
     ),
+  );
+}
+
+PreferredSizeWidget commonAppBar({
+  required String title,
+  List<Widget>? actions,
+}) {
+  return AppBar(
+    backgroundColor: colorOrangeDark,
+    foregroundColor: colorWhite,
+    toolbarHeight: 40,
+    centerTitle: true,
+    titleTextStyle: kAppBarTextStyle,
+    systemOverlayStyle: SystemUiOverlayStyle(
+      systemNavigationBarColor: colorOrangeDark,
+      statusBarColor: colorOrangeDark,
+      statusBarIconBrightness: Brightness.light,
+    ),
+    title: Text(title),
+    actions: actions,
   );
 }

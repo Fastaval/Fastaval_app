@@ -17,19 +17,14 @@ class NotificationsScreen extends StatelessWidget {
     notificationCtrl.clearNotificationsWaiting();
 
     return Scaffold(
-      appBar: AppBar(
-        backgroundColor: colorOrangeDark,
-        foregroundColor: colorWhite,
-        toolbarHeight: 40,
-        centerTitle: true,
-        titleTextStyle: kAppBarTextStyle,
+      appBar: commonAppBar(
+        title: tr('screenTitle.notifications'),
         actions: [
           IconButton(
             onPressed: () => notificationCtrl.getNotifications(),
             icon: Icon(CupertinoIcons.refresh),
           ),
         ],
-        title: Text(tr('screenTitle.notifications')),
       ),
       body: Container(
         height: double.infinity,
