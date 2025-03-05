@@ -30,7 +30,8 @@ class HomeScreenState extends State<HomeScreen> {
   Widget build(BuildContext context) {
     FirebaseMessaging.onMessageOpenedApp.listen((RemoteMessage message) {
       if (message.notification != null) {
-        notificationCtrl.getNotificationsAndSetWaiting();
+        notificationCtrl.getNotifications();
+        notificationCtrl.clearNotificationsWaiting();
         Get.to(() => NotificationsScreen(), transition: Transition.rightToLeft);
       }
     });
