@@ -21,7 +21,7 @@ const kServiceOpeningHours = {
     "day3": "09:30 - 17:00"
   },
   "kiosk": {"day1": "08:00 - 00:00", "day2": "08:00 - 16:00"},
-  "oasis": {"day1": "16:00 - 02:00", "day2": "16:00 - 02:00"},
+  "ottosLivingRoom": {"day1": "16:00 - 02:00", "day2": "16:00 - 02:00"},
 };
 const kStoreOpeningHours = {
   "store1": {"day1": "10:00 - 00:00"},

@@ -99,10 +99,10 @@
         "day2": "Sunday",
         "title": "The Kiosk"
       },
-      "oasis": {
+      "ottosLivingRoom": {
         "day1": "Wednesday",
         "day2": "Thu-Sat",
-        "title": "The Oasis"
+        "title": "Otto's Living Room"
       },
       "title": "Opening Hours"
     },
@@ -113,7 +113,6 @@
       "safetyMail": "Safety mail",
       "title": "Safety At Fastaval"
     },
-
     "stores": {
       "store1": {
         "day1": "Thu-Sat",
