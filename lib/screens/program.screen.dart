@@ -62,13 +62,13 @@ class ProgramScreen extends StatelessWidget {
 
   Widget buildday(String day) {
     return ListView.builder(
-      itemCount: programCtrl.activityRunForDay[day]!.length,
+      itemCount: programCtrl.activityRunForDay[day].length,
       itemBuilder: (context, index) {
-        ActivityRun item = programCtrl.activityRunForDay[day]![index];
+        ActivityRun item = programCtrl.activityRunForDay[day][index];
         return programListItem(
-          programCtrl.activities[item.activity]!,
+          programCtrl.activities[item.activity],
           item,
-          getActivityColor(programCtrl.activities[item.activity]!.type),
+          getActivityColor(programCtrl.activities[item.activity].type),
           context,
         );
       },

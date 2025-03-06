@@ -265,115 +265,110 @@ class ProfileScreen extends StatelessWidget {
     );
   }
 
-  Widget buildUserFoodTimesCard() {
-    return textAndIconCard(
-      tr('profile.foodTimes'),
-      Icons.fastfood_outlined,
-      buildUsersFoodTickets(appCtrl.user.food),
-    );
-  }
+  Widget buildUserFoodTimesCard() => textAndIconCard(
+        tr('profile.foodTimes'),
+        Icons.fastfood_outlined,
+        buildUsersFoodTickets(appCtrl.user.food),
+      );
 
-  Widget buildUsersFoodTickets(List<Food> foodList) {
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: [
-        Padding(
-          padding: EdgeInsets.fromLTRB(16, 8, 16, 8),
-          child: foodList.isNotEmpty
-              ? Text(tr('program.food.ordered'))
-              : Text(
-                  tr('program.food.notOrdered'),
-                  style: kNormalTextStyle,
+  Widget buildUsersFoodTickets(List<Food> foodList) => Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Padding(
+            padding: EdgeInsets.fromLTRB(16, 8, 16, 8),
+            child: foodList.isNotEmpty
+                ? Text(tr('program.food.ordered'))
+                : Text(tr('program.food.notOrdered'), style: kNormalTextStyle),
+          ),
+          foodList.isEmpty
+              ? SizedBox(height: 0)
+              : ListView.separated(
+                  physics: NeverScrollableScrollPhysics(),
+                  shrinkWrap: true,
+                  itemCount: foodList.length,
+                  separatorBuilder: (context, int index) => SizedBox(height: 0),
+                  itemBuilder: (buildContext, index) =>
+                      foodTickets(foodList[index]),
                 ),
-        ),
-        ListView.separated(
-          physics: NeverScrollableScrollPhysics(),
-          shrinkWrap: true,
-          itemCount: foodList.length,
-          separatorBuilder: (context, int index) => SizedBox(height: 0),
-          itemBuilder: (buildContext, index) => foodTickets(foodList[index]),
-        ),
-        SizedBox(height: 8),
-      ],
-    );
-  }
+          SizedBox(height: 8),
+        ],
+      );
 
-  Widget foodTickets(Food foodItem) {
-    return InkWell(
-      onTap: () => showDialog(
-        context: Get.context!,
-        builder: foodDialog,
-        routeSettings: RouteSettings(arguments: foodItem),
-      ),
-      child: Container(
-        decoration: BoxDecoration(
-          boxShadow: [
-            BoxShadow(
-              color: Colors.grey.withValues(alpha: 0.75),
-              blurRadius: 4,
-              offset: Offset(0, 4),
-            ),
-          ],
-          color: getFoodColor(foodItem),
-          borderRadius: BorderRadius.circular(15),
+  Widget foodTickets(Food foodItem) => InkWell(
+        onTap: () => showDialog(
+          context: Get.context!,
+          builder: foodDialog,
+          routeSettings: RouteSettings(arguments: foodItem),
         ),
-        margin: EdgeInsets.fromLTRB(8, 0, 8, 8),
-        child: Padding(
-          padding: EdgeInsets.fromLTRB(16, 4, 16, 4),
-          child: Row(
-            children: [
-              Expanded(
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Row(
-                      children: [
-                        Text(
-                          "${formatDay(foodItem.time)} ${formatTime(foodItem.time)} - ${formatTime(foodItem.timeEnd)}",
-                          style: TextStyle(
-                            fontSize: 16,
-                            color: foodItem.received == 0
-                                ? Colors.black
-                                : Colors.black26,
-                            fontWeight: FontWeight.bold,
+        child: Container(
+          decoration: BoxDecoration(
+            boxShadow: [
+              BoxShadow(
+                color: Colors.grey.withValues(alpha: 0.75),
+                blurRadius: 4,
+                offset: Offset(0, 4),
+              ),
+            ],
+            color: getFoodColor(foodItem),
+            borderRadius: BorderRadius.circular(15),
+          ),
+          margin: EdgeInsets.fromLTRB(8, 0, 8, 8),
+          child: Padding(
+            padding: EdgeInsets.fromLTRB(16, 4, 16, 4),
+            child: Row(
+              children: [
+                Expanded(
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Row(
+                        children: [
+                          Text(
+                            "${formatDay(foodItem.time)} ${formatTime(foodItem.time)} - ${formatTime(foodItem.timeEnd)}",
+                            style: TextStyle(
+                              fontSize: 16,
+                              color: foodItem.received == 0
+                                  ? Colors.black
+                                  : Colors.black26,
+                              fontWeight: FontWeight.bold,
+                            ),
                           ),
-                        ),
-                      ],
-                    ),
+                        ],
+                      ),
+                      Text(
+                        Get.locale!.languageCode == 'da'
+                            ? foodItem.titleDa
+                            : foodItem.titleEn,
+                        overflow: TextOverflow.ellipsis,
+                        style: foodItem.received == 0
+                            ? kNormalTextStyle
+                            : kNormalTextDisabled,
+                      ),
+                    ],
+                  ),
+                ),
+                Row(
+                  children: [
                     Text(
-                      Get.locale!.languageCode == 'da'
-                          ? foodItem.titleDa
-                          : foodItem.titleEn,
-                      overflow: TextOverflow.ellipsis,
+                      tr('profile.foodTicket'),
                       style: foodItem.received == 0
                           ? kNormalTextStyle
                           : kNormalTextDisabled,
                     ),
+                    SizedBox(width: 8),
+                    Icon(
+                      CupertinoIcons.barcode_viewfinder,
+                      color: foodItem.received == 0
+                          ? Colors.black
+                          : Colors.black26,
+                    ),
                   ],
                 ),
-              ),
-              Row(
-                children: [
-                  Text(
-                    tr('profile.foodTicket'),
-                    style: foodItem.received == 0
-                        ? kNormalTextStyle
-                        : kNormalTextDisabled,
-                  ),
-                  SizedBox(width: 8),
-                  Icon(
-                    CupertinoIcons.barcode_viewfinder,
-                    color:
-                        foodItem.received == 0 ? Colors.black : Colors.black26,
-                  ),
-                ],
-              ),
-            ],
+              ],
+            ),
           ),
         ),
-      ),
-    );
-  }
+      );
 
   Widget buildUserWearCard() => textAndIconCard(
         tr('profile.wear.title'),
@@ -442,21 +437,11 @@ class ProfileScreen extends StatelessWidget {
       );
 
   getFoodImage(Food item) {
-    if (item.titleEn.contains('Dinner')) {
-      return 'assets/images/dinner.jpg';
-    }
+    if (item.titleEn.contains('Dinner')) return 'assets/images/dinner.jpg';
     if (item.titleEn.contains('Breakfast')) {
       return 'assets/images/breakfast.jpg';
     }
-
     return 'assets/images/lunch.jpg';
-  }
-
-  Color getFoodColor(Food item) {
-    if (item.received == 1) return Color(0xFFD4E9EC);
-    if (item.titleEn.contains('Dinner')) return Color(0xFFDFE5D9);
-    if (item.titleEn.contains('Breakfast')) return Color(0xFFFDEB89);
-    return Color(0xFFD4E9EC);
   }
 
   Widget foodDialog(BuildContext context) {
@@ -490,9 +475,9 @@ class ProfileScreen extends StatelessWidget {
             height: 100,
           ),
           SizedBox(height: 5),
-          Text(
-            context.locale.languageCode == 'da' ? food.titleDa : food.titleEn,
-          ),
+          Text(context.locale.languageCode == 'da'
+              ? food.titleDa
+              : food.titleEn),
         ],
       ),
       content: Column(

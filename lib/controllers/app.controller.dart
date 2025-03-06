@@ -23,8 +23,8 @@ class AppController extends GetxController {
     navIndex(index);
   }
 
-  updateUser(User newUser) {
-    user = newUser;
+  updateUser(User updatedUser) {
+    user = updatedUser;
     userUpdateTime((DateTime.now().millisecondsSinceEpoch / 1000).round());
   }
 
