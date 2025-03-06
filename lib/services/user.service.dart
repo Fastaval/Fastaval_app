@@ -101,11 +101,11 @@ Future<String> getDeviceToken() async {
   FirebaseMessaging firebaseMessaging = FirebaseMessaging.instance;
   await firebaseMessaging.requestPermission(
     alert: true,
-    announcement: false,
+    announcement: true,
     badge: true,
     carPlay: false,
     criticalAlert: false,
-    provisional: false,
+    provisional: true,
     sound: true,
   );
   String? deviceToken = await firebaseMessaging.getToken();
