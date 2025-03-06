@@ -78,7 +78,7 @@
         "title": "Baren"
       },
       "boardGames": {
-        "day1": "Tor-Lør",
+        "day1": "Ons-Lør",
         "day2": "Søndag",
         "title": "Brætspilscaféen"
       },
@@ -100,8 +100,7 @@
         "title": "Kiosken"
       },
       "ottosLivingRoom": {
-        "day1": "Onsdag",
-        "day2": "Tor-Lør",
+        "day1": "Ons-Lør",
         "title": "Ottos Stue"
       },
       "title": "Åbningstider"
@@ -192,6 +191,7 @@
     "handout": "Udleveres",
     "messagesFromFastaval": "Beskeder Fra Fastaval",
     "noMessagesRightNow": "Fastaval har ingen beskeder til dig lige nu",
+    "noProgramItems": "Du har ingen planlagte programpunkter",
     "participantNumber": "Deltagernummer",
     "scanBarcode": "Vis stregkoden når du skal have udleveret mad",
     "sleep": {

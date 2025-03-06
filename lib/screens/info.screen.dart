@@ -147,11 +147,6 @@ Widget _buildOpenHoursCard() => textAndIconCard(
               kServiceOpeningHours["ottosLivingRoom"]!["day1"]!,
               sidePadding: true,
             ),
-            twoTextRow(
-              tr('info.openHours.ottosLivingRoom.day2'),
-              kServiceOpeningHours["ottosLivingRoom"]!["day2"]!,
-              sidePadding: true,
-            ),
             SizedBox(height: 10),
             textRowHeader(tr('info.openHours.coffeeCafe.title')),
             twoTextRow(

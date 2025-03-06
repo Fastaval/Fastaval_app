@@ -144,27 +144,31 @@ class ProfileScreen extends StatelessWidget {
         ),
       );
 
-  Widget buildUserProgramCard() => Obx(
-        () => textAndItemCard(
-          tr('profile.yourProgram'),
-          appCtrl.fetchingUser.isTrue
-              ? SizedBox(
-                  width: 20,
-                  height: 20,
-                  child: CircularProgressIndicator(
-                    strokeWidth: 2,
-                    color: colorOrangeDark,
-                  ),
-                )
-              : Text(
-                  "${tr('common.updated')} ${formatDay(appCtrl.userUpdateTime.value)} ${formatTime(appCtrl.userUpdateTime.value)}",
-                  style: kNormalTextSubdued,
+  Widget buildUserProgramCard() => Obx(() => textAndItemCard(
+        tr('profile.yourProgram'),
+        appCtrl.fetchingUser.isTrue
+            ? SizedBox(
+                width: 20,
+                height: 20,
+                child: CircularProgressIndicator(
+                  strokeWidth: 2,
+                  color: colorOrangeDark,
                 ),
-          buildUsersProgram(appCtrl.user.scheduling),
-        ),
-      );
+              )
+            : Text(
+                "${tr('common.updated')} ${formatDay(appCtrl.userUpdateTime.value)} ${formatTime(appCtrl.userUpdateTime.value)}",
+                style: kNormalTextSubdued,
+              ),
+        appCtrl.user.scheduling.isNotEmpty
+            ? buildUsersProgramItems(appCtrl.user.scheduling)
+            : Padding(
+                padding: EdgeInsets.fromLTRB(16, 8, 16, 16),
+                child:
+                    Text(tr('profile.noProgramItems'), style: kNormalTextStyle),
+              ),
+      ));
 
-  Widget buildUsersProgram(List<Scheduling> schedule) => Column(
+  Widget buildUsersProgramItems(List<Scheduling> schedule) => Column(
         children: [
           SizedBox(height: 8),
           ListView.separated(

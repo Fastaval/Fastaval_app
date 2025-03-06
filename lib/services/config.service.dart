@@ -1,5 +1,6 @@
-import 'package:firebase_remote_config/firebase_remote_config.dart';
 import 'dart:convert';
+
+import 'package:firebase_remote_config/firebase_remote_config.dart';
 
 String baseUrl = ConfigService.instance.getRemoteConfig('API');
 
@@ -15,6 +16,7 @@ class ConfigService {
       'APItest': 'https://infosys-test.fastaval.dk/api',
       'dates':
           "[\"2025-04-16\",\"2025-04-17\",\"2025-04-18\",\"2025-04-19\",\"2025-04-20\"]",
+      'info_screen_boxes': "[]"
     });
     await _remoteConfig.setConfigSettings(
       RemoteConfigSettings(

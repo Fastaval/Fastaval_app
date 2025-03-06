@@ -214,6 +214,7 @@ Widget textAndItemCard(String title, Widget secondaryTitle, content) {
       border: Border.all(color: colorWhite, width: 1),
     ),
     child: Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         Padding(
           padding: EdgeInsets.fromLTRB(16, 8, 16, 0),

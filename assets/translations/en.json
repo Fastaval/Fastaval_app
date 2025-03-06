@@ -78,7 +78,7 @@
         "title": "The Bar"
       },
       "boardGames": {
-        "day1": "Thu-Sat",
+        "day1": "Wed-Sat",
         "day2": "Sunday",
         "title": "The Board Game Café"
       },
@@ -100,8 +100,7 @@
         "title": "The Kiosk"
       },
       "ottosLivingRoom": {
-        "day1": "Wednesday",
-        "day2": "Thu-Sat",
+        "day1": "Wed-Sat",
         "title": "Otto's Living Room"
       },
       "title": "Opening Hours"
@@ -192,6 +191,7 @@
     "handout": "Handed out",
     "messagesFromFastaval": "Messages From Fastaval",
     "noMessagesRightNow": "Fastaval has no messages for you right now",
+    "noProgramItems": "You have no planned program items",
     "participantNumber": "Participant Number",
     "scanBarcode": "Show the barcode when you go to collect your food",
     "sleep": {
