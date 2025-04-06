@@ -31,7 +31,7 @@ if (keystorePropertiesFile.exists()) {
 
 android {
     namespace "dk.alea.fastaval.fastaval_app"
-    compileSdkVersion 34
+    compileSdkVersion 35
 
     compileOptions {
         coreLibraryDesugaringEnabled true
@@ -50,7 +50,7 @@ android {
     defaultConfig {
         applicationId "dk.alea.fastaval.fastaval_app"
         minSdkVersion 28
-        targetSdkVersion 34
+        targetSdkVersion 35
         versionCode flutterVersionCode.toInteger()
         versionName flutterVersionName
         multiDexEnabled true
