@@ -1,5 +1,6 @@
 import 'dart:async';
 import 'dart:convert';
+import 'dart:developer';
 
 import 'package:app_tracking_transparency/app_tracking_transparency.dart';
 import 'package:easy_localization/easy_localization.dart';
@@ -63,7 +64,7 @@ class UserService {
               ElevatedButton(
                 child: Text(tr('login.alert.dialogYes')),
                 onPressed: () {
-                  sendFCMTokenToInfosys(user.id);
+                  sendFCMTokenToInfosys(user);
                   askForTrackingPermission(context);
                   Navigator.of(context).pop();
                 },
@@ -85,13 +86,17 @@ Future<User> fetchUser(String userId, String password) async {
   throw Exception('Failed to load login. Logging out');
 }
 
-Future<void> sendFCMTokenToInfosys(int userId) async {
+Future<void> sendFCMTokenToInfosys(User user) async {
   String token = await getDeviceToken();
-  var response = await http.post(
-    Uri.parse('$baseUrl/user/$userId/register'),
-    headers: {'Content-Type': 'application/json; charset=UTF-8'},
-    body: jsonEncode({'gcm_id': token}),
-  );
+  inspect('TOKEN TOKEN TOKEN, $token');
+  final url = Uri.parse('$baseUrl/user/${user.id}/register');
+
+  var request = http.MultipartRequest('POST', url);
+  request.fields['pass'] = user.password;
+  request.fields['firebase_token'] = token;
+
+  var response = await request.send();
+
   if (response.statusCode != 200) {
     throw Exception('Failed to register app with infosys');
   }

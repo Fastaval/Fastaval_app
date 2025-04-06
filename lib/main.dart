@@ -8,25 +8,15 @@ import 'package:fastaval_app/controllers/settings.controller.dart';
 import 'package:fastaval_app/screens/home.screen.dart';
 import 'package:fastaval_app/services/config.service.dart';
 import 'package:firebase_core/firebase_core.dart';
-import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:get/get.dart';
 import 'package:timezone/data/latest.dart' as tz;
 import 'package:upgrader/upgrader.dart';
 
-import 'constants/firebase.constant.dart';
-
-@pragma('vm:entry-point')
-Future<void> _firebaseMessagingBackgroundHandler(RemoteMessage message) async {
-  await Firebase.initializeApp();
-}
-
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
-  await Firebase.initializeApp(options: DefaultFirebaseOptions.currentPlatform);
-
-  FirebaseMessaging.onBackgroundMessage(_firebaseMessagingBackgroundHandler);
+  await Firebase.initializeApp(); // Initialize Firebase
   await ConfigService.instance.initConfig();
   tz.initializeTimeZones();
 

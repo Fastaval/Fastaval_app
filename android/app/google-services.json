@@ -2,7 +2,7 @@
   "project_info": {
     "project_number": "998751652413",
     "project_id": "fastaval-it",
-    "storage_bucket": "fastaval-it.appspot.com"
+    "storage_bucket": "fastaval-it.firebasestorage.app"
   },
   "client": [
     {
@@ -29,6 +29,13 @@
             {
               "client_id": "998751652413-fqvef537ejdlousegtd8ujtv092uoj3a.apps.googleusercontent.com",
               "client_type": 3
+            },
+            {
+              "client_id": "998751652413-t3scq75i98cff1unkamf0dnlqvjmepcp.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "dk.fastaval.fastavappen"
+              }
             }
           ]
         }
