@@ -173,6 +173,16 @@ Widget _buildOpenHoursCard() => textAndIconCard(
               kStoreOpeningHours["store1"]!["day1"]!,
               sidePadding: true,
             ),
+            twoTextRow(
+              tr('info.stores.store1.day2'),
+              kStoreOpeningHours["store1"]!["day2"]!,
+              sidePadding: true,
+            ),
+            twoTextRow(
+              tr('info.stores.store1.day3'),
+              kStoreOpeningHours["store1"]!["day3"]!,
+              sidePadding: true,
+            ),
             SizedBox(height: 10),
             textRowHeader(tr('info.stores.store2.title')),
             twoTextRow(
@@ -180,11 +190,45 @@ Widget _buildOpenHoursCard() => textAndIconCard(
               kStoreOpeningHours["store2"]!["day1"]!,
               sidePadding: true,
             ),
+            twoTextRow(
+              tr('info.stores.store2.day2'),
+              kStoreOpeningHours["store2"]!["day2"]!,
+              sidePadding: true,
+            ),
+            twoTextRow(
+              tr('info.stores.store2.day3'),
+              kStoreOpeningHours["store2"]!["day3"]!,
+              sidePadding: true,
+            ),
             SizedBox(height: 10),
             textRowHeader(tr('info.stores.store3.title')),
             twoTextRow(
               tr('info.stores.store3.day1'),
               kStoreOpeningHours["store3"]!["day1"]!,
+              sidePadding: true,
+            ),
+            twoTextRow(
+              tr('info.stores.store3.day2'),
+              kStoreOpeningHours["store3"]!["day2"]!,
+              sidePadding: true,
+            ),
+            twoTextRow(
+              tr('info.stores.store3.day3'),
+              kStoreOpeningHours["store3"]!["day3"]!,
+              sidePadding: true,
+            ),
+            SizedBox(height: 10),
+            textRowHeader(tr('info.stores.store4.title')),
+            twoTextRow(
+              tr('info.stores.store4.day1'),
+              kStoreOpeningHours["store4"]!["day1"]!,
+              sidePadding: true,
+            ),
+            SizedBox(height: 10),
+            textRowHeader(tr('info.stores.store5.title')),
+            twoTextRow(
+              tr('info.stores.store5.day1'),
+              kStoreOpeningHours["store5"]!["day1"]!,
               sidePadding: true,
             ),
             SizedBox(height: 10),

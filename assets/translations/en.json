@@ -32,6 +32,11 @@
     "search": "Search...",
     "title": "Board Games"
   },
+  "boardgameVoting": {
+    "noItemsFound": "You have not signed up for any board games and therefore cannot vote.",
+    "possibilities": "Possibilities",
+    "title": "Board game voting"
+  },
   "bottomNavigation": {
     "favorites": "Favorites",
     "information": "Info",
@@ -114,14 +119,28 @@
     },
     "stores": {
       "store1": {
-        "day1": "Thu-Sat",
+        "day1": "Wednesday",
+        "day2": "Thu-Sat",
+        "day3": "Sunday",
         "title": "Epic Panda @ B45"
       },
       "store2": {
-        "day1": "Thu-Sat",
-        "title": "Bunkern Esbjerg @ A07"
+        "day1": "Friday",
+        "day2": "Saturday",
+        "day3": "Sunday",
+        "title": "Allroleplaying @ A07"
       },
       "store3": {
+        "day1": "Wednesday",
+        "day2": "Thu-Sat",
+        "day3": "Sunday",
+        "title": "Grandmas Gaming Goodies @ A07"
+      },
+      "store4": {
+        "day1": "Thu-Sat",
+        "title": "Bunkern Esbjerg @ Common Area"
+      },
+      "store5": {
         "day1": "Saturday",
         "title": "Artist Alley popup shops @ Common Area"
       },

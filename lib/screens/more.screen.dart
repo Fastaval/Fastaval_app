@@ -2,6 +2,7 @@ import 'package:easy_localization/easy_localization.dart';
 import 'package:fastaval_app/constants/styles.constant.dart';
 import 'package:fastaval_app/controllers/app.controller.dart';
 import 'package:fastaval_app/controllers/notification.controller.dart';
+import 'package:fastaval_app/screens/boardgame-voting.screen.dart';
 import 'package:fastaval_app/screens/boardgame.screen.dart';
 import 'package:fastaval_app/screens/notifications.screen.dart';
 import 'package:fastaval_app/screens/settings.screen.dart';
@@ -66,11 +67,22 @@ class MoreScreen extends StatelessWidget {
                 InkWell(
                   child: menuCard(
                     tr('boardgames.title'),
-                    Icons.sports_esports_outlined,
+                    Icons.casino_outlined,
                     true,
                   ),
                   onTap: () => Get.to(
                     () => BoardgameScreen(),
+                    transition: Transition.rightToLeft,
+                  ),
+                ),
+                InkWell(
+                  child: menuCard(
+                    tr('boardgameVoting.title'),
+                    Icons.how_to_vote_outlined,
+                    true,
+                  ),
+                  onTap: () => Get.to(
+                    () => BoardgameVotingScreen(),
                     transition: Transition.rightToLeft,
                   ),
                 ),

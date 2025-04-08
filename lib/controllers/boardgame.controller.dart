@@ -6,6 +6,7 @@ import 'package:get/get.dart';
 import 'package:http/http.dart' as http;
 
 class BoardGameController extends GetxController {
+  RxList boardgameVoteList = [].obs;
   RxList boardgameList = [].obs;
   RxList filteredList = [].obs;
   RxInt listUpdatedAt = 0.obs;

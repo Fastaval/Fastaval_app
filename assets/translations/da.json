@@ -32,6 +32,11 @@
     "search": "Søg...",
     "title": "Brætspil"
   },
+  "boardgameVoting": {
+    "noItemsFound": "Du har ikke været tilmeldt nogen brætspil og kan derfor ikke stemme.",
+    "possibilities": "Muligheder",
+    "title": "Brætspilsafstemning"
+  },
   "bottomNavigation": {
     "favorites": "Favoritter",
     "information": "Info",
@@ -114,14 +119,28 @@
     },
     "stores": {
       "store1": {
-        "day1": "Tor-Lør",
+        "day1": "Onsdag",
+        "day2": "Tor-Lør",
+        "day3": "Søndag",
         "title": "Epic Panda @ B45"
       },
       "store2": {
-        "day1": "Tor-Lør",
-        "title": "Bunkern Esbjerg @ A07"
+        "day1": "Fredag",
+        "day2": "Lørdag",
+        "day3": "Søndag",
+        "title": "Allroleplaying @ A07"
       },
       "store3": {
+        "day1": "Onsdag",
+        "day2": "Tor-Lør",
+        "day3": "Søndag",
+        "title": "Grandmas Gaming Goodies @ A07"
+      },
+      "store4": {
+        "day1": "Tor-Lør",
+        "title": "Bunkern Esbjerg @ Fællesområdet"
+      },
+      "store5": {
         "day1": "Lørdag",
         "title": "Artist Alley popup shops @ Fællesområdet"
       },
