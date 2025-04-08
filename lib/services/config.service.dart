@@ -14,14 +14,13 @@ class ConfigService {
     await _remoteConfig.setDefaults({
       'API': 'https://infosys.fastaval.dk/api',
       'APItest': 'https://infosys-test.fastaval.dk/api',
-      'dates':
-          "[\"2025-04-16\",\"2025-04-17\",\"2025-04-18\",\"2025-04-19\",\"2025-04-20\"]",
+      'dates': "[]",
       'info_screen_boxes': "[]"
     });
     await _remoteConfig.setConfigSettings(
       RemoteConfigSettings(
         fetchTimeout: Duration(minutes: 1),
-        minimumFetchInterval: Duration(minutes: 10),
+        minimumFetchInterval: Duration(hours: 1),
       ),
     );
     await _remoteConfig.fetchAndActivate();

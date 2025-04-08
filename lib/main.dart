@@ -5,6 +5,7 @@ import 'package:fastaval_app/controllers/boardgame.controller.dart';
 import 'package:fastaval_app/controllers/notification.controller.dart';
 import 'package:fastaval_app/controllers/program.controller.dart';
 import 'package:fastaval_app/controllers/settings.controller.dart';
+import 'package:fastaval_app/firebase_options.dart';
 import 'package:fastaval_app/screens/home.screen.dart';
 import 'package:fastaval_app/services/config.service.dart';
 import 'package:firebase_core/firebase_core.dart';
@@ -23,7 +24,7 @@ Future<void> _firebaseMessagingBackgroundHandler(RemoteMessage message) async {
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   FirebaseMessaging.onBackgroundMessage(_firebaseMessagingBackgroundHandler);
-  await Firebase.initializeApp();
+  await Firebase.initializeApp(options: DefaultFirebaseOptions.currentPlatform);
   await ConfigService.instance.initConfig();
   tz.initializeTimeZones();
 
