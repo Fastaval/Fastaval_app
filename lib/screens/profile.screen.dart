@@ -9,6 +9,7 @@ import 'package:fastaval_app/helpers/formatting.dart';
 import 'package:fastaval_app/models/food.model.dart';
 import 'package:fastaval_app/models/scheduling.model.dart';
 import 'package:fastaval_app/models/wear.model.dart';
+import 'package:fastaval_app/screens/boardgame-voting.screen.dart';
 import 'package:fastaval_app/widgets/widgets.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -128,9 +129,6 @@ class ProfileScreen extends StatelessWidget {
         child: SizedBox(
           width: double.infinity,
           child: ElevatedButton(
-            style: ButtonStyle(
-              backgroundColor: WidgetStateProperty.all<Color>(Colors.white),
-            ),
             onPressed: () => appCtrl.logout(),
             child: Text(
               tr('login.signOut'),
@@ -518,10 +516,39 @@ class ProfileScreen extends StatelessWidget {
 
     return AlertDialog(
       actions: [
-        TextButton(
-          onPressed: () => Navigator.pop(context),
-          child: Text(tr('common.close')),
-        ),
+        Padding(
+            padding: EdgeInsets.fromLTRB(8, 0, 8, 4),
+            child: Row(
+              mainAxisAlignment: item.activityType == "braet"
+                  ? MainAxisAlignment.spaceBetween
+                  : MainAxisAlignment.end,
+              children: [
+                if (item.activityType == "braet")
+                  ElevatedButton(
+                    style: ElevatedButton.styleFrom(
+                        backgroundColor: Colors.orange, elevation: 2),
+                    onPressed: () => Get.to(
+                      () => BoardgameVotingScreen(),
+                      transition: Transition.rightToLeft,
+                    ),
+                    child: Row(
+                      children: [
+                        Icon(Icons.how_to_vote, color: Colors.white),
+                        SizedBox(width: 5),
+                        Text(tr('boardgames.goToVoting'),
+                            style: TextStyle(color: Colors.white)),
+                      ],
+                    ),
+                  ),
+                ElevatedButton(
+                  style: ElevatedButton.styleFrom(
+                      backgroundColor: Colors.white, elevation: 2),
+                  onPressed: () => Navigator.pop(context),
+                  child: Text(tr('common.close'),
+                      style: TextStyle(color: Colors.deepOrange)),
+                ),
+              ],
+            ))
       ],
       shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
       backgroundColor: colorWhite,

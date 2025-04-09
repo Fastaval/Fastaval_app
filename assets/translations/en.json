@@ -28,14 +28,22 @@
       "false": "Not Available",
       "true": "Available"
     },
+    "goToVoting": "Go to voting",
     "noGamesFound": "No board games found. Try searching for something else.",
     "search": "Search...",
     "title": "Board Games"
   },
   "boardgameVoting": {
+    "description": "Here you can rank the board games you have signed up for in the order you like them best.",
+    "instruction1": "Change the order: Drag and drop the games to change their order - the game you love the most should be at the top!",
+    "instruction2": "Finish and send: When you are satisfied with your list, you can send it off to the judges.",
+    "instructionsFooter": "Your top 5 helps find the best winner, so think carefully about your ranking!",
+    "instructionsTitle": "How it works:",
     "noItemsFound": "You have not signed up for any board games and therefore cannot vote.",
     "possibilities": "Possibilities",
-    "title": "Board game voting"
+    "title": "Board Game Voting",
+    "voteButton": "Vote",
+    "voteInstruction": "You can vote as many times as you want."
   },
   "bottomNavigation": {
     "favorites": "Favorites",

@@ -52,9 +52,6 @@ class LoginScreen extends StatelessWidget {
   Widget _buildLoginButton() => SizedBox(
         width: double.infinity,
         child: ElevatedButton(
-          style: ButtonStyle(
-            backgroundColor: WidgetStateProperty.all<Color>(Colors.white),
-          ),
           onPressed: () async => {
             await appCtrl.login(userIdInput.text, passwordInput.text),
             if (appCtrl.loggedIn.value == true)

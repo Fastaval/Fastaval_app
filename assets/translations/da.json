@@ -28,14 +28,22 @@
       "false": "Ikke ledigt",
       "true": "Ledigt"
     },
+    "goToVoting": "Gå til afstemning",
     "noGamesFound": "Ingen brætspil fundet. Prøv at ændre din søgning.",
     "search": "Søg...",
     "title": "Brætspil"
   },
   "boardgameVoting": {
+    "description": "Her kan du rangere de brætspil du har været tilmeldt i den rækkefølge, du synes bedst om dem.",
+    "instruction1": "Ændr rækkefølgen: Træk og slip spillene for at ændre deres rækkefølge - det spil, du elsker mest, skal være øverst!",
+    "instruction2": "Afslut og send: Når du er tilfreds med din liste, kan du sende den af sted til dommerne.",
+    "instructionsFooter": "Din top 5 hjælper med at finde den bedste vinder, så tænk godt over din rangering!",
+    "instructionsTitle": "Sådan fungerer det:",
     "noItemsFound": "Du har ikke været tilmeldt nogen brætspil og kan derfor ikke stemme.",
     "possibilities": "Muligheder",
-    "title": "Brætspilsafstemning"
+    "title": "Brætspilsafstemning",
+    "voteButton": "Stem",
+    "voteInstruction": "Du kan stemme lige så mange gange du vil."
   },
   "bottomNavigation": {
     "favorites": "Favoritter",
