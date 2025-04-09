@@ -1,12 +1,14 @@
 import 'dart:convert';
 
 import 'package:fastaval_app/models/boardgame.model.dart';
+import 'package:fastaval_app/models/scheduling.model.dart';
 import 'package:fastaval_app/services/config.service.dart';
 import 'package:get/get.dart';
 import 'package:http/http.dart' as http;
 
 class BoardGameController extends GetxController {
-  RxList boardgameVoteList = [].obs;
+  RxList<Scheduling> availableBoardgames = <Scheduling>[].obs;
+  RxList<Scheduling> chosenBoardgames = <Scheduling>[].obs;
   RxList boardgameList = [].obs;
   RxList filteredList = [].obs;
   RxInt listUpdatedAt = 0.obs;
@@ -38,6 +40,24 @@ class BoardGameController extends GetxController {
               .toList()
           : boardgameList,
     );
+  }
+
+  void onReorder(int oldIndex, int newIndex) {
+    if (oldIndex < newIndex) {
+      newIndex -= 1;
+    }
+    final Scheduling item = chosenBoardgames.removeAt(oldIndex);
+    chosenBoardgames.insert(newIndex, item);
+  }
+
+  void acceptItem(Scheduling item) {
+    chosenBoardgames.add(item);
+    availableBoardgames.remove(item);
+  }
+
+  void removeItem(Scheduling item) {
+    availableBoardgames.add(item);
+    chosenBoardgames.remove(item);
   }
 }
 

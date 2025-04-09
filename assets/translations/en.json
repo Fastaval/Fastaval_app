@@ -34,16 +34,18 @@
     "title": "Board Games"
   },
   "boardgameVoting": {
-    "description": "Here you can rank the board games you have signed up for in the order you like them best.",
-    "instruction1": "Change the order: Drag and drop the games to change their order - the game you love the most should be at the top!",
-    "instruction2": "Finish and send: When you are satisfied with your list, you can send it off to the judges.",
-    "instructionsFooter": "Your top 5 helps find the best winner, so think carefully about your ranking!",
+    "availableGames": "Available games",
+    "chosenGames": "Chosen games",
+    "holdAndDrag": "Hold and drag to reorder",
+    "instruction1": "Drag a game from the available games list into the chosen list",
+    "instruction2": "Rank your chosen games by rearranging them",
+    "instruction3": "Vote!",
     "instructionsTitle": "How it works:",
     "noItemsFound": "You have not signed up for any board games and therefore cannot vote.",
     "possibilities": "Possibilities",
     "title": "Board Game Voting",
     "voteButton": "Vote",
-    "voteInstruction": "You can vote as many times as you want."
+    "voteInstruction": "You can update your vote as many times as you want."
   },
   "bottomNavigation": {
     "favorites": "Favorites",
