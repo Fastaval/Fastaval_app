@@ -17,7 +17,7 @@ class Activity {
   String type;
   double playHours;
   String language;
-  String wordpressId;
+  int wordpressId;
   int canSignUp;
 
   Activity({

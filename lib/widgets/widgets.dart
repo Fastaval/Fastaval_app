@@ -45,10 +45,8 @@ Widget programListItem(
                     decoration: BoxDecoration(
                       border: Border(
                         left: BorderSide(width: 5, color: color),
-                        right: BorderSide(
-                          width: 1,
-                          color: Colors.grey.shade300,
-                        ),
+                        right:
+                            BorderSide(width: 1, color: Colors.grey.shade300),
                       ),
                     ),
                     child: Padding(
@@ -90,7 +88,10 @@ Widget programListItem(
         alignment: Alignment.centerRight,
         child: Obx(
           () => IconButton(
-            onPressed: () => programCtrl.toggleFavorite(run.id),
+            onPressed: () => {
+              HapticFeedback.mediumImpact(),
+              programCtrl.toggleFavorite(run.id)
+            },
             icon: Icon(
               programCtrl.favorites.contains(run.id)
                   ? CupertinoIcons.heart_fill
@@ -312,10 +313,45 @@ Widget programItemDialog(BuildContext context) {
 
   return AlertDialog(
     actions: [
-      TextButton(
-        onPressed: () => Navigator.pop(context),
-        child: Text(tr('common.close')),
-      ),
+      Padding(
+          padding: EdgeInsets.fromLTRB(8, 0, 8, 4),
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              ElevatedButton(
+                  style: ElevatedButton.styleFrom(
+                      backgroundColor: Colors.orange, elevation: 2),
+                  onPressed: () => {
+                        HapticFeedback.mediumImpact(),
+                        programCtrl.toggleFavorite(run.id)
+                      },
+                  child: Obx(
+                    () => Row(
+                      children: [
+                        Icon(
+                          programCtrl.favorites.contains(run.id)
+                              ? CupertinoIcons.heart_fill
+                              : CupertinoIcons.heart,
+                          color: Colors.white,
+                        ),
+                        SizedBox(width: 4),
+                        Text(
+                            programCtrl.favorites.contains(run.id)
+                                ? tr('common.unfavorite')
+                                : tr('common.favorite'),
+                            style: TextStyle(color: Colors.white))
+                      ],
+                    ),
+                  )),
+              ElevatedButton(
+                style: ElevatedButton.styleFrom(
+                    backgroundColor: Colors.white, elevation: 2),
+                onPressed: () => Navigator.pop(context),
+                child: Text(tr('common.close'),
+                    style: TextStyle(color: Colors.deepOrange)),
+              ),
+            ],
+          ))
     ],
     shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
     backgroundColor: colorWhite,
@@ -344,33 +380,33 @@ Widget programItemDialog(BuildContext context) {
             ),
             SizedBox(height: 8),
             Padding(
-              padding: EdgeInsets.fromLTRB(10, 0, 10, 0),
-              child: Text(
-                context.locale.languageCode == 'da'
-                    ? activity.daTitle
-                    : activity.enTitle,
-                textAlign: TextAlign.center,
+              padding: EdgeInsets.fromLTRB(16, 0, 16, 0),
+              child: Row(
+                mainAxisSize: MainAxisSize.min,
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  Flexible(
+                    child: Text(
+                      context.locale.languageCode == 'da'
+                          ? activity.daTitle
+                          : activity.enTitle,
+                      textAlign: TextAlign.center,
+                    ),
+                  ),
+                  SizedBox(width: 4),
+                  Obx(
+                    () => Icon(
+                      programCtrl.favorites.contains(run.id)
+                          ? CupertinoIcons.heart_fill
+                          : CupertinoIcons.heart,
+                      color: colorOrangeDark,
+                    ),
+                  ),
+                ],
               ),
-            ),
+            )
           ],
-        ),
-        Align(
-          alignment: Alignment.topRight,
-          child: Padding(
-            padding: EdgeInsets.fromLTRB(0, 16, 16, 0),
-            child: Obx(
-              () => IconButton(
-                onPressed: () => programCtrl.toggleFavorite(run.id),
-                icon: Icon(
-                  programCtrl.favorites.contains(run.id)
-                      ? CupertinoIcons.heart_fill
-                      : CupertinoIcons.heart,
-                  color: colorOrangeDark,
-                ),
-              ),
-            ),
-          ),
-        ),
+        )
       ],
     ),
     content: Column(

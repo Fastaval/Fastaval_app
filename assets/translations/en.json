@@ -57,6 +57,7 @@
     "danish": "Danish",
     "description": "Description",
     "english": "English",
+    "favorite": "Favorite",
     "hour": "Hour",
     "hours": "Hours",
     "language": "Language",
@@ -65,6 +66,7 @@
     "runtime": "Runtime",
     "time": "Time",
     "type": "Type",
+    "unfavorite": "Unfavorite",
     "updated": "Updated"
   },
   "error": {

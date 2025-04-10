@@ -9,6 +9,7 @@ import 'package:fastaval_app/models/activity_run.model.dart';
 import 'package:fastaval_app/widgets/widgets.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:get/get.dart';
 
 class FavoritesScreen extends StatelessWidget {
@@ -169,10 +170,40 @@ class FavoritesScreen extends StatelessWidget {
       contentPadding: EdgeInsets.fromLTRB(20, 0, 20, 0),
       actionsPadding: EdgeInsets.all(5),
       actions: [
-        TextButton(
-          onPressed: () => Navigator.pop(context),
-          child: Text(tr('common.close')),
-        ),
+        Padding(
+            padding: EdgeInsets.fromLTRB(8, 0, 8, 4),
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                ElevatedButton(
+                  style: ElevatedButton.styleFrom(
+                      backgroundColor: Colors.orange, elevation: 2),
+                  onPressed: () => {
+                    HapticFeedback.mediumImpact(),
+                    programCtrl.toggleFavorite(run.id),
+                    Navigator.pop(context)
+                  },
+                  child: Row(
+                    children: [
+                      Icon(
+                        CupertinoIcons.heart_fill,
+                        color: Colors.white,
+                      ),
+                      SizedBox(width: 4),
+                      Text(tr('common.unfavorite'),
+                          style: TextStyle(color: Colors.white))
+                    ],
+                  ),
+                ),
+                ElevatedButton(
+                  style: ElevatedButton.styleFrom(
+                      backgroundColor: Colors.white, elevation: 2),
+                  onPressed: () => Navigator.pop(context),
+                  child: Text(tr('common.close'),
+                      style: TextStyle(color: Colors.deepOrange)),
+                ),
+              ],
+            ))
       ],
       backgroundColor: colorWhite,
       surfaceTintColor: colorWhite,
@@ -206,24 +237,7 @@ class FavoritesScreen extends StatelessWidget {
                 ),
               ),
             ],
-          ),
-          Align(
-            alignment: Alignment.topRight,
-            child: Padding(
-              padding: EdgeInsets.fromLTRB(0, 16, 16, 0),
-              child: Obx(
-                () => IconButton(
-                  onPressed: () => programCtrl.toggleFavorite(run.id),
-                  icon: Icon(
-                    programCtrl.favorites.contains(run.id)
-                        ? CupertinoIcons.heart_fill
-                        : CupertinoIcons.heart,
-                    color: colorOrangeDark,
-                  ),
-                ),
-              ),
-            ),
-          ),
+          )
         ],
       ),
       content: Column(

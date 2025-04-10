@@ -1,9 +1,9 @@
 import 'dart:convert';
-import 'dart:developer';
 
 import 'package:fastaval_app/controllers/app.controller.dart';
+import 'package:fastaval_app/models/activity.model.dart';
 import 'package:fastaval_app/models/boardgame.model.dart';
-import 'package:fastaval_app/models/scheduling.model.dart';
+import 'package:fastaval_app/services/activities.service.dart';
 import 'package:fastaval_app/services/config.service.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:get/get.dart';
@@ -11,9 +11,10 @@ import 'package:http/http.dart' as http;
 
 class BoardGameController extends GetxController {
   final appCtrl = Get.find<AppController>();
+  final ActivitiesService activitiesService = ActivitiesService();
 
-  RxList<Scheduling> availableBoardgames = <Scheduling>[].obs;
-  RxList<Scheduling> chosenBoardgames = <Scheduling>[].obs;
+  RxList<Activity> availableBoardgames = <Activity>[].obs;
+  RxList<Activity> chosenBoardgames = <Activity>[].obs;
   RxList boardgameList = [].obs;
   RxList filteredList = [].obs;
   RxInt listUpdatedAt = 0.obs;
@@ -53,21 +54,21 @@ class BoardGameController extends GetxController {
     if (oldIndex < newIndex) {
       newIndex -= 1;
     }
-    final Scheduling item = chosenBoardgames.removeAt(oldIndex);
+    final Activity item = chosenBoardgames.removeAt(oldIndex);
     chosenBoardgames.insert(newIndex, item);
   }
 
-  void acceptItem(Scheduling item) {
+  void acceptItem(Activity item) {
     chosenBoardgames.add(item);
     availableBoardgames.remove(item);
   }
 
-  void removeItem(Scheduling item) {
+  void removeItem(Activity item) {
     availableBoardgames.add(item);
     chosenBoardgames.remove(item);
   }
 
-  void addItem(Scheduling item) {
+  void addItem(Activity item) {
     chosenBoardgames.add(item);
     availableBoardgames.remove(item);
   }
@@ -89,9 +90,7 @@ class BoardGameController extends GetxController {
     }
 
     try {
-      inspect(request);
       var response = await request.send();
-      inspect(response);
       if (response.statusCode == 200 || response.statusCode == 500) {
         Fluttertoast.showToast(
             msg: 'Board game rankings submitted successfully!');
@@ -106,12 +105,12 @@ class BoardGameController extends GetxController {
   }
 
   Future<void> fetchAndSetInitialRankings() async {
-    var schedule = appCtrl.user.scheduling
-        .where((item) => item.activityType == "braet")
-        .toList();
-    if (schedule.isNotEmpty) {
-      availableBoardgames(schedule);
-    }
+    activitiesService.fetchProgram().then((program) {
+      var boardgameList =
+          program.activities.where((item) => item.type == "braet").toList();
+
+      availableBoardgames(boardgameList);
+    });
 
     var url = Uri.parse('$baseUrl/boardgamerankings?id=${appCtrl.user.id}');
 
@@ -122,12 +121,10 @@ class BoardGameController extends GetxController {
         var data = jsonDecode(response.body);
         List<dynamic> rankings = data['rankings'] ?? [];
 
-        // Clear existing chosenBoardgames
         chosenBoardgames.clear();
 
-        // Populate chosenBoardgames based on the rankings array
         for (var rankingId in rankings) {
-          Scheduling? game = availableBoardgames.firstWhereOrNull(
+          Activity? game = availableBoardgames.firstWhereOrNull(
             (game) => game.id == rankingId,
           );
           if (game != null) {

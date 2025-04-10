@@ -44,6 +44,7 @@ class AppController extends GetxController {
             if (newUser != null) {updateUser(newUser), updateLoggedIn(true)},
           },
         );
+    await updateUserProfile();
   }
 
   updateUserProfile() async {
@@ -81,7 +82,6 @@ class AppController extends GetxController {
     updateNavIndex(0);
     Fluttertoast.showToast(msg: tr('logout.message'));
 
-    // Clear board game lists
     boardCtrl.availableBoardgames.clear();
     boardCtrl.chosenBoardgames.clear();
   }

@@ -1,7 +1,7 @@
 class Session {
   int id;
   int activityId;
-  String roomId;
+  int roomId;
   String roomName;
   int start;
   int linked;
