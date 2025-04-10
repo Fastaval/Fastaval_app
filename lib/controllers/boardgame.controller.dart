@@ -106,8 +106,10 @@ class BoardGameController extends GetxController {
 
   Future<void> fetchAndSetInitialRankings() async {
     activitiesService.fetchProgram().then((program) {
-      var boardgameList =
-          program.activities.where((item) => item.type == "braet").toList();
+      var boardgameList = program.activities
+          .where((item) => item.type == "braet")
+          .toList()
+        ..sort((a, b) => a.titleDa.compareTo(b.titleDa));
 
       availableBoardgames(boardgameList);
     });
