@@ -31,18 +31,14 @@
     "goToVoting": "Gå til afstemning",
     "noGamesFound": "Ingen brætspil fundet. Prøv at ændre din søgning.",
     "search": "Søg...",
-    "title": "Brætspil"
+    "title": "Brætspilslisten"
   },
   "boardgameVoting": {
     "availableGames": "Tilgængelige spil",
     "chosenGames": "Valgte spil",
-    "holdAndDrag": "Hold og træk for at ændre rækkefølge",
-    "instruction1": "Træk et spil fra listen over tilgængelige spil ind i den valgte liste",
-    "instruction2": "Rangér dine valgte spil ved at ændre rækkefølgen",
-    "instruction3": "Stem på din top 5!",
-    "instructionsTitle": "Sådan fungerer det:",
-    "noItemsFound": "Du har ikke været tilmeldt nogen brætspil og kan derfor ikke stemme.",
-    "possibilities": "Muligheder",
+    "holdAndDrag": "Hold og træk",
+    "noItemsFound": "Du har ikke været tilmeldt nogen brætspil og kan derfor ikke stemme i år.",
+    "pressToAdd": "Tryk for at tilføje",
     "title": "Brætspilsafstemning",
     "voteButton": "Stem",
     "voteInstruction": "Du kan opdatere din stemme så mange gange du vil."
@@ -196,17 +192,12 @@
     "message": "Du er blevet logget ud"
   },
   "more": {
-    "barcode": "Vis stregkode",
-    "boardgames": "Brætspil",
-    "close": "Luk",
     "map": {
       "gym": "Kort - Hobro Idrætscenter",
       "school": "Kort - Mariagerfjord Gymnasium"
     },
-    "messages": "Notifikationer",
     "settings": "Indstillinger",
-    "socialMedia": "Besøg vores sociale medier, og skriv dig op til vores nyhedsbrev",
-    "title": "Mere"
+    "socialMedia": "Besøg vores sociale medier, og skriv dig op til vores nyhedsbrev"
   },
   "notifications": {
     "noNotificationsFound": "Ingen notifikationer fundet.\n\nBare rolig, du vil blive informeret her, hvis der sker noget vigtigt.",

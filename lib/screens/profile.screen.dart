@@ -13,6 +13,7 @@ import 'package:fastaval_app/screens/boardgame-voting.screen.dart';
 import 'package:fastaval_app/widgets/widgets.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:get/get.dart';
 
 class ProfileScreen extends StatelessWidget {
@@ -129,7 +130,7 @@ class ProfileScreen extends StatelessWidget {
         child: SizedBox(
           width: double.infinity,
           child: ElevatedButton(
-            onPressed: () => appCtrl.logout(),
+            onPressed: () => {HapticFeedback.heavyImpact(), appCtrl.logout()},
             child: Text(
               tr('login.signOut'),
               style: TextStyle(
@@ -191,11 +192,14 @@ class ProfileScreen extends StatelessWidget {
     );
 
     return InkWell(
-      onTap: () => showDialog(
-        context: Get.context!,
-        builder: activityDialog,
-        routeSettings: RouteSettings(arguments: item),
-      ),
+      onTap: () => {
+        HapticFeedback.lightImpact(),
+        showDialog(
+          context: Get.context!,
+          builder: activityDialog,
+          routeSettings: RouteSettings(arguments: item),
+        )
+      },
       child: Container(
         decoration: BoxDecoration(
           boxShadow: [
@@ -293,11 +297,14 @@ class ProfileScreen extends StatelessWidget {
       );
 
   Widget foodTickets(Food foodItem) => InkWell(
-        onTap: () => showDialog(
-          context: Get.context!,
-          builder: foodDialog,
-          routeSettings: RouteSettings(arguments: foodItem),
-        ),
+        onTap: () => {
+          HapticFeedback.lightImpact(),
+          showDialog(
+            context: Get.context!,
+            builder: foodDialog,
+            routeSettings: RouteSettings(arguments: foodItem),
+          )
+        },
         child: Container(
           decoration: BoxDecoration(
             boxShadow: [
@@ -527,10 +534,7 @@ class ProfileScreen extends StatelessWidget {
                   ElevatedButton(
                     style: ElevatedButton.styleFrom(
                         backgroundColor: Colors.orange, elevation: 2),
-                    onPressed: () => Get.to(
-                      () => BoardgameVotingScreen(),
-                      transition: Transition.rightToLeft,
-                    ),
+                    onPressed: () => Get.to(() => BoardgameVotingScreen()),
                     child: Row(
                       children: [
                         Icon(Icons.how_to_vote, color: Colors.white),

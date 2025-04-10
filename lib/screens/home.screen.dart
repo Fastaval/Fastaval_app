@@ -14,6 +14,7 @@ import 'package:fastaval_app/screens/program.screen.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:get/get.dart';
 
 class HomeScreen extends StatefulWidget {
@@ -38,6 +39,7 @@ class HomeScreenState extends State<HomeScreen> {
 
     FirebaseMessaging.onMessage.listen((RemoteMessage message) {
       if (message.notification != null) {
+        HapticFeedback.vibrate();
         notificationCtrl.getNotificationsAndSetWaiting();
       }
     });
@@ -69,6 +71,7 @@ class HomeScreenState extends State<HomeScreen> {
   }
 
   onNavClick(int index) {
+    HapticFeedback.selectionClick();
     appCtrl.updateNavIndex(index);
   }
 

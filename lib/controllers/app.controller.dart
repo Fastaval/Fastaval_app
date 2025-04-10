@@ -1,6 +1,7 @@
 import 'dart:async';
 
 import 'package:easy_localization/easy_localization.dart';
+import 'package:fastaval_app/controllers/boardgame.controller.dart';
 import 'package:fastaval_app/models/user.model.dart';
 import 'package:fastaval_app/services/user.service.dart';
 import 'package:fluttertoast/fluttertoast.dart';
@@ -56,6 +57,7 @@ class AppController extends GetxController {
   }
 
   Future<void> login(String id, String password) async {
+    var boardCtrl = Get.find<BoardGameController>();
     try {
       User newUser = await fetchUser(id, password);
       newUser.password = password;
@@ -64,17 +66,23 @@ class AppController extends GetxController {
       await UserService().setUser(newUser);
       await UserService().registerToInfosys(newUser);
       updateNavIndex(0);
+      boardCtrl.fetchAndSetInitialRankings();
     } catch (error) {
       Fluttertoast.showToast(msg: tr('error.login'));
     }
   }
 
   logout() {
+    var boardCtrl = Get.find<BoardGameController>();
     UserService().removeUser();
     user.id = 0;
     user.password = '';
     loggedIn(false);
     updateNavIndex(0);
     Fluttertoast.showToast(msg: tr('logout.message'));
+
+    // Clear board game lists
+    boardCtrl.availableBoardgames.clear();
+    boardCtrl.chosenBoardgames.clear();
   }
 }

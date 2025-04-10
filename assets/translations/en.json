@@ -31,18 +31,14 @@
     "goToVoting": "Go to voting",
     "noGamesFound": "No board games found. Try searching for something else.",
     "search": "Search...",
-    "title": "Board Games"
+    "title": "Board Games List"
   },
   "boardgameVoting": {
     "availableGames": "Available games",
     "chosenGames": "Chosen games",
-    "holdAndDrag": "Hold and drag to reorder",
-    "instruction1": "Drag a game from the available games list into the chosen list",
-    "instruction2": "Rank your chosen games by rearranging them",
-    "instruction3": "Vote for your top 5!",
-    "instructionsTitle": "How it works:",
-    "noItemsFound": "You have not signed up for any board games and therefore cannot vote.",
-    "possibilities": "Possibilities",
+    "holdAndDrag": "Hold and drag",
+    "noItemsFound": "You have not signed up for any board games and therefore cannot vote this year.",
+    "pressToAdd": "Click to add",
     "title": "Board Game Voting",
     "voteButton": "Vote",
     "voteInstruction": "You can update your vote as many times as you want."
@@ -196,17 +192,12 @@
     "message": "You were logged out"
   },
   "more": {
-    "barcode": "Show Barcode",
-    "boardgames": "Board Games",
-    "close": "Close",
     "map": {
       "gym": "Map - Hobro Idrætscenter",
       "school": "Map - Mariagerfjord Gymnasium"
     },
-    "messages": "Notifications",
     "settings": "Settings",
-    "socialMedia": "Visit our social media and sign up for our newsletter",
-    "title": "More"
+    "socialMedia": "Visit our social media and sign up for our newsletter"
   },
   "notifications": {
     "noNotificationsFound": "No notifications found.\n\nDon't worry, you will be informed here if anything important happens.",

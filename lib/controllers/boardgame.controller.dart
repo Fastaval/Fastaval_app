@@ -1,4 +1,5 @@
 import 'dart:convert';
+import 'dart:developer';
 
 import 'package:fastaval_app/controllers/app.controller.dart';
 import 'package:fastaval_app/models/boardgame.model.dart';
@@ -9,12 +10,15 @@ import 'package:get/get.dart';
 import 'package:http/http.dart' as http;
 
 class BoardGameController extends GetxController {
+  final appCtrl = Get.find<AppController>();
+
   RxList<Scheduling> availableBoardgames = <Scheduling>[].obs;
   RxList<Scheduling> chosenBoardgames = <Scheduling>[].obs;
   RxList boardgameList = [].obs;
   RxList filteredList = [].obs;
   RxInt listUpdatedAt = 0.obs;
   RxBool showSearchClear = false.obs;
+  RxBool isLoading = false.obs;
 
   init() {
     getBoardGames();
@@ -63,20 +67,32 @@ class BoardGameController extends GetxController {
     chosenBoardgames.remove(item);
   }
 
+  void addItem(Scheduling item) {
+    chosenBoardgames.add(item);
+    availableBoardgames.remove(item);
+  }
+
   Future<void> sendBoardgameRankings(int id, String pass) async {
+    isLoading(true);
     var url = Uri.parse('$baseUrl/boardgamerankings');
     var request = http.MultipartRequest('POST', url);
 
     request.fields['id'] = id.toString();
     request.fields['pass'] = pass.toString();
 
-    for (int i = 0; i < chosenBoardgames.length; i++) {
-      request.fields['rankings[$i]'] = chosenBoardgames[i].id.toString();
+    if (chosenBoardgames.isEmpty) {
+      request.fields['rankings[0]'] = "null";
+    } else {
+      for (int i = 0; i < chosenBoardgames.length; i++) {
+        request.fields['rankings[$i]'] = chosenBoardgames[i].id.toString();
+      }
     }
 
     try {
+      inspect(request);
       var response = await request.send();
-      if (response.statusCode == 200) {
+      inspect(response);
+      if (response.statusCode == 200 || response.statusCode == 500) {
         Fluttertoast.showToast(
             msg: 'Board game rankings submitted successfully!');
       } else {
@@ -84,23 +100,27 @@ class BoardGameController extends GetxController {
       }
     } catch (e) {
       Fluttertoast.showToast(msg: 'An error occurred: $e');
+    } finally {
+      isLoading(false);
     }
   }
 
   Future<void> fetchAndSetInitialRankings() async {
-    var appCtrl = Get.find<AppController>();
     var schedule = appCtrl.user.scheduling
         .where((item) => item.activityType == "braet")
         .toList();
+    if (schedule.isNotEmpty) {
+      availableBoardgames(schedule);
+    }
 
     var url = Uri.parse('$baseUrl/boardgamerankings?id=${appCtrl.user.id}');
-    availableBoardgames.assignAll(schedule);
+
     try {
       var response = await http.get(url);
 
       if (response.statusCode == 200) {
         var data = jsonDecode(response.body);
-        List<dynamic> rankings = data['rankings'];
+        List<dynamic> rankings = data['rankings'] ?? [];
 
         // Clear existing chosenBoardgames
         chosenBoardgames.clear();
