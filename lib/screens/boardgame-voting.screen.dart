@@ -13,13 +13,8 @@ class BoardgameVotingScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    var schedule = appCtrl.user.scheduling
-        .where((item) => item.activityType == "braet")
-        .toList();
     final ScrollController controller1 = ScrollController();
-
-    boardgameCtrl.availableBoardgames.assignAll(schedule);
-    boardgameCtrl.chosenBoardgames.assignAll([]);
+    boardgameCtrl.fetchAndSetInitialRankings();
 
     return Scaffold(
       appBar: commonAppBar(
@@ -100,7 +95,7 @@ class BoardgameVotingScreen extends StatelessWidget {
                                 color: Colors.white,
                                 borderRadius: BorderRadius.circular(6),
                               ),
-                              margin: EdgeInsets.fromLTRB(8, 0, 48, 8),
+                              margin: EdgeInsets.fromLTRB(8, 0, 60, 8),
                               child: Padding(
                                 padding: EdgeInsets.fromLTRB(16, 4, 16, 4),
                                 child: Text(gameTitle),
@@ -112,6 +107,7 @@ class BoardgameVotingScreen extends StatelessWidget {
                     ),
                   )),
             ),
+            SizedBox(height: 30),
             Padding(
                 padding: const EdgeInsets.fromLTRB(16, 0, 16, 8),
                 child: Row(children: [
@@ -128,38 +124,40 @@ class BoardgameVotingScreen extends StatelessWidget {
                 },
                 builder: (BuildContext context, List<Scheduling?> accepted,
                     List<dynamic> rejected) {
-                  return ReorderableListView.builder(
-                    itemCount: boardgameCtrl.chosenBoardgames.length,
-                    itemBuilder: (context, index) {
-                      var game = boardgameCtrl.chosenBoardgames[index];
-                      var gameTitle = Get.locale!.languageCode == 'da'
-                          ? game.titleDa
-                          : game.titleEn;
-                      return Container(
-                        key: Key(game.id.toString()),
-                        decoration: BoxDecoration(
-                          color: Colors.white,
-                          borderRadius: BorderRadius.circular(15),
-                        ),
-                        margin: EdgeInsets.fromLTRB(8, 0, 8, 8),
-                        child: Padding(
-                          padding: EdgeInsets.fromLTRB(16, 4, 16, 4),
-                          child: Row(
-                            children: [
-                              Expanded(child: Text(gameTitle)),
-                              IconButton(
-                                icon: Icon(Icons.remove_circle_outline),
-                                onPressed: () => boardgameCtrl.removeItem(game),
+                  return Obx(() => ReorderableListView.builder(
+                        itemCount: boardgameCtrl.chosenBoardgames.length,
+                        itemBuilder: (context, index) {
+                          var game = boardgameCtrl.chosenBoardgames[index];
+                          var gameTitle = Get.locale!.languageCode == 'da'
+                              ? game.titleDa
+                              : game.titleEn;
+                          return Container(
+                            key: Key(game.id.toString()),
+                            decoration: BoxDecoration(
+                              color: Colors.white,
+                              borderRadius: BorderRadius.circular(6),
+                            ),
+                            margin: EdgeInsets.fromLTRB(8, 0, 8, 8),
+                            child: Padding(
+                              padding: EdgeInsets.fromLTRB(16, 0, 16, 0),
+                              child: Row(
+                                children: [
+                                  Expanded(
+                                      child: Text("${index + 1} - $gameTitle")),
+                                  IconButton(
+                                    icon: Icon(Icons.remove_circle_outline),
+                                    onPressed: () =>
+                                        boardgameCtrl.removeItem(game),
+                                  ),
+                                ],
                               ),
-                            ],
-                          ),
-                        ),
-                      );
-                    },
-                    onReorder: (int oldIndex, int newIndex) {
-                      boardgameCtrl.onReorder(oldIndex, newIndex);
-                    },
-                  );
+                            ),
+                          );
+                        },
+                        onReorder: (int oldIndex, int newIndex) {
+                          boardgameCtrl.onReorder(oldIndex, newIndex);
+                        },
+                      ));
                 },
               ),
             ),
@@ -168,7 +166,8 @@ class BoardgameVotingScreen extends StatelessWidget {
                 padding: const EdgeInsets.all(8.0),
                 child: ElevatedButton(
                   onPressed: () {
-                    // TODO: Implement vote submission logic
+                    boardgameCtrl.sendBoardgameRankings(
+                        appCtrl.user.id, appCtrl.user.password);
                   },
                   child: Text(
                     tr('boardgameVoting.voteButton'),

@@ -75,17 +75,18 @@ class MoreScreen extends StatelessWidget {
                     transition: Transition.rightToLeft,
                   ),
                 ),
-                InkWell(
-                  child: menuCard(
-                    tr('boardgameVoting.title'),
-                    Icons.how_to_vote_outlined,
-                    true,
+                if (appCtrl.loggedIn.value == true)
+                  InkWell(
+                    child: menuCard(
+                      tr('boardgameVoting.title'),
+                      Icons.how_to_vote_outlined,
+                      true,
+                    ),
+                    onTap: () => Get.to(
+                      () => BoardgameVotingScreen(),
+                      transition: Transition.rightToLeft,
+                    ),
                   ),
-                  onTap: () => Get.to(
-                    () => BoardgameVotingScreen(),
-                    transition: Transition.rightToLeft,
-                  ),
-                ),
                 InkWell(
                   child: menuCard(
                     tr('more.map.school'),

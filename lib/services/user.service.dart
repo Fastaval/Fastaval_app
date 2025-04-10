@@ -1,6 +1,5 @@
 import 'dart:async';
 import 'dart:convert';
-import 'dart:developer';
 
 import 'package:app_tracking_transparency/app_tracking_transparency.dart';
 import 'package:easy_localization/easy_localization.dart';
@@ -88,7 +87,6 @@ Future<User> fetchUser(String userId, String password) async {
 
 Future<void> sendFCMTokenToInfosys(User user) async {
   String token = await getDeviceToken();
-  inspect('TOKEN TOKEN TOKEN, $token');
   final url = Uri.parse('$baseUrl/user/${user.id}/register');
 
   var request = http.MultipartRequest('POST', url);
