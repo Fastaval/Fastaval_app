@@ -3,6 +3,7 @@ import 'package:fastaval_app/constants/styles.constant.dart';
 import 'package:fastaval_app/controllers/app.controller.dart';
 import 'package:fastaval_app/controllers/notification.controller.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:get/get.dart';
 
 class LoginScreen extends StatelessWidget {
@@ -52,10 +53,8 @@ class LoginScreen extends StatelessWidget {
   Widget _buildLoginButton() => SizedBox(
         width: double.infinity,
         child: ElevatedButton(
-          style: ButtonStyle(
-            backgroundColor: WidgetStateProperty.all<Color>(Colors.white),
-          ),
           onPressed: () async => {
+            HapticFeedback.heavyImpact(),
             await appCtrl.login(userIdInput.text, passwordInput.text),
             if (appCtrl.loggedIn.value == true)
               notificationCtrl.getNotificationsAndSetWaiting(),

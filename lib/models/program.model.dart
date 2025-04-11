@@ -1,14 +1,15 @@
 import 'package:fastaval_app/models/activity.model.dart';
 
 class Program {
-  List<Activity>? activities;
+  List<Activity> activities;
 
-  Program({this.activities});
+  Program({required this.activities});
 
-  Program.fromJson(dynamic json) {
-    activities = <Activity>[];
+  factory Program.fromJson(dynamic json) {
+    List<Activity> activityList = <Activity>[];
     for (var activity in json) {
-      activities!.add(Activity.fromJson(activity));
+      activityList.add(Activity.fromJson(activity));
     }
+    return Program(activities: activityList);
   }
 }

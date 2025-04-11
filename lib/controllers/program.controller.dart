@@ -4,6 +4,7 @@ import 'package:fastaval_app/models/activity_item.model.dart';
 import 'package:fastaval_app/models/activity_run.model.dart';
 import 'package:fastaval_app/services/activities.service.dart';
 import 'package:fastaval_app/services/local_storage.service.dart';
+import 'package:fastaval_app/services/config.service.dart';
 import 'package:get/get.dart';
 
 class ProgramController extends GetxController {
@@ -16,13 +17,14 @@ class ProgramController extends GetxController {
   RxList favorites = [].obs;
   RxMap activityItemForDay = {}.obs;
   RxMap activityRunForDay = {}.obs;
+  RxList<String> eventDates = <String>[].obs;
 
   init() async {
-    await addDayToList("2025-04-16");
-    await addDayToList("2025-04-17");
-    await addDayToList("2025-04-18");
-    await addDayToList("2025-04-19");
-    await addDayToList("2025-04-20");
+    eventDates.value = ConfigService.instance.getDates();
+
+    for (String day in eventDates) {
+      await addDayToList(day);
+    }
 
     await getFavoritesFromStorage();
   }

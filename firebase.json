@@ -1,0 +1,31 @@
+{
+    "flutter": {
+        "platforms": {
+            "android": {
+                "default": {
+                    "projectId": "fastaval-it",
+                    "appId": "1:998751652413:android:eeb224c27a4fc564e67854",
+                    "fileOutput": "android/app/google-services.json"
+                }
+            },
+            "ios": {
+                "default": {
+                    "projectId": "fastaval-it",
+                    "appId": "1:998751652413:ios:97a588cd97e45cc5e67854",
+                    "uploadDebugSymbols": false,
+                    "fileOutput": "ios/Runner/GoogleService-Info.plist"
+                }
+            },
+            "dart": {
+                "lib/firebase_options.dart": {
+                    "projectId": "fastaval-it",
+                    "configurations": {
+                        "android": "1:998751652413:android:eeb224c27a4fc564e67854",
+                        "ios": "1:998751652413:ios:97a588cd97e45cc5e67854",
+                        "web": "1:998751652413:web:76c4d76c9b3c0aade67854"
+                    }
+                }
+            }
+        }
+    }
+}

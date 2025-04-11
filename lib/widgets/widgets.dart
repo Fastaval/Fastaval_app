@@ -8,6 +8,7 @@ import 'package:fastaval_app/models/activity_item.model.dart';
 import 'package:fastaval_app/models/activity_run.model.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:get/get.dart';
 import 'package:url_launcher/url_launcher.dart';
 
@@ -27,14 +28,13 @@ Widget programListItem(
     children: [
       Positioned.fill(
         child: InkWell(
-          onTap:
-              () => showDialog(
-                context: context,
-                builder: programItemDialog,
-                routeSettings: RouteSettings(
-                  arguments: [run, programCtrl.activities[activity.id]],
-                ),
-              ),
+          onTap: () => showDialog(
+            context: context,
+            builder: programItemDialog,
+            routeSettings: RouteSettings(
+              arguments: [run, programCtrl.activities[activity.id]],
+            ),
+          ),
           child: Padding(
             padding: EdgeInsets.fromLTRB(10, 5, 48, 5),
             child: Row(
@@ -45,10 +45,8 @@ Widget programListItem(
                     decoration: BoxDecoration(
                       border: Border(
                         left: BorderSide(width: 5, color: color),
-                        right: BorderSide(
-                          width: 1,
-                          color: Colors.grey.shade300,
-                        ),
+                        right:
+                            BorderSide(width: 1, color: Colors.grey.shade300),
                       ),
                     ),
                     child: Padding(
@@ -90,7 +88,10 @@ Widget programListItem(
         alignment: Alignment.centerRight,
         child: Obx(
           () => IconButton(
-            onPressed: () => programCtrl.toggleFavorite(run.id),
+            onPressed: () => {
+              HapticFeedback.mediumImpact(),
+              programCtrl.toggleFavorite(run.id)
+            },
             icon: Icon(
               programCtrl.favorites.contains(run.id)
                   ? CupertinoIcons.heart_fill
@@ -214,6 +215,7 @@ Widget textAndItemCard(String title, Widget secondaryTitle, content) {
       border: Border.all(color: colorWhite, width: 1),
     ),
     child: Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         Padding(
           padding: EdgeInsets.fromLTRB(16, 8, 16, 0),
@@ -236,17 +238,17 @@ Widget textAndItemCard(String title, Widget secondaryTitle, content) {
 }
 
 Widget textRowHeader(String text) => Row(
-  mainAxisSize: MainAxisSize.max,
-  children: [
-    Expanded(
-      child: Text(
-        text,
-        style: kNormalTextBoldStyle,
-        overflow: TextOverflow.ellipsis,
-      ),
-    ),
-  ],
-);
+      mainAxisSize: MainAxisSize.max,
+      children: [
+        Expanded(
+          child: Text(
+            text,
+            style: kNormalTextBoldStyle,
+            overflow: TextOverflow.ellipsis,
+          ),
+        ),
+      ],
+    );
 
 Widget twoTextRow(
   String textLeft,
@@ -261,18 +263,17 @@ Widget twoTextRow(
         Expanded(flex: 4, child: Text(textLeft, style: kNormalTextStyle)),
         Expanded(
           flex: 6,
-          child:
-              selectable
-                  ? SelectableText(
-                    textRight,
-                    textAlign: TextAlign.right,
-                    style: kNormalTextStyle,
-                  )
-                  : Text(
-                    textRight,
-                    textAlign: TextAlign.right,
-                    style: kNormalTextStyle,
-                  ),
+          child: selectable
+              ? SelectableText(
+                  textRight,
+                  textAlign: TextAlign.right,
+                  style: kNormalTextStyle,
+                )
+              : Text(
+                  textRight,
+                  textAlign: TextAlign.right,
+                  style: kNormalTextStyle,
+                ),
         ),
       ],
     ),
@@ -312,10 +313,45 @@ Widget programItemDialog(BuildContext context) {
 
   return AlertDialog(
     actions: [
-      TextButton(
-        onPressed: () => Navigator.pop(context),
-        child: Text(tr('common.close')),
-      ),
+      Padding(
+          padding: EdgeInsets.fromLTRB(8, 0, 8, 4),
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              ElevatedButton(
+                  style: ElevatedButton.styleFrom(
+                      backgroundColor: Colors.orange, elevation: 2),
+                  onPressed: () => {
+                        HapticFeedback.mediumImpact(),
+                        programCtrl.toggleFavorite(run.id)
+                      },
+                  child: Obx(
+                    () => Row(
+                      children: [
+                        Icon(
+                          programCtrl.favorites.contains(run.id)
+                              ? CupertinoIcons.heart_fill
+                              : CupertinoIcons.heart,
+                          color: Colors.white,
+                        ),
+                        SizedBox(width: 4),
+                        Text(
+                            programCtrl.favorites.contains(run.id)
+                                ? tr('common.unfavorite')
+                                : tr('common.favorite'),
+                            style: TextStyle(color: Colors.white))
+                      ],
+                    ),
+                  )),
+              ElevatedButton(
+                style: ElevatedButton.styleFrom(
+                    backgroundColor: Colors.white, elevation: 2),
+                onPressed: () => Navigator.pop(context),
+                child: Text(tr('common.close'),
+                    style: TextStyle(color: Colors.deepOrange)),
+              ),
+            ],
+          ))
     ],
     shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
     backgroundColor: colorWhite,
@@ -344,33 +380,33 @@ Widget programItemDialog(BuildContext context) {
             ),
             SizedBox(height: 8),
             Padding(
-              padding: EdgeInsets.fromLTRB(10, 0, 10, 0),
-              child: Text(
-                context.locale.languageCode == 'da'
-                    ? activity.daTitle
-                    : activity.enTitle,
-                textAlign: TextAlign.center,
+              padding: EdgeInsets.fromLTRB(16, 0, 16, 0),
+              child: Row(
+                mainAxisSize: MainAxisSize.min,
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  Flexible(
+                    child: Text(
+                      context.locale.languageCode == 'da'
+                          ? activity.daTitle
+                          : activity.enTitle,
+                      textAlign: TextAlign.center,
+                    ),
+                  ),
+                  SizedBox(width: 4),
+                  Obx(
+                    () => Icon(
+                      programCtrl.favorites.contains(run.id)
+                          ? CupertinoIcons.heart_fill
+                          : CupertinoIcons.heart,
+                      color: colorOrangeDark,
+                    ),
+                  ),
+                ],
               ),
-            ),
+            )
           ],
-        ),
-        Align(
-          alignment: Alignment.topRight,
-          child: Padding(
-            padding: EdgeInsets.fromLTRB(0, 16, 16, 0),
-            child: Obx(
-              () => IconButton(
-                onPressed: () => programCtrl.toggleFavorite(run.id),
-                icon: Icon(
-                  programCtrl.favorites.contains(run.id)
-                      ? CupertinoIcons.heart_fill
-                      : CupertinoIcons.heart,
-                  color: colorOrangeDark,
-                ),
-              ),
-            ),
-          ),
-        ),
+        )
       ],
     ),
     content: Column(
@@ -445,5 +481,25 @@ Widget programItemDialog(BuildContext context) {
         ],
       ],
     ),
+  );
+}
+
+PreferredSizeWidget commonAppBar({
+  required String title,
+  List<Widget>? actions,
+}) {
+  return AppBar(
+    backgroundColor: colorOrangeDark,
+    foregroundColor: colorWhite,
+    toolbarHeight: 40,
+    centerTitle: true,
+    titleTextStyle: kAppBarTextStyle,
+    systemOverlayStyle: SystemUiOverlayStyle(
+      systemNavigationBarColor: colorOrangeDark,
+      statusBarColor: colorOrangeDark,
+      statusBarIconBrightness: Brightness.light,
+    ),
+    title: Text(title),
+    actions: actions,
   );
 }

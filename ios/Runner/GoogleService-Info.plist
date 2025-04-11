@@ -17,7 +17,7 @@
 	<key>PROJECT_ID</key>
 	<string>fastaval-it</string>
 	<key>STORAGE_BUCKET</key>
-	<string>fastaval-it.appspot.com</string>
+	<string>fastaval-it.firebasestorage.app</string>
 	<key>IS_ADS_ENABLED</key>
 	<false></false>
 	<key>IS_ANALYTICS_ENABLED</key>

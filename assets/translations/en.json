@@ -28,9 +28,20 @@
       "false": "Not Available",
       "true": "Available"
     },
+    "goToVoting": "Go to voting",
     "noGamesFound": "No board games found. Try searching for something else.",
     "search": "Search...",
-    "title": "Board Games"
+    "title": "Board Games List"
+  },
+  "boardgameVoting": {
+    "availableGames": "Available games",
+    "chosenGames": "Chosen games",
+    "holdAndDrag": "Hold and drag",
+    "noItemsFound": "You have not signed up for any board games and therefore cannot vote this year.",
+    "pressToAdd": "Click to add",
+    "title": "Board Game Voting",
+    "voteButton": "Vote",
+    "voteInstruction": "You can update your vote as many times as you want."
   },
   "bottomNavigation": {
     "favorites": "Favorites",
@@ -46,6 +57,7 @@
     "danish": "Danish",
     "description": "Description",
     "english": "English",
+    "favorite": "Favorite",
     "hour": "Hour",
     "hours": "Hours",
     "language": "Language",
@@ -54,6 +66,7 @@
     "runtime": "Runtime",
     "time": "Time",
     "type": "Type",
+    "unfavorite": "Unfavorite",
     "updated": "Updated"
   },
   "error": {
@@ -78,7 +91,7 @@
         "title": "The Bar"
       },
       "boardGames": {
-        "day1": "Thu-Sat",
+        "day1": "Wed-Sat",
         "day2": "Sunday",
         "title": "The Board Game Café"
       },
@@ -99,10 +112,9 @@
         "day2": "Sunday",
         "title": "The Kiosk"
       },
-      "oasis": {
-        "day1": "Wednesday",
-        "day2": "Thu-Sat",
-        "title": "The Oasis"
+      "ottosLivingRoom": {
+        "day1": "Wed-Sat",
+        "title": "Otto's Living Room"
       },
       "title": "Opening Hours"
     },
@@ -113,17 +125,30 @@
       "safetyMail": "Safety mail",
       "title": "Safety At Fastaval"
     },
-
     "stores": {
       "store1": {
-        "day1": "Thu-Sat",
+        "day1": "Wednesday",
+        "day2": "Thu-Sat",
+        "day3": "Sunday",
         "title": "Epic Panda @ B45"
       },
       "store2": {
-        "day1": "Thu-Sat",
-        "title": "Bunkern Esbjerg @ A07"
+        "day1": "Friday",
+        "day2": "Saturday",
+        "day3": "Sunday",
+        "title": "Allroleplaying @ A07"
       },
       "store3": {
+        "day1": "Wednesday",
+        "day2": "Thu-Sat",
+        "day3": "Sunday",
+        "title": "Grandmas Gaming Goodies @ A07"
+      },
+      "store4": {
+        "day1": "Thu-Sat",
+        "title": "Bunkern Esbjerg @ Common Area"
+      },
+      "store5": {
         "day1": "Saturday",
         "title": "Artist Alley popup shops @ Common Area"
       },
@@ -169,17 +194,12 @@
     "message": "You were logged out"
   },
   "more": {
-    "barcode": "Show Barcode",
-    "boardgames": "Board Games",
-    "close": "Close",
     "map": {
       "gym": "Map - Hobro Idrætscenter",
       "school": "Map - Mariagerfjord Gymnasium"
     },
-    "messages": "Notifications",
     "settings": "Settings",
-    "socialMedia": "Visit our social media and sign up for our newsletter",
-    "title": "More"
+    "socialMedia": "Visit our social media and sign up for our newsletter"
   },
   "notifications": {
     "noNotificationsFound": "No notifications found.\n\nDon't worry, you will be informed here if anything important happens.",
@@ -193,6 +213,7 @@
     "handout": "Handed out",
     "messagesFromFastaval": "Messages From Fastaval",
     "noMessagesRightNow": "Fastaval has no messages for you right now",
+    "noProgramItems": "You have no planned program items",
     "participantNumber": "Participant Number",
     "scanBarcode": "Show the barcode when you go to collect your food",
     "sleep": {

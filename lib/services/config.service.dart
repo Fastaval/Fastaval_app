@@ -1,3 +1,5 @@
+import 'dart:convert';
+
 import 'package:firebase_remote_config/firebase_remote_config.dart';
 
 String baseUrl = ConfigService.instance.getRemoteConfig('API');
@@ -12,11 +14,13 @@ class ConfigService {
     await _remoteConfig.setDefaults({
       'API': 'https://infosys.fastaval.dk/api',
       'APItest': 'https://infosys-test.fastaval.dk/api',
+      'dates': "[]",
+      'info_screen_boxes': "[]"
     });
     await _remoteConfig.setConfigSettings(
       RemoteConfigSettings(
         fetchTimeout: Duration(minutes: 1),
-        minimumFetchInterval: Duration(minutes: 10),
+        minimumFetchInterval: Duration(hours: 1),
       ),
     );
     await _remoteConfig.fetchAndActivate();
@@ -24,5 +28,11 @@ class ConfigService {
 
   String getRemoteConfig(String string) {
     return _remoteConfig.getString(string);
+  }
+
+  List<String> getDates() {
+    String datesJson = _remoteConfig.getString('dates');
+    List<dynamic> datesList = jsonDecode(datesJson);
+    return datesList.map((date) => date.toString()).toList();
   }
 }

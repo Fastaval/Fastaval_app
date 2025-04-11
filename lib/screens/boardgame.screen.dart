@@ -18,19 +18,14 @@ class BoardgameScreen extends StatelessWidget {
     boardgameCtrl.applyFilterToList('');
 
     return Scaffold(
-      appBar: AppBar(
-        backgroundColor: colorOrangeDark,
-        foregroundColor: colorWhite,
-        toolbarHeight: 40,
-        centerTitle: true,
-        titleTextStyle: kAppBarTextStyle,
+      appBar: commonAppBar(
+        title: tr('boardgames.title'),
         actions: [
           IconButton(
             onPressed: () => boardgameCtrl.getBoardGames(),
             icon: Icon(CupertinoIcons.refresh),
           ),
         ],
-        title: Text(tr('boardgames.title')),
       ),
       body: Container(
         height: double.infinity,

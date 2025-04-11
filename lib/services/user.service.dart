@@ -63,7 +63,7 @@ class UserService {
               ElevatedButton(
                 child: Text(tr('login.alert.dialogYes')),
                 onPressed: () {
-                  sendFCMTokenToInfosys(user.id);
+                  sendFCMTokenToInfosys(user);
                   askForTrackingPermission(context);
                   Navigator.of(context).pop();
                 },
@@ -85,13 +85,16 @@ Future<User> fetchUser(String userId, String password) async {
   throw Exception('Failed to load login. Logging out');
 }
 
-Future<void> sendFCMTokenToInfosys(int userId) async {
+Future<void> sendFCMTokenToInfosys(User user) async {
   String token = await getDeviceToken();
-  var response = await http.post(
-    Uri.parse('$baseUrl/user/$userId/register'),
-    headers: {'Content-Type': 'application/json; charset=UTF-8'},
-    body: jsonEncode({'gcm_id': token}),
-  );
+  final url = Uri.parse('$baseUrl/user/${user.id}/register');
+
+  var request = http.MultipartRequest('POST', url);
+  request.fields['pass'] = user.password;
+  request.fields['firebase_token'] = token;
+
+  var response = await request.send();
+
   if (response.statusCode != 200) {
     throw Exception('Failed to register app with infosys');
   }
@@ -101,11 +104,11 @@ Future<String> getDeviceToken() async {
   FirebaseMessaging firebaseMessaging = FirebaseMessaging.instance;
   await firebaseMessaging.requestPermission(
     alert: true,
-    announcement: false,
+    announcement: true,
     badge: true,
     carPlay: false,
     criticalAlert: false,
-    provisional: false,
+    provisional: true,
     sound: true,
   );
   String? deviceToken = await firebaseMessaging.getToken();

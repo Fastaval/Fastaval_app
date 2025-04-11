@@ -1,7 +1,9 @@
 import 'package:easy_localization/easy_localization.dart';
 import 'package:fastaval_app/constants/styles.constant.dart';
 import 'package:fastaval_app/controllers/app.controller.dart';
+import 'package:fastaval_app/controllers/boardgame.controller.dart';
 import 'package:fastaval_app/controllers/notification.controller.dart';
+import 'package:fastaval_app/screens/boardgame-voting.screen.dart';
 import 'package:fastaval_app/screens/boardgame.screen.dart';
 import 'package:fastaval_app/screens/notifications.screen.dart';
 import 'package:fastaval_app/screens/settings.screen.dart';
@@ -17,6 +19,7 @@ import 'package:url_launcher/url_launcher.dart';
 class MoreScreen extends StatelessWidget {
   final notificationCtrl = Get.find<NotificationController>();
   final appCtrl = Get.find<AppController>();
+  final boardgameCtrl = Get.find<BoardGameController>();
 
   @override
   Widget build(context) {
@@ -56,6 +59,7 @@ class MoreScreen extends StatelessWidget {
                       notificationCtrl.notificationsWaiting.value,
                     ),
                     onTap: () => {
+                      HapticFeedback.selectionClick(),
                       Get.to(
                         () => NotificationsScreen(),
                         transition: Transition.rightToLeft,
@@ -66,35 +70,62 @@ class MoreScreen extends StatelessWidget {
                 InkWell(
                   child: menuCard(
                     tr('boardgames.title'),
-                    Icons.sports_esports_outlined,
+                    Icons.casino_outlined,
                     true,
                   ),
-                  onTap: () => Get.to(
-                    () => BoardgameScreen(),
-                    transition: Transition.rightToLeft,
-                  ),
+                  onTap: () => {
+                    HapticFeedback.selectionClick(),
+                    Get.to(
+                      () => BoardgameScreen(),
+                      transition: Transition.rightToLeft,
+                    )
+                  },
                 ),
+                if (appCtrl.loggedIn.value == true)
+                  InkWell(
+                    child: menuCard(
+                      tr('boardgameVoting.title'),
+                      Icons.how_to_vote_outlined,
+                      true,
+                    ),
+                    onTap: () => {
+                      HapticFeedback.selectionClick(),
+                      Get.to(
+                        () => BoardgameVotingScreen(),
+                        transition: Transition.rightToLeft,
+                      )
+                    },
+                  ),
                 InkWell(
                   child: menuCard(
                     tr('more.map.school'),
                     CupertinoIcons.map_pin_ellipse,
                   ),
-                  onTap: () => fastaMap(context, AssetImage(school)),
+                  onTap: () => {
+                    HapticFeedback.selectionClick(),
+                    fastaMap(context, AssetImage(school))
+                  },
                 ),
                 InkWell(
                   child: menuCard(
                     tr('more.map.gym'),
                     CupertinoIcons.map_pin_ellipse,
                   ),
-                  onTap: () => fastaMap(context, AssetImage(gym)),
+                  onTap: () => {
+                    HapticFeedback.selectionClick(),
+                    fastaMap(context, AssetImage(gym))
+                  },
                 ),
                 SizedBox(height: 50),
                 InkWell(
                   child: menuCard(tr('more.settings'), Icons.settings, true),
-                  onTap: () => Get.to(
-                    () => SettingsScreen(),
-                    transition: Transition.rightToLeft,
-                  ),
+                  onTap: () => {
+                    HapticFeedback.selectionClick(),
+                    Get.to(
+                      () => SettingsScreen(),
+                      transition: Transition.rightToLeft,
+                    )
+                  },
                 ),
                 Expanded(
                   child: Column(
@@ -183,10 +214,10 @@ class MoreScreen extends StatelessWidget {
                         alignment: Alignment.bottomRight,
                         child: Padding(
                           padding: EdgeInsets.only(bottom: 8, right: 16),
-                          child: Text(
-                            '1.2.6 © Fastaval IT',
-                            style: kNormalTextSubdued,
-                          ),
+                          child: Obx(() => Text(
+                                '${appCtrl.packageInfo.value?.version} © Fastaval IT',
+                                style: kNormalTextSubdued,
+                              )),
                         ),
                       ),
                     ],

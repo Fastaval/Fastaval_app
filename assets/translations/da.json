@@ -28,9 +28,20 @@
       "false": "Ikke ledigt",
       "true": "Ledigt"
     },
+    "goToVoting": "Gå til afstemning",
     "noGamesFound": "Ingen brætspil fundet. Prøv at ændre din søgning.",
     "search": "Søg...",
-    "title": "Brætspil"
+    "title": "Brætspilslisten"
+  },
+  "boardgameVoting": {
+    "availableGames": "Tilgængelige spil",
+    "chosenGames": "Valgte spil",
+    "holdAndDrag": "Hold og træk",
+    "noItemsFound": "Du har ikke været tilmeldt nogen brætspil og kan derfor ikke stemme i år.",
+    "pressToAdd": "Tryk for at tilføje",
+    "title": "Brætspilsafstemning",
+    "voteButton": "Stem",
+    "voteInstruction": "Du kan opdatere din stemme så mange gange du vil."
   },
   "bottomNavigation": {
     "favorites": "Favoritter",
@@ -46,6 +57,7 @@
     "danish": "Dansk",
     "description": "Beskrivelse",
     "english": "Engelsk",
+    "favorite": "Favorit",
     "hour": "Time",
     "hours": "Timer",
     "language": "Sprog",
@@ -54,6 +66,7 @@
     "runtime": "Tidsforbrug",
     "time": "Tidspunkt",
     "type": "Type",
+    "unfavorite": "Fjern favorit",
     "updated": "Opdateret"
   },
   "error": {
@@ -78,7 +91,7 @@
         "title": "Baren"
       },
       "boardGames": {
-        "day1": "Tor-Lør",
+        "day1": "Ons-Lør",
         "day2": "Søndag",
         "title": "Brætspilscaféen"
       },
@@ -99,10 +112,9 @@
         "day2": "Søndag",
         "title": "Kiosken"
       },
-      "oasis": {
-        "day1": "Onsdag",
-        "day2": "Tor-Lør",
-        "title": "Oasen"
+      "ottosLivingRoom": {
+        "day1": "Ons-Lør",
+        "title": "Ottos Stue"
       },
       "title": "Åbningstider"
     },
@@ -115,14 +127,28 @@
     },
     "stores": {
       "store1": {
-        "day1": "Tor-Lør",
+        "day1": "Onsdag",
+        "day2": "Tor-Lør",
+        "day3": "Søndag",
         "title": "Epic Panda @ B45"
       },
       "store2": {
-        "day1": "Tor-Lør",
-        "title": "Bunkern Esbjerg @ A07"
+        "day1": "Fredag",
+        "day2": "Lørdag",
+        "day3": "Søndag",
+        "title": "Allroleplaying @ A07"
       },
       "store3": {
+        "day1": "Onsdag",
+        "day2": "Tor-Lør",
+        "day3": "Søndag",
+        "title": "Grandmas Gaming Goodies @ A07"
+      },
+      "store4": {
+        "day1": "Tor-Lør",
+        "title": "Bunkern Esbjerg @ Fællesområdet"
+      },
+      "store5": {
         "day1": "Lørdag",
         "title": "Artist Alley popup shops @ Fællesområdet"
       },
@@ -168,17 +194,12 @@
     "message": "Du er blevet logget ud"
   },
   "more": {
-    "barcode": "Vis stregkode",
-    "boardgames": "Brætspil",
-    "close": "Luk",
     "map": {
       "gym": "Kort - Hobro Idrætscenter",
       "school": "Kort - Mariagerfjord Gymnasium"
     },
-    "messages": "Notifikationer",
     "settings": "Indstillinger",
-    "socialMedia": "Besøg vores sociale medier, og skriv dig op til vores nyhedsbrev",
-    "title": "Mere"
+    "socialMedia": "Besøg vores sociale medier, og skriv dig op til vores nyhedsbrev"
   },
   "notifications": {
     "noNotificationsFound": "Ingen notifikationer fundet.\n\nBare rolig, du vil blive informeret her, hvis der sker noget vigtigt.",
@@ -192,6 +213,7 @@
     "handout": "Udleveres",
     "messagesFromFastaval": "Beskeder Fra Fastaval",
     "noMessagesRightNow": "Fastaval har ingen beskeder til dig lige nu",
+    "noProgramItems": "Du har ingen planlagte programpunkter",
     "participantNumber": "Deltagernummer",
     "scanBarcode": "Vis stregkoden når du skal have udleveret mad",
     "sleep": {
