@@ -423,18 +423,18 @@ class ProfileScreen extends StatelessWidget {
         CupertinoIcons.bed_double,
         Padding(
           padding: EdgeInsets.fromLTRB(16, 8, 24, 16),
-          child: appCtrl.user.sleep.access == 0
+          child: appCtrl.user.sleep?.access == 0
               ? Row(children: [oneTextRow(tr('profile.sleep.notSleeping'))])
               : Column(
                   children: [
                     twoTextRow(
                       tr('profile.sleep.location'),
-                      appCtrl.user.sleep.areaName,
+                      appCtrl.user.sleep?.areaName ?? '',
                     ),
                     SizedBox(height: 10),
                     twoTextRow(
                       tr('profile.sleep.mattressRented'),
-                      tr('profile.sleep.mattress.${appCtrl.user.sleep.mattress}'),
+                      tr('profile.sleep.mattress.${appCtrl.user.sleep?.mattress}'),
                     ),
                   ],
                 ),

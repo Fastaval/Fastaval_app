@@ -31,7 +31,13 @@
     "goToVoting": "Go to voting",
     "noGamesFound": "No board games found. Try searching for something else.",
     "search": "Search...",
-    "title": "Board Games List"
+    "title": "Board Games List",
+    "vote": {
+      "failedFetch": "There was an error fetching the voting data",
+      "successful": "Your vote was registered",
+      "failed": "There was an error with your vote",
+      "reset": "Your vote was reset"
+    }
   },
   "boardgameVoting": {
     "availableGames": "Available games",
