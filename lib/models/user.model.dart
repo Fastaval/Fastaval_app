@@ -10,7 +10,7 @@ class User {
   String name;
   bool hasCheckedIn;
   String? messages;
-  Sleep sleep;
+  Sleep? sleep;
   String category;
   List<Food> food;
   List<Wear> wear;
@@ -19,18 +19,18 @@ class User {
   List<OttoParty> ottoParty;
 
   User({
-    required this.id,
-    required this.password,
-    required this.name,
-    required this.hasCheckedIn,
-    required this.messages,
-    required this.sleep,
-    required this.category,
-    required this.food,
-    required this.wear,
-    required this.scheduling,
-    required this.barcode,
-    required this.ottoParty,
+    this.id = 0,
+    this.password = '',
+    this.name = '',
+    this.hasCheckedIn = false,
+    this.messages,
+    this.sleep,
+    this.category = '',
+    this.food = const [],
+    this.wear = const [],
+    this.scheduling = const [],
+    this.barcode = 0,
+    this.ottoParty = const [],
   });
 
   User.fromJson(Map<String, dynamic> json)

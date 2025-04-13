@@ -31,7 +31,13 @@
     "goToVoting": "Gå til afstemning",
     "noGamesFound": "Ingen brætspil fundet. Prøv at ændre din søgning.",
     "search": "Søg...",
-    "title": "Brætspilslisten"
+    "title": "Brætspilslisten",
+    "vote": {
+      "successful": "Din stemme blev registreret",
+      "failed": "Der skete en fejl med din stemme",
+      "failedFetch": "Der skete en fejl med at hente afstemningsdata",
+      "reset": "Din stemme blev nulstillet"
+    }
   },
   "boardgameVoting": {
     "availableGames": "Tilgængelige spil",

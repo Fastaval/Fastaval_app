@@ -12,9 +12,9 @@ class AppController extends GetxController {
   final fetchingUser = false.obs;
   final loggedIn = false.obs;
   final navIndex = 1.obs;
-  late User user;
   final userUpdateTime = 0.obs;
   final Rx<PackageInfo?> packageInfo = Rx<PackageInfo?>(null);
+  User user = User();
 
   updateLoggedIn(bool status) {
     loggedIn(status);
@@ -48,6 +48,8 @@ class AppController extends GetxController {
   }
 
   updateUserProfile() async {
+    if (user.id == 0) return;
+
     fetchingUser(true);
     User newUser = await fetchUser(user.id.toString(), user.password);
     newUser.password = user.password;
@@ -58,7 +60,6 @@ class AppController extends GetxController {
   }
 
   Future<void> login(String id, String password) async {
-    var boardCtrl = Get.find<BoardGameController>();
     try {
       User newUser = await fetchUser(id, password);
       newUser.password = password;
@@ -67,7 +68,7 @@ class AppController extends GetxController {
       await UserService().setUser(newUser);
       await UserService().registerToInfosys(newUser);
       updateNavIndex(0);
-      boardCtrl.fetchAndSetInitialRankings();
+      Get.find<BoardGameController>().fetchAndSetInitialRankings();
     } catch (error) {
       Fluttertoast.showToast(msg: tr('error.login'));
     }

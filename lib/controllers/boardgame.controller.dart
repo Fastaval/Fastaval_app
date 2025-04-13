@@ -1,5 +1,6 @@
 import 'dart:convert';
 
+import 'package:easy_localization/easy_localization.dart';
 import 'package:fastaval_app/controllers/app.controller.dart';
 import 'package:fastaval_app/models/activity.model.dart';
 import 'package:fastaval_app/models/boardgame.model.dart';
@@ -91,11 +92,12 @@ class BoardGameController extends GetxController {
 
     try {
       var response = await request.send();
-      if (response.statusCode == 200 || response.statusCode == 500) {
-        Fluttertoast.showToast(
-            msg: 'Board game rankings submitted successfully!');
+      if (chosenBoardgames.isEmpty && response.statusCode == 500) {
+        Fluttertoast.showToast(msg: tr("boardgames.vote.reset"));
+      } else if (response.statusCode == 200) {
+        Fluttertoast.showToast(msg: tr("boardgames.vote.successful"));
       } else {
-        Fluttertoast.showToast(msg: 'Failed to submit board game rankings.');
+        Fluttertoast.showToast(msg: tr('boardgames.vote.failed'));
       }
     } catch (e) {
       Fluttertoast.showToast(msg: 'An error occurred: $e');
@@ -135,8 +137,7 @@ class BoardGameController extends GetxController {
           }
         }
       } else {
-        Fluttertoast.showToast(
-            msg: 'Failed to fetch initial board game rankings.');
+        Fluttertoast.showToast(msg: tr("boardgames.vote.failedFetch"));
       }
     } catch (e) {
       Fluttertoast.showToast(
